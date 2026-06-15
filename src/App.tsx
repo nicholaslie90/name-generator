@@ -95,7 +95,12 @@ export default function App() {
   function goNext() {
     setError(null);
     setNotice(null);
-    setCursor((c) => Math.min(history.length - 1, c + 1));
+    // Step forward through history, or generate a fresh name when at the end.
+    if (cursor < history.length - 1) {
+      setCursor((c) => c + 1);
+    } else {
+      generate();
+    }
   }
 
   /** Forget every tracked name so generation can repeat from scratch. */
@@ -152,7 +157,6 @@ export default function App() {
           notice={notice}
           position={{ index: cursor, total: history.length }}
           canPrev={cursor > 0}
-          canNext={cursor < history.length - 1}
           onPrev={goPrev}
           onNext={goNext}
           onRegenerate={generate}

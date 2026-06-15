@@ -62,4 +62,17 @@ describe('App: word count controls how many words the name has', () => {
     const panel = screen.getByText(/Regenerate/i).closest('.result') as HTMLElement;
     expect(within(panel).getByText(/1 \/ 1/)).toBeTruthy();
   });
+
+  it('the Next arrow is always enabled and generates a new name at the end', () => {
+    render(<App />);
+    setWords(2);
+    clickGenerate();
+    const next = screen.getByLabelText('Nama berikutnya') as HTMLButtonElement;
+    const panel = screen.getByText(/Regenerate/i).closest('.result') as HTMLElement;
+    expect(next.disabled).toBe(false);
+    expect(within(panel).getByText(/1 \/ 1/)).toBeTruthy();
+    fireEvent.click(next);
+    // At the end of history, Next generates a fresh name -> history grows to 2.
+    expect(within(panel).getByText(/2 \/ 2/)).toBeTruthy();
+  });
 });

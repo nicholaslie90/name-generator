@@ -10,7 +10,6 @@ interface Props {
   notice: string | null;
   position: { index: number; total: number };
   canPrev: boolean;
-  canNext: boolean;
   onPrev: () => void;
   onNext: () => void;
   onRegenerate: () => void;
@@ -23,7 +22,6 @@ export default function ResultPanel({
   notice,
   position,
   canPrev,
-  canNext,
   onPrev,
   onNext,
   onRegenerate,
@@ -87,12 +85,7 @@ export default function ResultPanel({
           ‹
         </button>
         <NameFrame ref={frameRef} result={current} style={style} />
-        <button
-          className="navarrow"
-          onClick={onNext}
-          disabled={!canNext}
-          aria-label="Nama berikutnya"
-        >
+        <button className="navarrow" onClick={onNext} aria-label="Nama berikutnya">
           ›
         </button>
       </div>
