@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ParameterForm, { type FormState } from './components/ParameterForm';
 import ResultPanel from './components/ResultPanel';
 import { ELEMENTS, COMMON_NAMES } from './data';
@@ -99,7 +99,30 @@ export default function App() {
     setNotice(null);
   }
 
-  const current = cursor >= 0 && cursor < history.length ? history[cursor] : null;
+  // A signature of everything that affects WHICH name is generated (surname is
+  // only displayed, so it is excluded). When this changes and a name is already
+  // shown, auto-regenerate so the preview always reflects the current filters.
+  const filterSig = JSON.stringify({
+    style: form.nameStyle,
+    gender: form.gender,
+    initial: form.familiarInitial ?? '',
+    origins: form.familiarOrigins ?? [],
+    slots: form.slots,
+  });
+  const lastSig = useRef(filterSig);
+  useEffect(() => {
+    if (lastSig.current === filterSig) return;
+    lastSig.current = filterSig;
+    // Only auto-regenerate once the user has generated at least one name.
+    if (cursor >= 0) generate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterSig]);
+
+  // Surname is applied live to the displayed frame without needing to regenerate.
+  const current =
+    cursor >= 0 && cursor < history.length
+      ? { ...history[cursor], surname: form.surname.trim() }
+      : null;
 
   return (
     <div className="app">
