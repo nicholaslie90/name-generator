@@ -24,6 +24,9 @@ deploys to GitHub Pages.
   auto-generates that part.**
 - **Origins (v1):** Arab/Islami, Sanskerta & Jawa, Latin/Yunani, Ibrani.
 - **Composed meaning** built from each chosen root, shown bilingually.
+- **History & no-repeat:** regenerating never repeats a name already shown;
+  **Prev/Next** step back and forth through the names you've generated, and
+  **Reset** clears the tracked set so you can start over.
 - **Four frame styles:** Klasik Elegan, Modern Lembut, Botani, Royal Gelap.
 - **Export:** hi-res PNG (3× pixel ratio) and PDF, with self-hosted cursive fonts
   embedded into the export.

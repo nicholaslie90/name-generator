@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import ParameterForm, { type FormState } from './components/ParameterForm';
 import ResultPanel from './components/ResultPanel';
 import { ELEMENTS, COMMON_NAMES } from './data';
 import { generateName, generateFamiliarName } from './lib/generator';
-import type { GenerateResult } from './types';
+import { isGenerateError, type GeneratedName, type GenerateError, type GenerateResult } from './types';
 
 const INITIAL_FORM: FormState = {
   nameStyle: 'familiar',
@@ -12,30 +12,94 @@ const INITIAL_FORM: FormState = {
   slots: [{}, {}],
 };
 
+/** How many random draws to attempt before declaring the filtered pool exhausted. */
+const MAX_TRIES = 80;
+
+const nameKey = (g: GeneratedName) => g.name.toLowerCase();
+
 export default function App() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
-  const [result, setResult] = useState<GenerateResult | null>(null);
+  const [history, setHistory] = useState<GeneratedName[]>([]);
+  const [cursor, setCursor] = useState(-1);
+  const [error, setError] = useState<GenerateError | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  // Names already shown — kept across regenerations until the user resets.
+  const seen = useRef<Set<string>>(new Set());
 
-  function generate() {
+  function runGenerator(): GenerateResult {
     if (form.nameStyle === 'familiar') {
-      setResult(
-        generateFamiliarName(
-          {
-            surname: form.surname,
-            gender: form.gender,
-            syllables: form.slots.length,
-            initial: form.familiarInitial,
-            origins: form.familiarOrigins,
-          },
-          COMMON_NAMES,
-        ),
-      );
-    } else {
-      setResult(
-        generateName({ surname: form.surname, gender: form.gender, slots: form.slots }, ELEMENTS),
+      return generateFamiliarName(
+        {
+          surname: form.surname,
+          gender: form.gender,
+          syllables: form.slots.length,
+          initial: form.familiarInitial,
+          origins: form.familiarOrigins,
+        },
+        COMMON_NAMES,
       );
     }
+    return generateName({ surname: form.surname, gender: form.gender, slots: form.slots }, ELEMENTS);
   }
+
+  /** Generate a fresh, non-repeating name and append it to the history. */
+  function generate() {
+    setNotice(null);
+
+    let res = runGenerator();
+    if (isGenerateError(res)) {
+      setError(res);
+      return;
+    }
+
+    let tries = 1;
+    while (seen.current.has(nameKey(res)) && tries < MAX_TRIES) {
+      const next = runGenerator();
+      if (isGenerateError(next)) {
+        setError(next);
+        return;
+      }
+      res = next;
+      tries++;
+    }
+
+    if (seen.current.has(nameKey(res))) {
+      setNotice(
+        'Semua nama untuk filter ini sudah ditampilkan — tekan Reset untuk mengulang. · ' +
+          'All names for these filters have been shown — press Reset to start over.',
+      );
+      return;
+    }
+
+    seen.current.add(nameKey(res));
+    const nextHistory = [...history, res];
+    setHistory(nextHistory);
+    setCursor(nextHistory.length - 1);
+    setError(null);
+  }
+
+  function goPrev() {
+    setError(null);
+    setNotice(null);
+    setCursor((c) => Math.max(0, c - 1));
+  }
+
+  function goNext() {
+    setError(null);
+    setNotice(null);
+    setCursor((c) => Math.min(history.length - 1, c + 1));
+  }
+
+  /** Forget every tracked name so generation can repeat from scratch. */
+  function reset() {
+    seen.current.clear();
+    setHistory([]);
+    setCursor(-1);
+    setError(null);
+    setNotice(null);
+  }
+
+  const current = cursor >= 0 && cursor < history.length ? history[cursor] : null;
 
   return (
     <div className="app">
@@ -48,7 +112,18 @@ export default function App() {
 
       <div className="layout">
         <ParameterForm value={form} onChange={setForm} onGenerate={generate} />
-        <ResultPanel result={result} onRegenerate={generate} />
+        <ResultPanel
+          current={current}
+          error={error}
+          notice={notice}
+          position={{ index: cursor, total: history.length }}
+          canPrev={cursor > 0}
+          canNext={cursor < history.length - 1}
+          onPrev={goPrev}
+          onNext={goNext}
+          onRegenerate={generate}
+          onReset={reset}
+        />
       </div>
 
       <footer className="app__footer">
