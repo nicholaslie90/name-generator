@@ -43,6 +43,9 @@ interface Props {
 export default function ParameterForm({ value, onChange, onGenerate }: Props) {
   const familiar = value.nameStyle === 'familiar';
   const familiarOrigins = value.familiarOrigins ?? [];
+  const surname = value.surname.trim();
+  // The surname is one of the chosen words, so one fewer word is generated.
+  const generatedWords = Math.max(1, value.slots.length - (surname ? 1 : 0));
 
   function setWordCount(count: number) {
     const slots: SlotConstraint[] = Array.from({ length: count }, (_, i) => value.slots[i] ?? {});
@@ -145,6 +148,11 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
             </button>
           ))}
         </div>
+        {surname && (
+          <p className="field__hint" style={{ marginTop: '0.35rem' }}>
+            Termasuk nama keluarga «{surname}» · includes surname — {generatedWords} kata akan dibuat
+          </p>
+        )}
       </div>
 
       {familiar ? (
@@ -186,9 +194,14 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
           <span className="field__label">
             Pengaturan per kata <span className="field__hint">/ Per-word — kosongkan awalan untuk acak</span>
           </span>
-          {value.slots.map((slot, i) => (
+          {value.slots.slice(0, generatedWords).map((slot, i) => (
             <SyllableSlotRow key={i} index={i} slot={slot} onChange={(s) => setSlot(i, s)} />
           ))}
+          {surname && (
+            <p className="field__hint" style={{ margin: '0 0 0.5rem' }}>
+              Kata terakhir: nama keluarga «{surname}» · last word is the surname
+            </p>
+          )}
           <div className="chips" style={{ marginTop: '0.5rem' }}>
             <button type="button" className="chip" onClick={() => applyToAll([])}>
               Campur semua etimologi

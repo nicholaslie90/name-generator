@@ -27,19 +27,27 @@ export default function App() {
   const seen = useRef<Set<string>>(new Set());
 
   function runGenerator(): GenerateResult {
+    // The surname counts as one of the chosen words, so generate one fewer
+    // given-name word when a surname is present (at least one word always).
+    const hasSurname = form.surname.trim().length > 0;
+    const wordCount = Math.max(1, form.slots.length - (hasSurname ? 1 : 0));
+
     if (form.nameStyle === 'familiar') {
       return generateFamiliarName(
         {
           surname: form.surname,
           gender: form.gender,
-          words: form.slots.length,
+          words: wordCount,
           initial: form.familiarInitial,
           origins: form.familiarOrigins,
         },
         COMMON_NAMES,
       );
     }
-    return generateName({ surname: form.surname, gender: form.gender, slots: form.slots }, ELEMENTS);
+    return generateName(
+      { surname: form.surname, gender: form.gender, slots: form.slots.slice(0, wordCount) },
+      ELEMENTS,
+    );
   }
 
   /** Generate a fresh, non-repeating name and append it to the history. */
@@ -108,6 +116,9 @@ export default function App() {
     initial: form.familiarInitial ?? '',
     origins: form.familiarOrigins ?? [],
     slots: form.slots,
+    // Whether a surname exists changes the generated word count (but typing
+    // within an existing surname does not — that updates the frame live).
+    surnamePresent: form.surname.trim().length > 0,
   });
   const lastSig = useRef(filterSig);
   useEffect(() => {

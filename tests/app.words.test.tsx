@@ -43,6 +43,18 @@ describe('App: word count controls how many words the name has', () => {
     expect(wordCount()).toBe(3);
   });
 
+  it('counts the surname as one of the words', () => {
+    render(<App />);
+    fireEvent.change(screen.getByPlaceholderText('mis. Santoso'), { target: { value: 'Lie' } });
+    setWords(2);
+    clickGenerate();
+    // 1 generated word + surname "Lie" = 2 words total
+    expect(wordCount()).toBe(1);
+    setWords(3);
+    // auto-regenerates: 2 generated words + surname = 3
+    expect(wordCount()).toBe(2);
+  });
+
   it('shows the position counter on first generation', () => {
     render(<App />);
     setWords(2);
