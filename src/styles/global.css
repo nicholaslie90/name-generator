@@ -315,10 +315,21 @@ select:focus {
 }
 
 .result__actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.6rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.result__actions .btn {
+  width: 100%;
+}
+
+/* Buttons that should stretch across both columns (Regenerate, Reset). */
+.result__actions .act-span {
+  grid-column: 1 / -1;
 }
 
 .error {

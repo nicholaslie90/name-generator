@@ -26,13 +26,13 @@ export default function ExportButtons({ targetRef, name, surname }: Props) {
   }
 
   return (
-    <div className="result__actions">
+    <>
       <button className="btn btn--ghost" onClick={() => run('png')} disabled={busy !== null}>
-        {busy === 'png' ? 'Menyimpan…' : '⬇ PNG (hi-res)'}
+        {busy === 'png' ? 'Menyimpan…' : '⬇ PNG'}
       </button>
       <button className="btn btn--ghost" onClick={() => run('pdf')} disabled={busy !== null}>
         {busy === 'pdf' ? 'Menyimpan…' : '⬇ PDF'}
       </button>
-    </div>
+    </>
   );
 }

@@ -97,15 +97,14 @@ export default function ResultPanel({
       {notice && <p className="notice">{notice}</p>}
 
       <div className="result__actions">
-        <button className="btn btn--ghost" onClick={onRegenerate}>
+        <button className="btn btn--ghost act-span" onClick={onRegenerate}>
           ↻ Buat lagi · Regenerate
         </button>
-        <button className="btn btn--ghost" onClick={onReset}>
+        <ExportButtons targetRef={frameRef} name={current.name} surname={current.surname} />
+        <button className="btn btn--ghost act-span" onClick={onReset}>
           🗑 Reset
         </button>
       </div>
-
-      <ExportButtons targetRef={frameRef} name={current.name} surname={current.surname} />
     </div>
   );
 }
