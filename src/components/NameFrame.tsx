@@ -42,9 +42,6 @@ const NameFrame = forwardRef<HTMLDivElement, Props>(function NameFrame({ result,
       <div className={styles.etymology}>{etymology.id}</div>
 
       <span className={styles.leafBottom}>❧ ❀ ❧</span>
-      <div className={styles.disclaimer}>
-        Nama disusun kreatif dari akar etimologi · Name creatively composed from etymological roots
-      </div>
     </div>
   );
 });

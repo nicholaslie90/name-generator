@@ -88,17 +88,6 @@
   text-transform: uppercase;
 }
 
-.disclaimer {
-  position: absolute;
-  bottom: 12px;
-  left: 0;
-  right: 0;
-  font-size: 8.5px;
-  letter-spacing: 0.05em;
-  opacity: 0.5;
-  font-family: var(--font-ui);
-}
-
 /* ---- Theme: Elegant classic (cream + gold) ---- */
 .elegant {
   color: #4a3b22;
