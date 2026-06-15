@@ -76,19 +76,30 @@ export default function ResultPanel({
   return (
     <div className="panel result">
       <FrameStyleSwitcher value={style} onChange={setStyle} />
-      <NameFrame ref={frameRef} result={current} style={style} />
 
-      <div className="result__nav">
-        <button className="btn btn--ghost" onClick={onPrev} disabled={!canPrev} aria-label="Nama sebelumnya">
-          ‹ Sebelumnya
+      <div className="result__stage">
+        <button
+          className="navarrow"
+          onClick={onPrev}
+          disabled={!canPrev}
+          aria-label="Nama sebelumnya"
+        >
+          ‹
         </button>
-        <span className="result__counter">
-          {position.index + 1} / {position.total}
-        </span>
-        <button className="btn btn--ghost" onClick={onNext} disabled={!canNext} aria-label="Nama berikutnya">
-          Berikutnya ›
+        <NameFrame ref={frameRef} result={current} style={style} />
+        <button
+          className="navarrow"
+          onClick={onNext}
+          disabled={!canNext}
+          aria-label="Nama berikutnya"
+        >
+          ›
         </button>
       </div>
+
+      <span className="result__counter">
+        {position.index + 1} / {position.total}
+      </span>
 
       {notice && <p className="notice">{notice}</p>}
 

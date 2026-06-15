@@ -254,18 +254,51 @@ select:focus {
   border-color: var(--ink);
 }
 
-.result__nav {
+.result__stage {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.navarrow {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.navarrow:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.navarrow:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.navarrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .result__counter {
   font-family: var(--font-display);
   font-size: 0.9rem;
   color: var(--muted);
-  min-width: 56px;
   text-align: center;
 }
 
