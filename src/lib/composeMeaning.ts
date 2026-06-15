@@ -6,29 +6,19 @@ interface Bilingual {
 }
 
 /**
- * Compose a readable bilingual meaning from the chosen elements.
- * Two parts read as "A yang penuh B" / "A full of B"; more parts are joined
- * with commas. A single part is returned as-is.
+ * Compose a bilingual meaning from the chosen words. Each word's meaning is
+ * shown in order, separated by a middot — readable for multi-word names and
+ * safe for English-only glosses.
  */
 export function composeMeaning(g: GeneratedName): Bilingual {
-  const idParts = g.elements.map((e) => e.meaning.id);
-  const enParts = g.elements.map((e) => e.meaning.en);
+  const idParts = g.elements.map((e) => capitalize(e.meaning.id));
+  const enParts = g.elements.map((e) => capitalize(e.meaning.en));
 
   if (g.elements.length === 1) {
-    return { id: capitalize(idParts[0]), en: capitalize(enParts[0]) };
+    return { id: idParts[0], en: enParts[0] };
   }
 
-  if (g.elements.length === 2) {
-    return {
-      id: capitalize(`${idParts[0]} yang penuh ${idParts[1]}`),
-      en: capitalize(`${enParts[0]} full of ${enParts[1]}`),
-    };
-  }
-
-  return {
-    id: capitalize(joinList(idParts, 'dan')),
-    en: capitalize(joinList(enParts, 'and')),
-  };
+  return { id: idParts.join(' · '), en: enParts.join(' · ') };
 }
 
 /** A bilingual etymology line naming the distinct origins used. */
@@ -38,12 +28,6 @@ export function composeEtymology(g: GeneratedName): Bilingual {
     id: `Etimologi: ${labels.map((l) => l.id).join(' · ')}`,
     en: `Etymology: ${labels.map((l) => l.en).join(' · ')}`,
   };
-}
-
-function joinList(items: string[], conj: string): string {
-  if (items.length <= 1) return items[0] ?? '';
-  const head = items.slice(0, -1).join(', ');
-  return `${head} ${conj} ${items[items.length - 1]}`;
 }
 
 function capitalize(s: string): string {

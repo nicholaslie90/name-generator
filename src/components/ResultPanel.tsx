@@ -38,11 +38,10 @@ export default function ResultPanel({
         <div className="error">
           {error.slotIndex >= 0 ? (
             <>
-              Tidak ada kandidat untuk <strong>suku kata {error.slotIndex + 1}</strong>. Longgarkan
+              Tidak ada kandidat untuk <strong>kata {error.slotIndex + 1}</strong>. Longgarkan
               awalan atau etimologinya.
               <br />
-              No candidates for syllable {error.slotIndex + 1} — relax its initial letter or
-              etymology.
+              No candidates for word {error.slotIndex + 1} — relax its initial letter or etymology.
             </>
           ) : (
             <>

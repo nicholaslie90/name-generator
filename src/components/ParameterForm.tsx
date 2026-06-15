@@ -32,7 +32,7 @@ const GENDER_OPTIONS: { value: Gender; label: string }[] = [
   { value: 'N', label: 'Netral' },
 ];
 
-const SYLLABLE_OPTIONS = [2, 3, 4];
+const WORD_OPTIONS = [2, 3, 4];
 
 interface Props {
   value: FormState;
@@ -44,7 +44,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
   const familiar = value.nameStyle === 'familiar';
   const familiarOrigins = value.familiarOrigins ?? [];
 
-  function setSyllableCount(count: number) {
+  function setWordCount(count: number) {
     const slots: SlotConstraint[] = Array.from({ length: count }, (_, i) => value.slots[i] ?? {});
     onChange({ ...value, slots });
   }
@@ -130,14 +130,16 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
       </div>
 
       <div className="field">
-        <span className="field__label">Jumlah suku kata <span className="field__hint">/ Syllables</span></span>
+        <span className="field__label">
+          Jumlah kata <span className="field__hint">/ Words — mis. 3 = tiga kata</span>
+        </span>
         <div className="segmented">
-          {SYLLABLE_OPTIONS.map((n) => (
+          {WORD_OPTIONS.map((n) => (
             <button
               key={n}
               type="button"
               aria-pressed={value.slots.length === n}
-              onClick={() => setSyllableCount(n)}
+              onClick={() => setWordCount(n)}
             >
               {n}
             </button>
@@ -182,7 +184,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
       ) : (
         <div className="field">
           <span className="field__label">
-            Pengaturan per suku kata <span className="field__hint">/ Per-syllable — kosongkan awalan untuk acak</span>
+            Pengaturan per kata <span className="field__hint">/ Per-word — kosongkan awalan untuk acak</span>
           </span>
           {value.slots.map((slot, i) => (
             <SyllableSlotRow key={i} index={i} slot={slot} onChange={(s) => setSlot(i, s)} />

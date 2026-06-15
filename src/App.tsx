@@ -32,7 +32,7 @@ export default function App() {
         {
           surname: form.surname,
           gender: form.gender,
-          syllables: form.slots.length,
+          words: form.slots.length,
           initial: form.familiarInitial,
           origins: form.familiarOrigins,
         },

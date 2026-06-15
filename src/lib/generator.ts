@@ -88,17 +88,29 @@ export function generateName(
     chosen.push(pick(preferByPosition(base, i, total), rng));
   }
 
-  const name = capitalize(cleanup(chosen.map((e) => e.text).join('')));
+  // Each slot becomes its own capitalized word, e.g. ["nur","wira"] -> "Nur Wira".
+  const name = chosen.map((e) => capitalize(cleanup(e.text))).join(' ');
   const origins: Origin[] = distinct(chosen.map((e) => e.origin));
 
   return { name, surname: req.surname.trim(), elements: chosen, origins };
 }
 
+function asElement(n: CommonName): NameElement {
+  return {
+    id: n.id,
+    text: n.name.toLowerCase(),
+    initial: n.initial,
+    origin: n.origin,
+    gender: n.gender,
+    meaning: n.meaning,
+  };
+}
+
 /**
- * Pick a familiar, attested given name (e.g. Cindy, Elaine, Christie) matching
- * the gender / initial / origin filters. The syllable count is a *soft*
- * preference: if no name has exactly that count we fall back to any count
- * rather than failing. An empty initial means "auto" (no constraint).
+ * Build a full name from `req.words` attested given names (e.g. Cindy, Elaine,
+ * Christie) joined by spaces, matching the gender / origin filters. The first
+ * word honors the requested initial; an empty initial means "auto". Only
+ * single-word entries are used so the word count is exact.
  */
 export function generateFamiliarName(
   req: FamiliarRequest,
@@ -108,8 +120,8 @@ export function generateFamiliarName(
   const wantInitial = req.initial?.toLowerCase();
   const base = names.filter(
     (n) =>
+      !n.name.includes(' ') &&
       matchesGender(n, req.gender) &&
-      (!wantInitial || n.initial === wantInitial) &&
       (!req.origins || req.origins.length === 0 || req.origins.includes(n.origin)),
   );
 
@@ -118,22 +130,30 @@ export function generateFamiliarName(
     return { error: 'empty-pool', slotIndex: -1 };
   }
 
-  const preferred = base.filter((n) => n.syllables === req.syllables);
-  const chosen = pick(preferred.length > 0 ? preferred : base, rng);
+  const firstPool = wantInitial ? base.filter((n) => n.initial === wantInitial) : base;
+  if (firstPool.length === 0) {
+    return { error: 'empty-pool', slotIndex: -1 };
+  }
 
-  const element: NameElement = {
-    id: chosen.id,
-    text: chosen.name.toLowerCase(),
-    initial: chosen.initial,
-    origin: chosen.origin,
-    gender: chosen.gender,
-    meaning: chosen.meaning,
-  };
+  const total = Math.max(1, req.words);
+  const chosen: CommonName[] = [];
+  const usedIds = new Set<string>();
+
+  const first = pick(firstPool, rng);
+  chosen.push(first);
+  usedIds.add(first.id);
+
+  for (let i = 1; i < total; i++) {
+    const available = base.filter((n) => !usedIds.has(n.id));
+    const picked = pick(available.length > 0 ? available : base, rng);
+    chosen.push(picked);
+    usedIds.add(picked.id);
+  }
 
   return {
-    name: chosen.name,
+    name: chosen.map((c) => c.name).join(' '),
     surname: req.surname.trim(),
-    elements: [element],
-    origins: [chosen.origin],
+    elements: chosen.map(asElement),
+    origins: distinct(chosen.map((c) => c.origin)),
   };
 }

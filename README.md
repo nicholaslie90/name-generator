@@ -9,18 +9,18 @@ deploys to GitHub Pages.
 ## Features
 
 - **Two name styles:**
-  - **Umum (Familiar)** — picks from **~5,200 attested given names** (enriched
-    from Lisa Shaw's *Baby Names Your Child Can Live With*) across 12 origin
-    families, filtered by your parameters. Meanings are English (the source is
+  - **Umum (Familiar)** — joins **attested given names** (from a ~5,200-name set
+    enriched from Lisa Shaw's *Baby Names Your Child Can Live With*) across 12
+    origin families into a multi-word name. Meanings are English (the source is
     English-only); the curated core set is fully bilingual.
   - **Unik (Composed)** — assembles a one-of-a-kind name from etymological roots
     (Arab, Sanskerta, Latin, Ibrani), with composed bilingual meanings.
 - **12 etymology families** in familiar mode: Arab, Ibrani, Yunani, Latin & Roman,
   Inggris, Keltik, Jermanik, Sanskerta & Hindu, Slavia, Afrika, Pasifik & Asia, Lainnya.
-- **Parameters:** surname, gender (Laki-laki / Perempuan / Netral), number of
-  syllables (2–4), and control of the initial letter (awalan) and etymology.
-  In Composed mode each syllable is controlled *individually*, so you can mix
-  origins across syllables ("campuran etimologi"). **Leaving an awalan empty
+- **Parameters:** surname, gender (Laki-laki / Perempuan / Netral), **number of
+  words (2–4)** — e.g. 3 gives a three-word name — plus the initial letter (awalan)
+  and etymology. In Composed mode each word is controlled *individually*, so you
+  can mix origins across words ("campuran etimologi"). **Leaving an awalan empty
   auto-generates that part.**
 - **Origins (v1):** Arab/Islami, Sanskerta & Jawa, Latin/Yunani, Ibrani.
 - **Composed meaning** built from each chosen root, shown bilingually.

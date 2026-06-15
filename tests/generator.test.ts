@@ -16,13 +16,14 @@ function gen(req: Parameters<typeof generateName>[0]) {
 }
 
 describe('generateName', () => {
-  it('produces a capitalized name from the requested number of syllables', () => {
+  it('produces one capitalized word per slot', () => {
     const r = gen({ surname: 'Putra', gender: 'N', slots: [{}, {}] });
     expect(isGenerateError(r)).toBe(false);
     const g = r as GeneratedName;
     expect(g.elements).toHaveLength(2);
-    expect(g.name[0]).toBe(g.name[0].toUpperCase());
-    expect(g.name.slice(1)).toBe(g.name.slice(1).toLowerCase());
+    const words = g.name.split(' ');
+    expect(words).toHaveLength(2);
+    for (const w of words) expect(w[0]).toBe(w[0].toUpperCase());
     expect(g.surname).toBe('Putra');
   });
 

@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateFamiliarName } from '../src/lib/generator';
-import { makeRng } from '../src/lib/generator';
+import { generateFamiliarName, makeRng } from '../src/lib/generator';
 import { isGenerateError, type CommonName, type GeneratedName } from '../src/types';
 
 const NAMES: CommonName[] = [
@@ -11,51 +10,56 @@ const NAMES: CommonName[] = [
   { id: 'c5', name: 'Ahmad', initial: 'a', syllables: 2, origin: 'arab', gender: 'L', meaning: { id: 'terpuji', en: 'praiseworthy' } },
 ];
 
+const NAMESET = new Set(NAMES.map((n) => n.name));
+
 function gen(req: Parameters<typeof generateFamiliarName>[0]) {
   return generateFamiliarName(req, NAMES, makeRng(42));
 }
 
 describe('generateFamiliarName', () => {
-  it('returns a real, attested name from the pool', () => {
-    const r = gen({ surname: 'Wijaya', gender: 'P', syllables: 2 });
+  it('joins the requested number of words, each a real name', () => {
+    const r = gen({ surname: 'Lie', gender: 'P', words: 3 });
     expect(isGenerateError(r)).toBe(false);
     const g = r as GeneratedName;
-    expect(['Cindy', 'Elaine', 'Sophia']).toContain(g.name);
-    expect(g.surname).toBe('Wijaya');
+    const words = g.name.split(' ');
+    expect(words).toHaveLength(3);
+    for (const w of words) expect(NAMESET.has(w)).toBe(true);
+    expect(g.surname).toBe('Lie');
   });
 
   it('auto-picks when the initial is empty', () => {
-    const r = gen({ surname: '', gender: 'N', syllables: 2 });
+    const r = gen({ surname: '', gender: 'N', words: 2 });
     expect(isGenerateError(r)).toBe(false);
   });
 
-  it('honors a requested initial letter', () => {
-    const r = gen({ surname: '', gender: 'P', syllables: 2, initial: 'e' });
+  it('honors a requested initial on the first word', () => {
+    const r = gen({ surname: '', gender: 'P', words: 2, initial: 'e' });
     const g = r as GeneratedName;
-    expect(g.name).toBe('Elaine');
+    expect(g.name.split(' ')[0]).toBe('Elaine');
   });
 
-  it('honors the gender filter', () => {
-    const r = gen({ surname: '', gender: 'L', syllables: 2 });
+  it('honors the gender filter for every word', () => {
+    const r = gen({ surname: '', gender: 'L', words: 2 });
     const g = r as GeneratedName;
-    expect(['Victor', 'Ahmad']).toContain(g.name);
+    for (const w of g.name.split(' ')) expect(['Victor', 'Ahmad']).toContain(w);
   });
 
   it('honors an origin constraint', () => {
-    const r = gen({ surname: '', gender: 'L', syllables: 2, origins: ['arab'] });
+    const r = gen({ surname: '', gender: 'L', words: 1, origins: ['arab'] });
     const g = r as GeneratedName;
     expect(g.name).toBe('Ahmad');
     expect(g.origins).toEqual(['arab']);
   });
 
-  it('softly prefers the requested syllable count but still returns a name', () => {
-    // No 4-syllable names exist; should fall back rather than error.
-    const r = gen({ surname: '', gender: 'P', syllables: 4 });
-    expect(isGenerateError(r)).toBe(false);
+  it('prefers distinct words when the pool allows', () => {
+    const r = gen({ surname: '', gender: 'P', words: 3 });
+    const g = r as GeneratedName;
+    const words = g.name.split(' ');
+    expect(new Set(words).size).toBe(words.length);
   });
 
   it('errors only when nothing matches the hard filters', () => {
-    const r = gen({ surname: '', gender: 'P', syllables: 2, initial: 'z' });
+    const r = gen({ surname: '', gender: 'P', words: 2, initial: 'z' });
     expect(isGenerateError(r)).toBe(true);
   });
 });

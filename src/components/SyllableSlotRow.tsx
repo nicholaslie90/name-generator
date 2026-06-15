@@ -21,7 +21,7 @@ export default function SyllableSlotRow({ index, slot, onChange }: Props) {
 
   return (
     <div className="slot">
-      <div className="slot__title">Suku kata {index + 1} · Syllable {index + 1}</div>
+      <div className="slot__title">Kata {index + 1} · Word {index + 1}</div>
       <div className="slot__row">
         <div>
           <label className="field__label" htmlFor={`initial-${index}`}>
@@ -35,7 +35,7 @@ export default function SyllableSlotRow({ index, slot, onChange }: Props) {
             placeholder="—"
             value={slot.initial ?? ''}
             onChange={(e) => setInitial(e.target.value)}
-            aria-label={`Awalan suku kata ${index + 1}`}
+            aria-label={`Awalan kata ${index + 1}`}
           />
         </div>
         <div>

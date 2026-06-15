@@ -104,9 +104,9 @@ export interface GenerateRequest {
 export interface FamiliarRequest {
   surname: string;
   gender: Gender;
-  /** Preferred syllable count (soft — falls back to any count if none match). */
-  syllables: number;
-  /** Optional desired first letter (lowercase). Empty = auto. */
+  /** Number of words (name parts) in the generated full name. */
+  words: number;
+  /** Optional desired first letter of the first word (lowercase). Empty = auto. */
   initial?: string;
   /** Optional subset of origins. Empty/undefined = all. */
   origins?: Origin[];
