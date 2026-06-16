@@ -1,10 +1,27 @@
+/* ---- Fluid sizing ----
+ * The frame is authored at 480×600 but scales fluidly with its container.
+ * `.scale` is a query container; every internal dimension below is expressed
+ * in `cqw` (1cqw = 1% of the container width), so 480px → 100cqw. At a 480px
+ * container the result is pixel-identical to the original fixed design, and on
+ * narrow phones the whole design — including type — shrinks proportionally
+ * instead of overflowing. Exports stay crisp because html-to-image inlines the
+ * resolved px values at capture time. */
+.scale {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 480px;
+  /* Allow the frame to shrink below its content's intrinsic width inside the
+   * flex stage (between the two nav arrows) on narrow screens. */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 /* ---- Base frame (shared by all themes) ---- */
 .frame {
   position: relative;
-  width: 480px;
-  height: 600px;
-  max-width: 100%;
-  padding: 38px;
+  width: 100%;
+  aspect-ratio: 480 / 600;
+  padding: 7.9cqw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,40 +34,40 @@
 
 .inner {
   position: absolute;
-  inset: 18px;
+  inset: 3.75cqw;
   border-radius: 4px;
   pointer-events: none;
 }
 
 .kicker {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 2.71cqw;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 2.08cqw;
   opacity: 0.8;
 }
 
 .name {
   font-family: var(--font-script);
   line-height: 1;
-  font-size: 76px;
-  margin: 4px 0 6px;
+  font-size: 15.83cqw;
+  margin: 0.83cqw 0 1.25cqw;
   word-break: break-word;
 }
 
 .surname {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 4.17cqw;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 2.92cqw;
 }
 
 .divider {
-  width: 120px;
+  width: 25cqw;
   height: 1px;
-  margin: 10px 0 16px;
+  margin: 2.08cqw 0 3.33cqw;
   position: relative;
 }
 
@@ -60,30 +77,30 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 18px;
+  font-size: 3.75cqw;
   background: transparent;
   padding: 0 8px;
 }
 
 .meaningId {
-  font-size: 23px;
+  font-size: 4.79cqw;
   font-style: italic;
   line-height: 1.35;
-  margin: 0 0 6px;
+  margin: 0 0 1.25cqw;
   max-width: 90%;
 }
 
 .meaningEn {
-  font-size: 16px;
+  font-size: 3.33cqw;
   line-height: 1.3;
   opacity: 0.78;
-  margin: 0 0 16px;
+  margin: 0 0 3.33cqw;
   max-width: 88%;
 }
 
 .etymology {
   font-family: var(--font-display);
-  font-size: 11px;
+  font-size: 2.29cqw;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -137,12 +154,12 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 26px;
+  font-size: 5.42cqw;
   color: #6f9150;
-  letter-spacing: 6px;
+  letter-spacing: 1.25cqw;
 }
-.botanical .leafTop { top: 30px; }
-.botanical .leafBottom { bottom: 28px; transform: translateX(-50%) rotate(180deg); }
+.botanical .leafTop { top: 6.25cqw; }
+.botanical .leafBottom { bottom: 5.83cqw; transform: translateX(-50%) rotate(180deg); }
 
 /* ---- Theme: Royal dark (navy + gold foil) ---- */
 .royal {

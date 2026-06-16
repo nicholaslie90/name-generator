@@ -26,22 +26,24 @@ const NameFrame = forwardRef<HTMLDivElement, Props>(function NameFrame({ result,
   const etymology = composeEtymology(result);
 
   return (
-    <div ref={ref} className={`${styles.frame} ${styles[style]}`}>
-      <div className={styles.inner} />
-      <span className={styles.leafTop}>❧ ❀ ❧</span>
+    <div className={styles.scale}>
+      <div ref={ref} className={`${styles.frame} ${styles[style]}`}>
+        <div className={styles.inner} />
+        <span className={styles.leafTop}>❧ ❀ ❧</span>
 
-      <div className={styles.kicker}>Sebuah nama untuk · A name for</div>
-      <div className={styles.name}>{result.name}</div>
-      {result.surname && <div className={styles.surname}>{result.surname}</div>}
+        <div className={styles.kicker}>Sebuah nama untuk · A name for</div>
+        <div className={styles.name}>{result.name}</div>
+        {result.surname && <div className={styles.surname}>{result.surname}</div>}
 
-      <div className={styles.divider} />
+        <div className={styles.divider} />
 
-      <p className={styles.meaningId}>“{meaning.id}”</p>
-      <p className={styles.meaningEn}>{meaning.en}</p>
+        <p className={styles.meaningId}>“{meaning.id}”</p>
+        <p className={styles.meaningEn}>{meaning.en}</p>
 
-      <div className={styles.etymology}>{etymology.id}</div>
+        <div className={styles.etymology}>{etymology.id}</div>
 
-      <span className={styles.leafBottom}>❧ ❀ ❧</span>
+        <span className={styles.leafBottom}>❧ ❀ ❧</span>
+      </div>
     </div>
   );
 });
