@@ -67,4 +67,14 @@ describe('common-names dataset', () => {
       expect(n.meaning.en.trim(), `meaning.en for ${n.id}`).not.toBe('');
     }
   });
+
+  it('tags a healthy set of biblical names (both testaments, both genders)', () => {
+    const biblical = COMMON_NAMES.filter((n) => n.biblical);
+    expect(biblical.length).toBeGreaterThanOrEqual(80);
+    // attested dictionary entries get tagged too, not just freshly added ones
+    expect(COMMON_NAMES.some((n) => n.name === 'David' && n.biblical)).toBe(true);
+    expect(COMMON_NAMES.some((n) => n.name === 'Mary' && n.biblical)).toBe(true);
+    expect(biblical.some((n) => n.gender === 'L')).toBe(true);
+    expect(biblical.some((n) => n.gender === 'P')).toBe(true);
+  });
 });

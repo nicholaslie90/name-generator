@@ -6,6 +6,7 @@ import latin from './elements.latin.json';
 import ibrani from './elements.ibrani.json';
 import commonNames from './commonNames.json';
 import importedNames from './commonNamesImported.json';
+import biblicalNames from './biblicalNames.json';
 
 /** Building-block roots used by the "composed" (unique) name style. */
 export const ELEMENTS: NameElement[] = [
@@ -23,11 +24,21 @@ export const ELEMENTS: NameElement[] = [
 function mergeCommonNames(): CommonName[] {
   const byKey = new Map<string, CommonName>();
   const key = (n: CommonName) => `${n.name.toLowerCase()}|${n.gender}`;
+  // Curated core wins, then curated biblical entries fill gaps, then the dictionary.
   for (const n of commonNames as CommonName[]) byKey.set(key(n), n);
+  for (const n of biblicalNames as CommonName[]) {
+    if (!byKey.has(key(n))) byKey.set(key(n), n);
+  }
   for (const n of importedNames as CommonName[]) {
     if (!byKey.has(key(n))) byKey.set(key(n), n);
   }
-  return [...byKey.values()];
+  // Tag every entry whose name is a known biblical name (regardless of gender),
+  // so attested dictionary entries (David, Daniel, …) keep their own meaning but
+  // still register as biblical.
+  const biblicalSet = new Set((biblicalNames as CommonName[]).map((n) => n.name.toLowerCase()));
+  return [...byKey.values()].map((n) =>
+    biblicalSet.has(n.name.toLowerCase()) ? { ...n, biblical: true } : n,
+  );
 }
 
 export const COMMON_NAMES: CommonName[] = mergeCommonNames();

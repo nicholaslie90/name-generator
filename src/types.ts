@@ -82,10 +82,12 @@ export interface CommonName {
   origin: Origin;
   gender: Gender;
   meaning: { id: string; en: string };
+  /** True for names attested in the Bible (Old or New Testament). */
+  biblical?: boolean;
 }
 
 /** Which generation style the user picked. */
-export type NameStyle = 'familiar' | 'composed' | 'meaning';
+export type NameStyle = 'familiar' | 'composed' | 'meaning' | 'analyze';
 
 /** Per-syllable constraints chosen by the user. */
 export interface SlotConstraint {
@@ -112,6 +114,8 @@ export interface FamiliarRequest {
   origins?: Origin[];
   /** When true, force every word to share one (randomly chosen) origin. */
   sameOrigin?: boolean;
+  /** When true, draw only from names attested in the Bible. */
+  biblicalOnly?: boolean;
 }
 
 export interface MeaningRequest {

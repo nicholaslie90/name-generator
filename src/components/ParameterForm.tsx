@@ -19,22 +19,28 @@ export interface FormState {
   familiarInitial?: string;
   /** Familiar-mode: allowed origins (empty = all). */
   familiarOrigins?: Origin[];
+  /** Familiar-mode: restrict to biblical names only. */
+  biblicalOnly?: boolean;
   /** Meaning-mode: meaning words to search, e.g. "joy, happy, glee". */
   meaningQuery?: string;
   /** Familiar/meaning modes: force all words to share one etymology. */
   sameOrigin?: boolean;
+  /** Analyze-mode: the name the user typed to look up. */
+  ownName?: string;
 }
 
 const NAME_STYLES: { value: NameStyle; label: string; hint: string }[] = [
   { value: 'familiar', label: 'Umum', hint: 'mis. Cindy, Elaine, Christie' },
   { value: 'composed', label: 'Unik', hint: 'dirangkai dari akar kata' },
   { value: 'meaning', label: 'Arti', hint: 'mis. joy, happy, glee' },
+  { value: 'analyze', label: 'Nama Sendiri', hint: 'ketik nama, lihat artinya' },
 ];
 
 const STYLE_HINTS: Record<NameStyle, string> = {
   familiar: 'Nama umum yang dikenal · ' + NAME_STYLES[0].hint,
   composed: 'Nama unik · ' + NAME_STYLES[1].hint,
   meaning: 'Cari dari arti · ' + NAME_STYLES[2].hint,
+  analyze: 'Arti nama Anda · ' + NAME_STYLES[3].hint,
 };
 
 const GENDER_OPTIONS: { value: Gender; label: string }[] = [
@@ -54,6 +60,7 @@ interface Props {
 export default function ParameterForm({ value, onChange, onGenerate }: Props) {
   const familiar = value.nameStyle === 'familiar';
   const meaning = value.nameStyle === 'meaning';
+  const analyze = value.nameStyle === 'analyze';
   const familiarOrigins = value.familiarOrigins ?? [];
   const surname = value.surname.trim();
   // The surname is one of the chosen words, so one fewer word is generated.
@@ -128,46 +135,66 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         />
       </div>
 
-      <div className="field">
-        <span className="field__label">Jenis kelamin <span className="field__hint">/ Gender</span></span>
-        <div className="segmented">
-          {GENDER_OPTIONS.map((g) => (
-            <button
-              key={g.value}
-              type="button"
-              aria-pressed={value.gender === g.value}
-              onClick={() => onChange({ ...value, gender: g.value })}
-            >
-              {g.label}
-            </button>
-          ))}
+      {!analyze && (
+        <div className="field">
+          <span className="field__label">Jenis kelamin <span className="field__hint">/ Gender</span></span>
+          <div className="segmented">
+            {GENDER_OPTIONS.map((g) => (
+              <button
+                key={g.value}
+                type="button"
+                aria-pressed={value.gender === g.value}
+                onClick={() => onChange({ ...value, gender: g.value })}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="field">
-        <span className="field__label">
-          Jumlah kata <span className="field__hint">/ Words — mis. 3 = tiga kata</span>
-        </span>
-        <div className="segmented">
-          {WORD_OPTIONS.map((n) => (
-            <button
-              key={n}
-              type="button"
-              aria-pressed={value.slots.length === n}
-              onClick={() => setWordCount(n)}
-            >
-              {n}
-            </button>
-          ))}
+      {!analyze && (
+        <div className="field">
+          <span className="field__label">
+            Jumlah kata <span className="field__hint">/ Words — mis. 3 = tiga kata</span>
+          </span>
+          <div className="segmented">
+            {WORD_OPTIONS.map((n) => (
+              <button
+                key={n}
+                type="button"
+                aria-pressed={value.slots.length === n}
+                onClick={() => setWordCount(n)}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+          {surname && (
+            <p className="field__hint" style={{ marginTop: '0.35rem' }}>
+              Termasuk nama keluarga «{surname}» · includes surname — {generatedWords} kata akan dibuat
+            </p>
+          )}
         </div>
-        {surname && (
+      )}
+
+      {analyze ? (
+        <div className="field">
+          <label className="field__label" htmlFor="own-name">
+            Nama <span className="field__hint">/ Name — ketik nama yang ingin dicari artinya</span>
+          </label>
+          <input
+            id="own-name"
+            type="text"
+            placeholder="mis. Sophia Nuraini"
+            value={value.ownName ?? ''}
+            onChange={(e) => onChange({ ...value, ownName: e.target.value })}
+          />
           <p className="field__hint" style={{ marginTop: '0.35rem' }}>
-            Termasuk nama keluarga «{surname}» · includes surname — {generatedWords} kata akan dibuat
+            Arti & etimologi dicari per kata · meaning & etymology looked up per word
           </p>
-        )}
-      </div>
-
-      {meaning ? (
+        </div>
+      ) : meaning ? (
         <div className="field">
           <label className="field__label" htmlFor="meaning-query">
             Kata arti <span className="field__hint">/ Meaning words — pisahkan dengan koma</span>
@@ -216,6 +243,26 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
                 </button>
               ))}
             </div>
+          </div>
+          <div className="field">
+            <span className="field__label">
+              Kategori <span className="field__hint">/ Category</span>
+            </span>
+            <div className="chips">
+              <button
+                type="button"
+                className="chip"
+                aria-pressed={!!value.biblicalOnly}
+                onClick={() => onChange({ ...value, biblicalOnly: !value.biblicalOnly })}
+              >
+                ✝ Alkitab · Biblical
+              </button>
+            </div>
+            {value.biblicalOnly && (
+              <p className="field__hint" style={{ marginTop: '0.35rem' }}>
+                Hanya nama dari Alkitab · biblical names only
+              </p>
+            )}
           </div>
         </>
       ) : (

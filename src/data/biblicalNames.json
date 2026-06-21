@@ -1,0 +1,1419 @@
+[
+  {
+    "id": "bib-adam-l",
+    "name": "Adam",
+    "initial": "a",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "manusia, dari tanah",
+      "en": "man, of the earth"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-seth-l",
+    "name": "Seth",
+    "initial": "s",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang ditetapkan",
+      "en": "appointed"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-enoch-l",
+    "name": "Enoch",
+    "initial": "e",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang dibaktikan",
+      "en": "dedicated"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-noah-l",
+    "name": "Noah",
+    "initial": "n",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "ketenangan, penghiburan",
+      "en": "rest, comfort"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-abraham-l",
+    "name": "Abraham",
+    "initial": "a",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "ayah dari banyak bangsa",
+      "en": "father of many"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-isaac-l",
+    "name": "Isaac",
+    "initial": "i",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "tawa",
+      "en": "laughter"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-jacob-l",
+    "name": "Jacob",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "penggenggam tumit",
+      "en": "supplanter"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-joseph-l",
+    "name": "Joseph",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan akan menambahkan",
+      "en": "God will add"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-benjamin-l",
+    "name": "Benjamin",
+    "initial": "b",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "putra tangan kanan",
+      "en": "son of the right hand"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-judah-l",
+    "name": "Judah",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "pujian",
+      "en": "praise"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-levi-l",
+    "name": "Levi",
+    "initial": "l",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "bersatu, terikat",
+      "en": "joined"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-reuben-l",
+    "name": "Reuben",
+    "initial": "r",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "lihatlah, seorang putra",
+      "en": "behold, a son"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-simeon-l",
+    "name": "Simeon",
+    "initial": "s",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang mendengar",
+      "en": "he has heard"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-asher-l",
+    "name": "Asher",
+    "initial": "a",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "bahagia, beruntung",
+      "en": "happy, blessed"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-moses-l",
+    "name": "Moses",
+    "initial": "m",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "diangkat dari air",
+      "en": "drawn from the water"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-aaron-l",
+    "name": "Aaron",
+    "initial": "a",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang ditinggikan",
+      "en": "exalted"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-joshua-l",
+    "name": "Joshua",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan adalah keselamatan",
+      "en": "the Lord is salvation"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-caleb-l",
+    "name": "Caleb",
+    "initial": "c",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "setia, sepenuh hati",
+      "en": "faithful, wholehearted"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-gideon-l",
+    "name": "Gideon",
+    "initial": "g",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "penebang, pejuang perkasa",
+      "en": "mighty warrior"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-samson-l",
+    "name": "Samson",
+    "initial": "s",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "seperti matahari",
+      "en": "like the sun"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-samuel-l",
+    "name": "Samuel",
+    "initial": "s",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "didengar oleh Tuhan",
+      "en": "heard by God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-saul-l",
+    "name": "Saul",
+    "initial": "s",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang diminta",
+      "en": "asked for"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-david-l",
+    "name": "David",
+    "initial": "d",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang dikasihi",
+      "en": "beloved"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-solomon-l",
+    "name": "Solomon",
+    "initial": "s",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "damai sejahtera",
+      "en": "peace"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-nathan-l",
+    "name": "Nathan",
+    "initial": "n",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "pemberian",
+      "en": "he gave"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-jesse-l",
+    "name": "Jesse",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "anugerah, Tuhan ada",
+      "en": "gift, the Lord exists"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-elijah-l",
+    "name": "Elijah",
+    "initial": "e",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan adalah Allahku",
+      "en": "my God is the Lord"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-elisha-l",
+    "name": "Elisha",
+    "initial": "e",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan adalah keselamatan",
+      "en": "God is salvation"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-isaiah-l",
+    "name": "Isaiah",
+    "initial": "i",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan adalah keselamatan",
+      "en": "the Lord is salvation"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-jeremiah-l",
+    "name": "Jeremiah",
+    "initial": "j",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan meninggikan",
+      "en": "the Lord exalts"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-ezekiel-l",
+    "name": "Ezekiel",
+    "initial": "e",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan menguatkan",
+      "en": "God strengthens"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-daniel-l",
+    "name": "Daniel",
+    "initial": "d",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan adalah hakimku",
+      "en": "God is my judge"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-ezra-l",
+    "name": "Ezra",
+    "initial": "e",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "pertolongan",
+      "en": "help"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-nehemiah-l",
+    "name": "Nehemiah",
+    "initial": "n",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "dihibur oleh Tuhan",
+      "en": "comforted by God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-job-l",
+    "name": "Job",
+    "initial": "j",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang teraniaya",
+      "en": "persecuted"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-boaz-l",
+    "name": "Boaz",
+    "initial": "b",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "kekuatan, ketangkasan",
+      "en": "swiftness, strength"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-eli-l",
+    "name": "Eli",
+    "initial": "e",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang ditinggikan",
+      "en": "ascended"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-hosea-l",
+    "name": "Hosea",
+    "initial": "h",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "keselamatan",
+      "en": "salvation"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-joel-l",
+    "name": "Joel",
+    "initial": "j",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan adalah Allah",
+      "en": "the Lord is God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-amos-l",
+    "name": "Amos",
+    "initial": "a",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "dipikul oleh Tuhan",
+      "en": "borne by God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-jonah-l",
+    "name": "Jonah",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "merpati",
+      "en": "dove"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-micah-l",
+    "name": "Micah",
+    "initial": "m",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "siapa seperti Tuhan",
+      "en": "who is like God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-malachi-l",
+    "name": "Malachi",
+    "initial": "m",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "utusanku",
+      "en": "my messenger"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-zechariah-l",
+    "name": "Zechariah",
+    "initial": "z",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan mengingat",
+      "en": "the Lord remembers"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-obadiah-l",
+    "name": "Obadiah",
+    "initial": "o",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "hamba Tuhan",
+      "en": "servant of the Lord"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-hezekiah-l",
+    "name": "Hezekiah",
+    "initial": "h",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan menguatkan",
+      "en": "God strengthens"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-josiah-l",
+    "name": "Josiah",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan menyokong",
+      "en": "the Lord supports"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-abel-l",
+    "name": "Abel",
+    "initial": "a",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "napas, kefanaan",
+      "en": "breath"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-cain-l",
+    "name": "Cain",
+    "initial": "c",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "yang diperoleh",
+      "en": "acquired"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-eliezer-l",
+    "name": "Eliezer",
+    "initial": "e",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan adalah penolongku",
+      "en": "God is my help"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-gabriel-l",
+    "name": "Gabriel",
+    "initial": "g",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan adalah kekuatanku",
+      "en": "God is my strength"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-michael-l",
+    "name": "Michael",
+    "initial": "m",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "siapa seperti Tuhan",
+      "en": "who is like God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-raphael-l",
+    "name": "Raphael",
+    "initial": "r",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan menyembuhkan",
+      "en": "God heals"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-nathaniel-l",
+    "name": "Nathaniel",
+    "initial": "n",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "anugerah dari Tuhan",
+      "en": "gift of God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-tobias-l",
+    "name": "Tobias",
+    "initial": "t",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan itu baik",
+      "en": "God is good"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-immanuel-l",
+    "name": "Immanuel",
+    "initial": "i",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan beserta kita",
+      "en": "God is with us"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-eve-p",
+    "name": "Eve",
+    "initial": "e",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "kehidupan",
+      "en": "life"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-sarah-p",
+    "name": "Sarah",
+    "initial": "s",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "puteri bangsawan",
+      "en": "princess"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-rebecca-p",
+    "name": "Rebecca",
+    "initial": "r",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "yang memikat",
+      "en": "captivating"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-rachel-p",
+    "name": "Rachel",
+    "initial": "r",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "domba betina",
+      "en": "ewe"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-leah-p",
+    "name": "Leah",
+    "initial": "l",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "lembut, jemu",
+      "en": "delicate, weary"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-dinah-p",
+    "name": "Dinah",
+    "initial": "d",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "yang dibenarkan",
+      "en": "vindicated"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-miriam-p",
+    "name": "Miriam",
+    "initial": "m",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "yang dikasihi",
+      "en": "beloved"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-deborah-p",
+    "name": "Deborah",
+    "initial": "d",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "lebah",
+      "en": "bee"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-ruth-p",
+    "name": "Ruth",
+    "initial": "r",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "sahabat, sahabat karib",
+      "en": "companion, friend"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-naomi-p",
+    "name": "Naomi",
+    "initial": "n",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "keramahan, kesenangan",
+      "en": "pleasantness"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-hannah-p",
+    "name": "Hannah",
+    "initial": "h",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "rahmat, anugerah",
+      "en": "grace, favor"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-abigail-p",
+    "name": "Abigail",
+    "initial": "a",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "sukacita sang ayah",
+      "en": "father's joy"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-esther-p",
+    "name": "Esther",
+    "initial": "e",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "bintang",
+      "en": "star"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-tamar-p",
+    "name": "Tamar",
+    "initial": "t",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "pohon kurma",
+      "en": "palm tree"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-delilah-p",
+    "name": "Delilah",
+    "initial": "d",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "yang lembut",
+      "en": "delicate"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-zipporah-p",
+    "name": "Zipporah",
+    "initial": "z",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "burung",
+      "en": "bird"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-susanna-p",
+    "name": "Susanna",
+    "initial": "s",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "bunga bakung",
+      "en": "lily"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-bethany-p",
+    "name": "Bethany",
+    "initial": "b",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "rumah buah ara",
+      "en": "house of figs"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-mary-p",
+    "name": "Mary",
+    "initial": "m",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "yang dikasihi",
+      "en": "beloved"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-martha-p",
+    "name": "Martha",
+    "initial": "m",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "nyonya rumah",
+      "en": "lady"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-elizabeth-p",
+    "name": "Elizabeth",
+    "initial": "e",
+    "syllables": 4,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "Tuhan adalah sumpahku",
+      "en": "God is my oath"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-joanna-p",
+    "name": "Joanna",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "Tuhan itu pemurah",
+      "en": "God is gracious"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-anna-p",
+    "name": "Anna",
+    "initial": "a",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "rahmat, anugerah",
+      "en": "grace"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-magdalene-p",
+    "name": "Magdalene",
+    "initial": "m",
+    "syllables": 4,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "dari Magdala",
+      "en": "of Magdala"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-phoebe-p",
+    "name": "Phoebe",
+    "initial": "p",
+    "syllables": 2,
+    "origin": "yunani",
+    "gender": "P",
+    "meaning": {
+      "id": "cerah, berseri",
+      "en": "bright, radiant"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-lydia-p",
+    "name": "Lydia",
+    "initial": "l",
+    "syllables": 2,
+    "origin": "yunani",
+    "gender": "P",
+    "meaning": {
+      "id": "dari Lydia",
+      "en": "from Lydia"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-priscilla-p",
+    "name": "Priscilla",
+    "initial": "p",
+    "syllables": 3,
+    "origin": "latin",
+    "gender": "P",
+    "meaning": {
+      "id": "purba, terhormat",
+      "en": "ancient, venerable"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-tabitha-p",
+    "name": "Tabitha",
+    "initial": "t",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "kijang",
+      "en": "gazelle"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-dorcas-p",
+    "name": "Dorcas",
+    "initial": "d",
+    "syllables": 2,
+    "origin": "yunani",
+    "gender": "P",
+    "meaning": {
+      "id": "kijang",
+      "en": "gazelle"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-salome-p",
+    "name": "Salome",
+    "initial": "s",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "P",
+    "meaning": {
+      "id": "damai",
+      "en": "peace"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-peter-l",
+    "name": "Peter",
+    "initial": "p",
+    "syllables": 2,
+    "origin": "yunani",
+    "gender": "L",
+    "meaning": {
+      "id": "batu karang",
+      "en": "rock"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-andrew-l",
+    "name": "Andrew",
+    "initial": "a",
+    "syllables": 2,
+    "origin": "yunani",
+    "gender": "L",
+    "meaning": {
+      "id": "jantan, gagah",
+      "en": "manly"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-philip-l",
+    "name": "Philip",
+    "initial": "p",
+    "syllables": 2,
+    "origin": "yunani",
+    "gender": "L",
+    "meaning": {
+      "id": "pencinta kuda",
+      "en": "lover of horses"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-thomas-l",
+    "name": "Thomas",
+    "initial": "t",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "kembar",
+      "en": "twin"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-matthew-l",
+    "name": "Matthew",
+    "initial": "m",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "anugerah dari Tuhan",
+      "en": "gift of God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-james-l",
+    "name": "James",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "penggenggam tumit",
+      "en": "supplanter"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-john-l",
+    "name": "John",
+    "initial": "j",
+    "syllables": 1,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan itu pemurah",
+      "en": "God is gracious"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-paul-l",
+    "name": "Paul",
+    "initial": "p",
+    "syllables": 1,
+    "origin": "latin",
+    "gender": "L",
+    "meaning": {
+      "id": "kecil, rendah hati",
+      "en": "small, humble"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-mark-l",
+    "name": "Mark",
+    "initial": "m",
+    "syllables": 1,
+    "origin": "latin",
+    "gender": "L",
+    "meaning": {
+      "id": "suka berperang",
+      "en": "warlike"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-luke-l",
+    "name": "Luke",
+    "initial": "l",
+    "syllables": 2,
+    "origin": "latin",
+    "gender": "L",
+    "meaning": {
+      "id": "cahaya",
+      "en": "light"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-stephen-l",
+    "name": "Stephen",
+    "initial": "s",
+    "syllables": 2,
+    "origin": "yunani",
+    "gender": "L",
+    "meaning": {
+      "id": "mahkota",
+      "en": "crown"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-timothy-l",
+    "name": "Timothy",
+    "initial": "t",
+    "syllables": 3,
+    "origin": "yunani",
+    "gender": "L",
+    "meaning": {
+      "id": "menghormati Tuhan",
+      "en": "honoring God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-titus-l",
+    "name": "Titus",
+    "initial": "t",
+    "syllables": 2,
+    "origin": "latin",
+    "gender": "L",
+    "meaning": {
+      "id": "terhormat",
+      "en": "honorable"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-barnabas-l",
+    "name": "Barnabas",
+    "initial": "b",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "putra penghiburan",
+      "en": "son of encouragement"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-silas-l",
+    "name": "Silas",
+    "initial": "s",
+    "syllables": 2,
+    "origin": "latin",
+    "gender": "L",
+    "meaning": {
+      "id": "dari hutan",
+      "en": "of the forest"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-cornelius-l",
+    "name": "Cornelius",
+    "initial": "c",
+    "syllables": 3,
+    "origin": "latin",
+    "gender": "L",
+    "meaning": {
+      "id": "tanduk",
+      "en": "horn"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-nicodemus-l",
+    "name": "Nicodemus",
+    "initial": "n",
+    "syllables": 4,
+    "origin": "yunani",
+    "gender": "L",
+    "meaning": {
+      "id": "kemenangan rakyat",
+      "en": "victory of the people"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-theophilus-l",
+    "name": "Theophilus",
+    "initial": "t",
+    "syllables": 3,
+    "origin": "yunani",
+    "gender": "L",
+    "meaning": {
+      "id": "sahabat Tuhan",
+      "en": "friend of God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-lazarus-l",
+    "name": "Lazarus",
+    "initial": "l",
+    "syllables": 3,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "Tuhan telah menolong",
+      "en": "God has helped"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-bartholomew-l",
+    "name": "Bartholomew",
+    "initial": "b",
+    "syllables": 4,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "putra Tolmai",
+      "en": "son of Tolmai"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-matthias-l",
+    "name": "Matthias",
+    "initial": "m",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "anugerah dari Tuhan",
+      "en": "gift of God"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-stephanas-l",
+    "name": "Stephanas",
+    "initial": "s",
+    "syllables": 3,
+    "origin": "yunani",
+    "gender": "L",
+    "meaning": {
+      "id": "bermahkota",
+      "en": "crowned"
+    },
+    "biblical": true
+  },
+  {
+    "id": "bib-jude-l",
+    "name": "Jude",
+    "initial": "j",
+    "syllables": 2,
+    "origin": "ibrani",
+    "gender": "L",
+    "meaning": {
+      "id": "pujian",
+      "en": "praise"
+    },
+    "biblical": true
+  }
+]

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import ParameterForm, { type FormState } from './components/ParameterForm';
 import ResultPanel from './components/ResultPanel';
 import { ELEMENTS, COMMON_NAMES, MEANING_POOL } from './data';
-import { generateName, generateFamiliarName, generateByMeaning } from './lib/generator';
+import { generateName, generateFamiliarName, generateByMeaning, analyzeName } from './lib/generator';
 import { isGenerateError, type GeneratedName, type GenerateError, type GenerateResult } from './types';
 
 const INITIAL_FORM: FormState = {
@@ -41,6 +41,7 @@ export default function App() {
           initial: form.familiarInitial,
           origins: form.familiarOrigins,
           sameOrigin: form.sameOrigin,
+          biblicalOnly: form.biblicalOnly,
         },
         COMMON_NAMES,
       );
@@ -56,6 +57,9 @@ export default function App() {
         },
         MEANING_POOL,
       );
+    }
+    if (form.nameStyle === 'analyze') {
+      return analyzeName(form.ownName ?? '', COMMON_NAMES, ELEMENTS);
     }
     return generateName(
       { surname: form.surname, gender: form.gender, slots: form.slots.slice(0, wordCount) },
@@ -134,7 +138,9 @@ export default function App() {
     initial: form.familiarInitial ?? '',
     origins: form.familiarOrigins ?? [],
     meaningQuery: form.meaningQuery ?? '',
+    ownName: form.ownName ?? '',
     sameOrigin: form.sameOrigin ?? false,
+    biblicalOnly: form.biblicalOnly ?? false,
     slots: form.slots,
     // Whether a surname exists changes the generated word count (but typing
     // within an existing surname does not — that updates the frame live).

@@ -201,7 +201,8 @@ export function generateFamiliarName(
     (n) =>
       !n.name.includes(' ') &&
       matchesGender(n, req.gender) &&
-      (!req.origins || req.origins.length === 0 || req.origins.includes(n.origin)),
+      (!req.origins || req.origins.length === 0 || req.origins.includes(n.origin)) &&
+      (!req.biblicalOnly || n.biblical === true),
   );
 
   if (base.length === 0) {
@@ -237,5 +238,87 @@ export function generateFamiliarName(
     surname: req.surname.trim(),
     elements: chosen.map(asElement),
     origins: distinct(chosen.map((c) => c.origin)),
+  };
+}
+
+/**
+ * Greedily find known etymology roots inside a word: longest root first, left to
+ * right, non-overlapping, minimum length 3 (so tiny fragments don't over-match).
+ */
+function findRoots(word: string, elements: NameElement[]): NameElement[] {
+  const lower = word.toLowerCase();
+  const roots = elements.filter((e) => e.text.length >= 3).sort((a, b) => b.text.length - a.text.length);
+  const matched: NameElement[] = [];
+  let i = 0;
+  while (i < lower.length) {
+    const hit = roots.find((e) => e.text.length <= lower.length - i && lower.startsWith(e.text, i));
+    if (hit) {
+      matched.push(hit);
+      i += hit.text.length;
+    } else {
+      i += 1;
+    }
+  }
+  return matched;
+}
+
+/**
+ * Analyze a user-typed name into a meaning + etymology. Each word is, in order:
+ * (1) matched exactly against the attested names, else (2) decomposed into known
+ * etymology roots, else (3) left with a "meaning not found" placeholder. Always
+ * returns a GeneratedName (the typed name is valid even when unmeaningful); only
+ * empty input yields an error.
+ */
+export function analyzeName(
+  input: string,
+  names: CommonName[],
+  elements: NameElement[],
+): GenerateResult {
+  const words = input.trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) {
+    return {
+      error: 'empty-pool',
+      slotIndex: -1,
+      message: {
+        id: 'Ketik nama dulu untuk dilihat artinya.',
+        en: 'Type a name to see its meaning.',
+      },
+    };
+  }
+
+  const byName = new Map<string, CommonName>();
+  for (const n of names) {
+    const k = n.name.toLowerCase();
+    if (!byName.has(k)) byName.set(k, n);
+  }
+
+  const chosen: NameElement[] = [];
+  for (const w of words) {
+    const lw = w.toLowerCase().replace(/[^a-z]/g, '');
+    const exact = lw ? byName.get(lw) : undefined;
+    if (exact) {
+      chosen.push(asElement(exact));
+      continue;
+    }
+    const roots = lw ? findRoots(lw, elements) : [];
+    if (roots.length > 0) {
+      chosen.push(...roots);
+      continue;
+    }
+    chosen.push({
+      id: `unknown-${lw || 'x'}`,
+      text: w.toLowerCase(),
+      initial: lw[0] ?? '',
+      origin: 'lainnya',
+      gender: 'N',
+      meaning: { id: 'arti tidak ditemukan', en: 'meaning not found' },
+    });
+  }
+
+  return {
+    name: words.join(' '),
+    surname: '',
+    elements: chosen,
+    origins: distinct(chosen.map((e) => e.origin)),
   };
 }

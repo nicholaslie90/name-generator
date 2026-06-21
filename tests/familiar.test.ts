@@ -90,3 +90,25 @@ describe('generateFamiliarName — sameOrigin', () => {
     expect(sawMix).toBe(true);
   });
 });
+
+describe('generateFamiliarName — biblicalOnly', () => {
+  const POOL: CommonName[] = [
+    { id: 'b1', name: 'David', initial: 'd', syllables: 2, origin: 'ibrani', gender: 'L', meaning: { id: 'dikasihi', en: 'beloved' }, biblical: true },
+    { id: 'b2', name: 'Daniel', initial: 'd', syllables: 2, origin: 'ibrani', gender: 'L', meaning: { id: 'hakim', en: 'judge' }, biblical: true },
+    { id: 'n1', name: 'Kevin', initial: 'k', syllables: 2, origin: 'keltik', gender: 'L', meaning: { id: 'tampan', en: 'handsome' } },
+    { id: 'n2', name: 'Ryan', initial: 'r', syllables: 2, origin: 'keltik', gender: 'L', meaning: { id: 'raja kecil', en: 'little king' } },
+  ];
+
+  it('draws only from biblical names when biblicalOnly is set', () => {
+    for (const seed of [1, 2, 3, 7, 42, 99]) {
+      const r = generateFamiliarName({ surname: '', gender: 'L', words: 2, biblicalOnly: true }, POOL, makeRng(seed)) as GeneratedName;
+      expect(isGenerateError(r)).toBe(false);
+      for (const w of r.name.split(' ')) expect(['David', 'Daniel']).toContain(w);
+    }
+  });
+
+  it('errors when no biblical name matches the other filters', () => {
+    const r = generateFamiliarName({ surname: '', gender: 'L', words: 1, biblicalOnly: true, origins: ['keltik'] }, POOL, makeRng(1));
+    expect(isGenerateError(r)).toBe(true);
+  });
+});

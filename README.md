@@ -19,8 +19,15 @@ deploys to GitHub Pages.
     `joy, happy, glee`) and get names whose meaning contains **any** of them.
     Matches are drawn from **both** the attested-name set and the etymology
     roots, comparing against the Indonesian **and** English glosses.
+  - **Nama Sendiri (Your own name)** — type any name and it generates the
+    meaning + etymology per word: an exact match against the attested names,
+    else decomposition into known etymology roots (e.g. *Rahmawati* →
+    *rahma* + *wati*), else a graceful "arti tidak ditemukan".
 - **12 etymology families** in familiar mode: Arab, Ibrani, Yunani, Latin & Roman,
   Inggris, Keltik, Jermanik, Sanskerta & Hindu, Slavia, Afrika, Pasifik & Asia, Lainnya.
+- **Biblical category:** a cross-cutting **Alkitab / Biblical** flag (spanning the
+  Hebrew, Greek and Latin families) with a toggle in Familiar mode to draw only
+  from names attested in the Bible (Old & New Testament).
 - **Parameters:** surname, gender (Laki-laki / Perempuan / Netral), **number of
   words (2–4)** — e.g. 3 gives a three-word name — plus the initial letter (awalan)
   and etymology. In Composed mode each word is controlled *individually*, so you
