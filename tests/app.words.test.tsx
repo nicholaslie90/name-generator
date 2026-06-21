@@ -59,14 +59,14 @@ describe('App: word count controls how many words the name has', () => {
     render(<App />);
     // No clicks: a name and the "1 / 1" counter are already present.
     expect(generatedName()).not.toBe('');
-    const panel = screen.getByText(/Regenerate/i).closest('.result') as HTMLElement;
+    const panel = screen.getByRole('button', { name: /Regenerate/i }).closest('.result') as HTMLElement;
     expect(within(panel).getByText(/1 \/ 1/)).toBeTruthy();
   });
 
   it('the Next arrow is always enabled and generates a new name at the end', () => {
     render(<App />);
     const next = screen.getByLabelText('Nama berikutnya') as HTMLButtonElement;
-    const panel = screen.getByText(/Regenerate/i).closest('.result') as HTMLElement;
+    const panel = screen.getByRole('button', { name: /Regenerate/i }).closest('.result') as HTMLElement;
     expect(next.disabled).toBe(false);
     // One name was auto-generated on load.
     expect(within(panel).getByText(/1 \/ 1/)).toBeTruthy();
