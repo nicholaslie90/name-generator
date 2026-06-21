@@ -27,11 +27,23 @@ export default function ExportButtons({ targetRef, name, surname }: Props) {
 
   return (
     <>
-      <button className="btn btn--ghost" onClick={() => run('png')} disabled={busy !== null}>
-        {busy === 'png' ? 'Menyimpan…' : '⬇ PNG'}
+      <button
+        className="btn btn--ghost btn--icon"
+        onClick={() => run('png')}
+        disabled={busy !== null}
+        title="Unduh PNG · Download PNG"
+        aria-label="Unduh PNG · Download PNG"
+      >
+        {busy === 'png' ? '…' : '🖼'}
       </button>
-      <button className="btn btn--ghost" onClick={() => run('pdf')} disabled={busy !== null}>
-        {busy === 'pdf' ? 'Menyimpan…' : '⬇ PDF'}
+      <button
+        className="btn btn--ghost btn--icon"
+        onClick={() => run('pdf')}
+        disabled={busy !== null}
+        title="Unduh PDF · Download PDF"
+        aria-label="Unduh PDF · Download PDF"
+      >
+        {busy === 'pdf' ? '…' : '📄'}
       </button>
     </>
   );

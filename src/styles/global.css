@@ -91,7 +91,7 @@ body {
   }
 
   .result__actions {
-    max-width: none;
+    gap: 0.4rem;
   }
 }
 
@@ -341,21 +341,19 @@ select:focus {
 }
 
 .result__actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.6rem;
-  width: 100%;
-  max-width: 360px;
-  margin: 0 auto;
-}
-
-.result__actions .btn {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   width: 100%;
 }
 
-/* Buttons that should stretch across both columns (Regenerate, Reset). */
-.result__actions .act-span {
-  grid-column: 1 / -1;
+/* Compact, label-free icon buttons sitting on a single row. */
+.btn--icon {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  font-size: 1.2rem;
 }
 
 .error {
