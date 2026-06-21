@@ -313,6 +313,9 @@ const JUNK = [
 
 const ARTICLES = new Set(['the', 'a', 'an']);
 
+/** Possessive determiners → an Indonesian suffix attached to the next noun. */
+const POSSESSIVE = { my: 'ku', mine: 'ku', your: 'mu', his: 'nya', her: 'nya', its: 'nya', their: 'nya', our: ' kami' };
+
 /**
  * Look up one English token. Returns:
  *   { fn:true, id }      → function word (no content weight)
@@ -355,22 +358,33 @@ function renderChunk(tokens, acc) {
   const nouns = [];
   const adjs = [];
   let hadAnd = false;
+  let poss = ''; // pending possessive suffix from "my"/"his"/... → attaches to the next noun
+  const addNoun = (id) => {
+    nouns.push(poss ? id + poss : id);
+    poss = '';
+  };
   for (const word of words) {
+    const stripped = word.replace(/^'+|'+$/g, '').replace(/'s$/, '');
+    if (Object.prototype.hasOwnProperty.call(POSSESSIVE, stripped)) {
+      poss = POSSESSIVE[stripped];
+      continue;
+    }
     const r = lookup(word);
     if (r.fn) {
       if (word === 'and') hadAnd = true;
-      else if (r.id) nouns.push(r.id); // rare inline function word
+      else if (r.id) addNoun(r.id); // rare inline function word
       continue;
     }
     acc.total++;
     if (r.miss) {
       acc.miss.push(r.base);
-      nouns.push(word); // leave the English word in place
+      addNoun(word); // leave the English word in place
       continue;
     }
     acc.hit++;
     if (!r.id) continue;
-    (r.adj ? adjs : nouns).push(r.id);
+    if (r.adj) adjs.push(r.id);
+    else addNoun(r.id);
   }
 
   const adjText = adjs.length > 1 && hadAnd ? adjs.join(' dan ') : adjs.join(' ');
@@ -380,17 +394,30 @@ function renderChunk(tokens, acc) {
   return [nounText, adjText].filter(Boolean).join(' ');
 }
 
+/** Render a clause: split a genitive ("man of the red earth") and rejoin with "dari". */
+function renderPhrase(text, acc) {
+  const chunks = text.split(/\s+of\s+/).map((c) => c.split(/\s+/).filter(Boolean));
+  return chunks.map((c) => renderChunk(c, acc)).filter(Boolean).join(' dari ');
+}
+
 /** Translate one gloss; returns { id, total, hit, miss:[words] }. */
 function translate(gloss) {
   const segments = gloss.toLowerCase().split(/\s*[,;]\s*/).filter(Boolean);
   const acc = { total: 0, hit: 0, miss: [] };
   const out = [];
   for (const seg of segments) {
-    const clean = seg.replace(/[^a-z\s'-]/g, ' ');
-    // Split a genitive ("man of the red earth") and rejoin chunks with "dari".
-    const chunks = clean.split(/\s+of\s+/).map((c) => c.split(/\s+/).filter(Boolean));
-    const rendered = chunks.map((c) => renderChunk(c, acc)).filter(Boolean);
-    if (rendered.length) out.push(rendered.join(' dari '));
+    const clean = seg.replace(/[^a-z\s'-]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!clean) continue;
+    // "X is/are/was/were Y" → "X adalah Y" (predicate). A relative "who is …"
+    // keeps its "yang" reading instead (no inserted copula).
+    const cop = clean.match(/^(.*?\S)\s+(?:is|are|was|were)\s+(\S.*)$/);
+    let rendered;
+    if (cop && !/\bwho$/.test(cop[1])) {
+      rendered = [renderPhrase(cop[1], acc), 'adalah', renderPhrase(cop[2], acc)].filter(Boolean).join(' ');
+    } else {
+      rendered = renderPhrase(clean, acc);
+    }
+    if (rendered) out.push(rendered);
   }
   return { id: out.join(', '), total: acc.total, hit: acc.hit, miss: acc.miss };
 }
