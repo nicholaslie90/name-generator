@@ -32,7 +32,7 @@ const FUNCTION = {
 
 // Curated content-word glossary (top ~320 words by frequency in the dataset).
 const GLOSS = {
-  god: 'dewa', name: 'nama', son: 'putra', town: 'kota', good: 'baik',
+  god: 'Tuhan', name: 'nama', son: 'putra', town: 'kota', good: 'baik',
   flower: 'bunga', meadow: 'padang rumput', man: 'lelaki', bright: 'cerah',
   white: 'putih', ruler: 'penguasa', created: 'tercipta', goddess: 'dewi',
   famous: 'termasyhur', friend: 'teman', born: 'lahir', river: 'sungai',
