@@ -95,6 +95,8 @@ describe('generateName fusion', () => {
     );
     const g = r as GeneratedName;
     // Fused word should be 'Wiradi' (one 'a' dropped), never 'Wiraadi'.
+    expect(g.wordGroups).toEqual([2]);
+    expect(g.name.toLowerCase()).toContain('wiradi');
     expect(g.name).not.toMatch(/aa/i);
   });
 
@@ -113,5 +115,18 @@ describe('generateName fusion', () => {
     const g = r as GeneratedName;
     expect(g.wordGroups).toEqual([1]);
     expect(g.elements).toHaveLength(1);
+  });
+
+  it('respects position hints inside a fused word', () => {
+    const posPool: NameElement[] = [
+      { id: 'p1', text: 'dewa', initial: 'd', origin: 'sanskerta', gender: 'N', position: 'prefix', meaning: { id: 'dewa', en: 'god' } },
+      { id: 'p2', text: 'wati', initial: 'w', origin: 'sanskerta', gender: 'N', position: 'suffix', meaning: { id: 'perempuan', en: 'woman' } },
+    ];
+    const r = generateName({ surname: '', gender: 'N', slots: [{}], fuse: true }, posPool, makeRng(5));
+    const g = r as GeneratedName;
+    expect(g.wordGroups).toEqual([2]);
+    // First root must not be the suffix-only one; second must not be the prefix-only one.
+    expect(g.elements[0].position).not.toBe('suffix');
+    expect(g.elements[1].position).not.toBe('prefix');
   });
 });

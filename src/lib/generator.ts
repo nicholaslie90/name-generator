@@ -95,7 +95,7 @@ function decideFusion(
   for (let i = 0; i < bases.length; i++) if (bases[i].length >= 2) eligible.push(i);
   if (eligible.length === 0) return flags;
   for (const i of eligible) flags[i] = rng() < 0.5;
-  if (!eligible.some((i) => flags[i])) flags[eligible[0]] = true;
+  if (!eligible.some((slotIdx) => flags[slotIdx])) flags[eligible[0]] = true;
   return flags;
 }
 
