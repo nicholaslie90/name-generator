@@ -440,6 +440,10 @@ function notFoundCandidate(word: string, lw: string): MeaningCandidate {
   };
 }
 
+function candidateKey(c: MeaningCandidate): string {
+  return `${c.displayName.toLowerCase()}|${c.origins.join(',')}|${c.meaning.id}|${c.meaning.en}`;
+}
+
 export function analyzeNameCandidates(
   input: string,
   names: CommonName[],
@@ -465,7 +469,41 @@ export function analyzeNameCandidates(
       }
     }
 
-    const ranked = candidates.length > 0 ? candidates : [notFoundCandidate(word, lw)];
+    // (2) Fuzzy spelling matches: distance <= 2, same first letter, not already exact.
+    if (lw) {
+      for (const n of names) {
+        const nl = normalizeName(n.name);
+        if (nl === lw) continue;
+        if (nl[0] !== lw[0]) continue;
+        const d = levenshtein(lw, nl);
+        if (d <= FUZZY_MAX_DISTANCE) {
+          candidates.push({
+            kind: 'fuzzy',
+            displayName: n.name,
+            elements: [asElement(n)],
+            meaning: n.meaning,
+            origins: [n.origin],
+            distance: d,
+          });
+        }
+      }
+    }
+
+    // Rank: exact -> fuzzy(asc distance) -> root; dedup; (cap added in Task 4).
+    const kindRank = { exact: 0, fuzzy: 1, root: 2 } as const;
+    candidates.sort((a, b) => {
+      if (kindRank[a.kind] !== kindRank[b.kind]) return kindRank[a.kind] - kindRank[b.kind];
+      return (a.distance ?? 0) - (b.distance ?? 0);
+    });
+    const seen = new Set<string>();
+    const deduped = candidates.filter((c) => {
+      const k = candidateKey(c);
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+
+    const ranked = deduped.length > 0 ? deduped : [notFoundCandidate(word, lw)];
     return { raw: word, candidates: ranked };
   });
 }

@@ -46,3 +46,42 @@ describe('analyzeNameCandidates — exact + fallback', () => {
     expect(exact!.displayName).toBe('Il-Sung');
   });
 });
+
+describe('analyzeNameCandidates — fuzzy', () => {
+  it('matches near spellings within distance 2 sharing the first letter', () => {
+    const [w] = analyzeNameCandidates('Markus', NAMES, ELEMENTS);
+    const marcus = w.candidates.find((c) => c.displayName === 'Marcus');
+    expect(marcus).toBeDefined();
+    expect(marcus!.kind).toBe('fuzzy');
+    expect(marcus!.distance).toBe(1);
+  });
+
+  it('excludes matches with a different first letter even if close', () => {
+    const names = [
+      { id: 'x', name: 'Aarcus', initial: 'a', syllables: 2, origin: 'latin', gender: 'L', meaning: { id: 'x', en: 'x' } },
+    ] as CommonName[];
+    const [w] = analyzeNameCandidates('Markus', names, []);
+    expect(w.candidates.every((c) => c.kind !== 'fuzzy')).toBe(true);
+  });
+
+  it('orders exact before fuzzy, and fuzzy by ascending distance', () => {
+    const names = [
+      { id: 'a', name: 'Marcus', initial: 'm', syllables: 2, origin: 'latin', gender: 'L', meaning: { id: 'kuat', en: 'strong' } },
+      { id: 'b', name: 'Mark', initial: 'm', syllables: 1, origin: 'latin', gender: 'L', meaning: { id: 'perang', en: 'war' } },
+      { id: 'c', name: 'Markus', initial: 'm', syllables: 2, origin: 'latin', gender: 'L', meaning: { id: 'asli', en: 'exact' } },
+    ] as CommonName[];
+    const [w] = analyzeNameCandidates('Markus', names, []);
+    expect(w.candidates[0].kind).toBe('exact');           // Markus exact
+    const fuzzy = w.candidates.filter((c) => c.kind === 'fuzzy');
+    expect(fuzzy.map((c) => c.distance)).toEqual([1, 2]); // Marcus(1) before Mark(2)
+  });
+
+  it('does not list the same name+origin+meaning twice', () => {
+    const names = [
+      { id: 'a', name: 'Sara', initial: 's', syllables: 2, origin: 'ibrani', gender: 'P', meaning: { id: 'putri', en: 'princess' } },
+      { id: 'b', name: 'Sara', initial: 's', syllables: 2, origin: 'ibrani', gender: 'P', meaning: { id: 'putri', en: 'princess' } },
+    ] as CommonName[];
+    const [w] = analyzeNameCandidates('Sara', names, []);
+    expect(w.candidates).toHaveLength(1);
+  });
+});
