@@ -35,4 +35,14 @@ describe('analyzeNameCandidates — exact + fallback', () => {
     expect(w.candidates[0].meaning.en.toLowerCase()).toContain('not found');
     expect(w.candidates[0].origins).toEqual(['lainnya']);
   });
+
+  it('matches a hyphenated dataset name after normalization', () => {
+    const names = [
+      { id: 'k', name: 'Il-Sung', initial: 'i', syllables: 2, origin: 'pasifik_asia', gender: 'L', meaning: { id: 'pelita', en: 'lodestar' } },
+    ] as CommonName[];
+    const [w] = analyzeNameCandidates('Il-Sung', names, []);
+    const exact = w.candidates.find((c) => c.kind === 'exact');
+    expect(exact).toBeDefined();
+    expect(exact!.displayName).toBe('Il-Sung');
+  });
 });

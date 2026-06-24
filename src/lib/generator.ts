@@ -408,6 +408,11 @@ export function analyzeName(
 export const MAX_CANDIDATES_PER_WORD = 6;
 export const FUZZY_MAX_DISTANCE = 2;
 
+/** Normalize a name/word for matching: lowercase, strip non-letters. */
+function normalizeName(s: string): string {
+  return s.toLowerCase().replace(/[^a-z]/g, '');
+}
+
 export interface MeaningCandidate {
   kind: 'exact' | 'fuzzy' | 'root';
   displayName: string;
@@ -442,13 +447,13 @@ export function analyzeNameCandidates(
 ): WordAnalysis[] {
   const words = input.trim().split(/\s+/).filter(Boolean);
   return words.map((word) => {
-    const lw = word.toLowerCase().replace(/[^a-z]/g, '');
+    const lw = normalizeName(word);
     const candidates: MeaningCandidate[] = [];
 
     // (1) Exact matches across all etymology families.
     if (lw) {
       for (const n of names) {
-        if (n.name.toLowerCase() === lw) {
+        if (normalizeName(n.name) === lw) {
           candidates.push({
             kind: 'exact',
             displayName: n.name,
