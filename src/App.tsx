@@ -174,6 +174,14 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterSig]);
 
+  // Clear any stale error/notice when entering analyze mode.
+  useEffect(() => {
+    if (form.nameStyle === 'analyze') {
+      setError(null);
+      setNotice(null);
+    }
+  }, [form.nameStyle]);
+
   // Generate a first name automatically on initial load (once).
   const didInit = useRef(false);
   useEffect(() => {

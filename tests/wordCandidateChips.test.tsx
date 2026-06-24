@@ -15,10 +15,10 @@ const WORDS: WordAnalysis[] = [
 ];
 
 describe('WordCandidateChips', () => {
-  it('renders a radiogroup per word with its candidate chips', () => {
+  it('renders a group per word with its candidate chips', () => {
     render(<WordCandidateChips words={WORDS} selections={[0]} onSelect={() => {}} />);
-    expect(screen.getByRole('radiogroup', { name: /Sara/ })).toBeInTheDocument();
-    expect(screen.getAllByRole('radio')).toHaveLength(2);
+    expect(screen.getByRole('group', { name: /Sara/ })).toBeInTheDocument();
+    expect(screen.getAllByRole('button')).toHaveLength(2);
     expect(screen.getByText('putri')).toBeInTheDocument();
     expect(screen.getByText('murni')).toBeInTheDocument();
   });
@@ -26,10 +26,10 @@ describe('WordCandidateChips', () => {
   it('marks the selected chip and calls onSelect on click', async () => {
     const onSelect = vi.fn();
     render(<WordCandidateChips words={WORDS} selections={[0]} onSelect={onSelect} />);
-    const radios = screen.getAllByRole('radio');
-    expect(radios[0]).toHaveAttribute('aria-checked', 'true');
-    expect(radios[1]).toHaveAttribute('aria-checked', 'false');
-    await userEvent.click(radios[1]);
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[0]).toHaveAttribute('aria-pressed', 'true');
+    expect(buttons[1]).toHaveAttribute('aria-pressed', 'false');
+    await userEvent.click(buttons[1]);
     expect(onSelect).toHaveBeenCalledWith(0, 1);
   });
 

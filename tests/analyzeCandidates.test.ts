@@ -108,6 +108,6 @@ describe('analyzeNameCandidates — roots + cap', () => {
       meaning: { id: `arti ${i}`, en: `meaning ${i}` },
     })) as CommonName[];
     const [w] = analyzeNameCandidates('Marcus', many, []);
-    expect(w.candidates.length).toBeLessThanOrEqual(6);
+    expect(w.candidates.length).toBe(6);
   });
 });

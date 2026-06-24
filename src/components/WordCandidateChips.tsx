@@ -12,7 +12,7 @@ export default function WordCandidateChips({ words, selections, onSelect }: Prop
   return (
     <div className="candidates">
       {words.map((w, wi) => (
-        <div className="candidates__word" key={`${w.raw}-${wi}`} role="radiogroup" aria-label={`Arti untuk ${w.raw}`}>
+        <div className="candidates__word" key={`${w.raw}-${wi}`} role="group" aria-label={`Arti untuk ${w.raw}`}>
           <span className="candidates__label">{w.raw}</span>
           <div className="candidates__chips">
             {w.candidates.map((c, ci) => {
@@ -21,10 +21,9 @@ export default function WordCandidateChips({ words, selections, onSelect }: Prop
               const originEn = c.origins.map((o) => ORIGIN_LABELS[o].en).join(', ');
               return (
                 <button
-                  key={ci}
+                  key={`${c.displayName}-${ci}`}
                   type="button"
-                  role="radio"
-                  aria-checked={selected}
+                  aria-pressed={selected}
                   className={`chip${selected ? ' chip--on' : ''}`}
                   onClick={() => onSelect(wi, ci)}
                   title={`${c.meaning.en} · ${originEn}`}

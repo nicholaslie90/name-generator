@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ResultPanel from '../src/components/ResultPanel';
 import type { GeneratedName } from '../src/types';
@@ -44,10 +44,16 @@ describe('ResultPanel — analyze mode candidates', () => {
         onSelectCandidate={onSelectCandidate}
       />,
     );
-    expect(screen.getAllByRole('radio')).toHaveLength(2);
+    const group = screen.getByRole('group', { name: /Sara/ });
+    const chips = within(group).getAllByRole('button');
+    expect(chips).toHaveLength(2);
+    expect(chips[0]).toHaveAttribute('aria-pressed', 'false');
+    expect(chips[1]).toHaveAttribute('aria-pressed', 'true');
     expect(screen.queryByLabelText('Nama sebelumnya')).not.toBeInTheDocument();
     expect(screen.queryByLabelText('Nama berikutnya')).not.toBeInTheDocument();
-    await userEvent.click(screen.getAllByRole('radio')[0]);
+    expect(screen.queryByLabelText('Buat lagi · Regenerate')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Reset')).not.toBeInTheDocument();
+    await userEvent.click(chips[0]);
     expect(onSelectCandidate).toHaveBeenCalledWith(0, 0);
   });
 
@@ -66,6 +72,6 @@ describe('ResultPanel — analyze mode candidates', () => {
       />,
     );
     expect(screen.getByLabelText('Nama berikutnya')).toBeInTheDocument();
-    expect(screen.queryByRole('radio')).not.toBeInTheDocument();
+    expect(screen.queryByRole('group', { name: /Sara/ })).not.toBeInTheDocument();
   });
 });

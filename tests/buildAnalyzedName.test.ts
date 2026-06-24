@@ -25,9 +25,16 @@ describe('buildAnalyzedName', () => {
     expect(composeMeaning(g).id.toLowerCase()).toContain('murni');
   });
 
-  it('defaults to candidate 0 when a selection is missing or out of range', () => {
+  it('defaults to candidate 0 when a selection is missing', () => {
     const words = analyzeNameCandidates('Sara', NAMES, ELEMENTS);
     const g = buildAnalyzedName(words, [], '')!;
+    expect(g.elements).toHaveLength(1);
+    expect(g.wordGroups).toEqual([1]);
+  });
+
+  it('defaults to candidate 0 when a selection is out of range', () => {
+    const words = analyzeNameCandidates('Sara', NAMES, ELEMENTS);
+    const g = buildAnalyzedName(words, [999], '')!;
     expect(g.elements).toHaveLength(1);
     expect(g.wordGroups).toEqual([1]);
   });
