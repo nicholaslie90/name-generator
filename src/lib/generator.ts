@@ -5,7 +5,6 @@ import type {
   GenerateResult,
   MeaningRequest,
   NameElement,
-  Origin,
   SlotConstraint,
 } from '../types';
 import { expandTerms } from './synonyms';
