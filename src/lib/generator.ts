@@ -1,13 +1,16 @@
 import type {
   CommonName,
   FamiliarRequest,
+  GeneratedName,
   GenerateRequest,
   GenerateResult,
   MeaningRequest,
   NameElement,
+  Origin,
   SlotConstraint,
 } from '../types';
 import { expandTerms } from './synonyms';
+import { firstSense } from './composeMeaning';
 
 /** Deterministic PRNG (mulberry32) so a fixed seed yields repeatable names. */
 export function makeRng(seed: number): () => number {
@@ -303,6 +306,25 @@ export function generateFamiliarName(
   };
 }
 
+/** Classic iterative Levenshtein edit distance between two strings. */
+export function levenshtein(a: string, b: string): number {
+  const m = a.length;
+  const n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  let curr = new Array<number>(n + 1);
+  for (let i = 1; i <= m; i++) {
+    curr[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+    }
+    [prev, curr] = [curr, prev];
+  }
+  return prev[n];
+}
+
 /**
  * Greedily find known etymology roots inside a word: longest root first, left to
  * right, non-overlapping, minimum length 3 (so tiny fragments don't over-match).
@@ -382,5 +404,172 @@ export function analyzeName(
     surname: '',
     elements: chosen,
     origins: distinct(chosen.map((e) => e.origin)),
+  };
+}
+
+export const MAX_CANDIDATES_PER_WORD = 6;
+export const FUZZY_MAX_DISTANCE = 2;
+export const MAX_ROOT_DECOMPOSITIONS = 3;
+
+/** Build up to N root decompositions of a word: greedy, plus alternatives that start at each distinct prefix root. */
+function rootDecompositions(word: string, elements: NameElement[]): NameElement[][] {
+  const results: NameElement[][] = [];
+  const push = (split: NameElement[]) => {
+    if (split.length === 0) return;
+    const key = split.map((e) => e.id).join('+');
+    if (!results.some((r) => r.map((e) => e.id).join('+') === key)) results.push(split);
+  };
+  push(findRoots(word, elements)); // greedy
+  const prefixRoots = elements
+    .filter((e) => e.text.length >= 3 && word.startsWith(e.text))
+    .sort((a, b) => b.text.length - a.text.length);
+  for (const first of prefixRoots) {
+    push([first, ...findRoots(word.slice(first.text.length), elements)]);
+    if (results.length >= MAX_ROOT_DECOMPOSITIONS) break;
+  }
+  return results.slice(0, MAX_ROOT_DECOMPOSITIONS);
+}
+
+/** Summary gloss for a candidate's elements: single root keeps its full gloss; multiple roots join leading senses with a hyphen. */
+function combinedMeaning(elements: NameElement[]): { id: string; en: string } {
+  if (elements.length === 1) return elements[0].meaning;
+  return {
+    id: elements.map((e) => firstSense(e.meaning.id)).join('-'),
+    en: elements.map((e) => firstSense(e.meaning.en)).join('-'),
+  };
+}
+
+/** Normalize a name/word for matching: lowercase, strip non-letters. */
+function normalizeName(s: string): string {
+  return s.toLowerCase().replace(/[^a-z]/g, '');
+}
+
+export interface MeaningCandidate {
+  kind: 'exact' | 'fuzzy' | 'root';
+  displayName: string;
+  elements: NameElement[];
+  meaning: { id: string; en: string };
+  origins: Origin[];
+  distance?: number;
+}
+
+export interface WordAnalysis {
+  raw: string;
+  candidates: MeaningCandidate[];
+}
+
+function notFoundCandidate(word: string, lw: string): MeaningCandidate {
+  const meaning = { id: 'arti tidak ditemukan', en: 'meaning not found' };
+  return {
+    kind: 'root',
+    displayName: word,
+    elements: [
+      { id: `unknown-${lw || 'x'}`, text: word.toLowerCase(), initial: lw[0] ?? '', origin: 'lainnya', gender: 'N', meaning },
+    ],
+    meaning,
+    origins: ['lainnya'],
+  };
+}
+
+function candidateKey(c: MeaningCandidate): string {
+  return `${c.displayName.toLowerCase()}|${[...c.origins].sort().join(',')}|${c.meaning.id}|${c.meaning.en}`;
+}
+
+export function analyzeNameCandidates(
+  input: string,
+  names: CommonName[],
+  elements: NameElement[],
+): WordAnalysis[] {
+  const words = input.trim().split(/\s+/).filter(Boolean);
+  return words.map((word) => {
+    const lw = normalizeName(word);
+    const candidates: MeaningCandidate[] = [];
+
+    // (1) Exact matches across all etymology families.
+    if (lw) {
+      for (const n of names) {
+        if (normalizeName(n.name) === lw) {
+          candidates.push({
+            kind: 'exact',
+            displayName: n.name,
+            elements: [asElement(n)],
+            meaning: n.meaning,
+            origins: [n.origin],
+          });
+        }
+      }
+    }
+
+    // (2) Fuzzy spelling matches: distance <= 2, same first letter, not already exact.
+    if (lw) {
+      for (const n of names) {
+        const nl = normalizeName(n.name);
+        if (nl === lw) continue;
+        if (nl[0] !== lw[0]) continue;
+        const d = levenshtein(lw, nl);
+        if (d <= FUZZY_MAX_DISTANCE) {
+          candidates.push({
+            kind: 'fuzzy',
+            displayName: n.name,
+            elements: [asElement(n)],
+            meaning: n.meaning,
+            origins: [n.origin],
+            distance: d,
+          });
+        }
+      }
+    }
+
+    // (3) Root decompositions (one candidate per distinct split).
+    if (lw) {
+      for (const split of rootDecompositions(lw, elements)) {
+        candidates.push({
+          kind: 'root',
+          displayName: word,
+          elements: split,
+          meaning: combinedMeaning(split),
+          origins: distinct(split.map((e) => e.origin)),
+        });
+      }
+    }
+
+    // Rank: exact -> fuzzy(asc distance) -> root; dedup; cap.
+    const kindRank = { exact: 0, fuzzy: 1, root: 2 } as const;
+    candidates.sort((a, b) => {
+      if (kindRank[a.kind] !== kindRank[b.kind]) return kindRank[a.kind] - kindRank[b.kind];
+      return (a.distance ?? 0) - (b.distance ?? 0);
+    });
+    const seen = new Set<string>();
+    const deduped = candidates.filter((c) => {
+      const k = candidateKey(c);
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+
+    const capped = deduped.slice(0, MAX_CANDIDATES_PER_WORD);
+    const ranked = capped.length > 0 ? capped : [notFoundCandidate(word, lw)];
+    return { raw: word, candidates: ranked };
+  });
+}
+
+export function buildAnalyzedName(
+  words: WordAnalysis[],
+  selections: number[],
+  surname: string,
+): GeneratedName | null {
+  if (words.length === 0) return null;
+  const chosen = words.map((w, i) => {
+    const sel = selections[i] ?? 0;
+    return w.candidates[sel] ?? w.candidates[0];
+  });
+  const elements = chosen.flatMap((c) => c.elements);
+  const wordGroups = chosen.map((c) => Math.max(1, c.elements.length));
+  return {
+    name: words.map((w) => w.raw).join(' '),
+    surname: surname.trim(),
+    elements,
+    origins: distinct(elements.map((e) => e.origin)),
+    wordGroups,
   };
 }
