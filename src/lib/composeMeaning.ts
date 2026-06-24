@@ -11,14 +11,36 @@ interface Bilingual {
  * safe for English-only glosses.
  */
 export function composeMeaning(g: GeneratedName): Bilingual {
-  const idParts = g.elements.map((e) => capitalize(e.meaning.id));
-  const enParts = g.elements.map((e) => capitalize(e.meaning.en));
+  const groups = g.wordGroups ?? g.elements.map(() => 1);
 
-  if (g.elements.length === 1) {
-    return { id: idParts[0], en: enParts[0] };
+  // Chunk elements into words per `groups`; any leftover becomes its own word.
+  const words: GeneratedName['elements'][] = [];
+  let idx = 0;
+  for (const n of groups) {
+    words.push(g.elements.slice(idx, idx + n));
+    idx += n;
+  }
+  while (idx < g.elements.length) {
+    words.push([g.elements[idx]]);
+    idx += 1;
   }
 
-  return { id: idParts.join(' · '), en: enParts.join(' · ') };
+  const render = (lang: 'id' | 'en'): string =>
+    words
+      .map((w) =>
+        w.length === 1
+          ? capitalize(w[0].meaning[lang])
+          : [capitalize(firstSense(w[0].meaning[lang])), ...w.slice(1).map((e) => firstSense(e.meaning[lang]))].join('-'),
+      )
+      .join(' · ');
+
+  return { id: render('id'), en: render('en') };
+}
+
+/** The leading sense of a gloss — text before the first comma, trimmed. */
+function firstSense(s: string): string {
+  const i = s.indexOf(',');
+  return (i >= 0 ? s.slice(0, i) : s).trim();
 }
 
 /** A bilingual etymology line naming the distinct origins used. */
