@@ -4,6 +4,8 @@ import NameFrame, { NAME_FONTS, type FrameStyle, type NameFontId } from './NameF
 import FrameStyleSwitcher from './FrameStyleSwitcher';
 import NameFontSwitcher from './NameFontSwitcher';
 import ExportButtons from './ExportButtons';
+import WordCandidateChips from './WordCandidateChips';
+import type { WordAnalysis } from '../lib/generator';
 
 interface Props {
   current: GeneratedName | null;
@@ -15,6 +17,9 @@ interface Props {
   onNext: () => void;
   onRegenerate: () => void;
   onReset: () => void;
+  wordAnalyses?: WordAnalysis[];
+  selections?: number[];
+  onSelectCandidate?: (wordIndex: number, candidateIndex: number) => void;
 }
 
 export default function ResultPanel({
@@ -27,6 +32,9 @@ export default function ResultPanel({
   onNext,
   onRegenerate,
   onReset,
+  wordAnalyses,
+  selections,
+  onSelectCandidate,
 }: Props) {
   const frameRef = useRef<HTMLDivElement>(null);
   const [style, setStyle] = useState<FrameStyle>('elegant');
@@ -80,50 +88,70 @@ export default function ResultPanel({
     );
   }
 
+  const analyzeMode = !!wordAnalyses && wordAnalyses.length > 0;
+
   return (
     <div className="panel result">
       <FrameStyleSwitcher value={style} onChange={setStyle} />
       <NameFontSwitcher value={nameFont} onChange={setNameFont} />
 
+      {analyzeMode && (
+        <WordCandidateChips
+          words={wordAnalyses!}
+          selections={selections ?? []}
+          onSelect={onSelectCandidate ?? (() => {})}
+        />
+      )}
+
       <div className="result__stage">
-        <button
-          className="navarrow"
-          onClick={onPrev}
-          disabled={!canPrev}
-          aria-label="Nama sebelumnya"
-        >
-          ‹
-        </button>
+        {!analyzeMode && (
+          <button
+            className="navarrow"
+            onClick={onPrev}
+            disabled={!canPrev}
+            aria-label="Nama sebelumnya"
+          >
+            ‹
+          </button>
+        )}
         <NameFrame ref={frameRef} result={current} style={style} nameFontFamily={nameFontFamily} />
-        <button className="navarrow" onClick={onNext} aria-label="Nama berikutnya">
-          ›
-        </button>
+        {!analyzeMode && (
+          <button className="navarrow" onClick={onNext} aria-label="Nama berikutnya">
+            ›
+          </button>
+        )}
       </div>
 
-      <span className="result__counter">
-        {position.index + 1} / {position.total}
-      </span>
+      {!analyzeMode && (
+        <span className="result__counter">
+          {position.index + 1} / {position.total}
+        </span>
+      )}
 
       {notice && <p className="notice">{notice}</p>}
 
       <div className="result__actions">
-        <button
-          className="btn btn--ghost btn--icon"
-          onClick={onRegenerate}
-          title="Buat lagi · Regenerate"
-          aria-label="Buat lagi · Regenerate"
-        >
-          ↻
-        </button>
+        {!analyzeMode && (
+          <button
+            className="btn btn--ghost btn--icon"
+            onClick={onRegenerate}
+            title="Buat lagi · Regenerate"
+            aria-label="Buat lagi · Regenerate"
+          >
+            ↻
+          </button>
+        )}
         <ExportButtons targetRef={frameRef} name={current.name} surname={current.surname} />
-        <button
-          className="btn btn--ghost btn--icon"
-          onClick={onReset}
-          title="Reset"
-          aria-label="Reset"
-        >
-          🗑
-        </button>
+        {!analyzeMode && (
+          <button
+            className="btn btn--ghost btn--icon"
+            onClick={onReset}
+            title="Reset"
+            aria-label="Reset"
+          >
+            🗑
+          </button>
+        )}
       </div>
     </div>
   );

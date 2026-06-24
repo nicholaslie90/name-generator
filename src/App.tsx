@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ParameterForm, { type FormState } from './components/ParameterForm';
 import ResultPanel from './components/ResultPanel';
 import { ELEMENTS, COMMON_NAMES, MEANING_POOL } from './data';
-import { generateName, generateFamiliarName, generateByMeaning, analyzeName } from './lib/generator';
+import { generateName, generateFamiliarName, generateByMeaning, analyzeNameCandidates, buildAnalyzedName } from './lib/generator';
 import { isGenerateError, type GeneratedName, type GenerateError, type GenerateResult } from './types';
 
 const INITIAL_FORM: FormState = {
@@ -25,6 +25,19 @@ export default function App() {
   const [notice, setNotice] = useState<string | null>(null);
   // Names already shown — kept across regenerations until the user resets.
   const seen = useRef<Set<string>>(new Set());
+
+  const analysis = useMemo(
+    () =>
+      form.nameStyle === 'analyze'
+        ? analyzeNameCandidates(form.ownName ?? '', COMMON_NAMES, ELEMENTS)
+        : [],
+    [form.nameStyle, form.ownName],
+  );
+  const analysisKey = useMemo(() => analysis.map((w) => w.raw).join('|'), [analysis]);
+  const [selections, setSelections] = useState<number[]>([]);
+  useEffect(() => {
+    setSelections(analysis.map(() => 0));
+  }, [analysisKey]);
 
   function runGenerator(): GenerateResult {
     // The surname counts as one of the chosen words, so generate one fewer
@@ -59,9 +72,6 @@ export default function App() {
         MEANING_POOL,
       );
     }
-    if (form.nameStyle === 'analyze') {
-      return analyzeName(form.ownName ?? '', COMMON_NAMES, ELEMENTS);
-    }
     return generateName(
       { surname: form.surname, gender: form.gender, slots: form.slots.slice(0, wordCount), fuse: form.fuse },
       ELEMENTS,
@@ -70,6 +80,13 @@ export default function App() {
 
   /** Generate a fresh, non-repeating name and append it to the history. */
   function generate() {
+    if (form.nameStyle === 'analyze') {
+      // Analyze mode derives `current` live from chip selections; no history.
+      setError(null);
+      setNotice(null);
+      return;
+    }
+
     setNotice(null);
 
     let res = runGenerator();
@@ -168,9 +185,11 @@ export default function App() {
 
   // Surname is applied live to the displayed frame without needing to regenerate.
   const current =
-    cursor >= 0 && cursor < history.length
-      ? { ...history[cursor], surname: form.surname.trim() }
-      : null;
+    form.nameStyle === 'analyze'
+      ? buildAnalyzedName(analysis, selections, form.surname)
+      : cursor >= 0 && cursor < history.length
+        ? { ...history[cursor], surname: form.surname.trim() }
+        : null;
 
   return (
     <div className="app">
@@ -193,6 +212,15 @@ export default function App() {
           onNext={goNext}
           onRegenerate={generate}
           onReset={reset}
+          wordAnalyses={form.nameStyle === 'analyze' ? analysis : undefined}
+          selections={selections}
+          onSelectCandidate={(wi, ci) =>
+            setSelections((prev) => {
+              const next = [...prev];
+              next[wi] = ci;
+              return next;
+            })
+          }
         />
       </div>
 
