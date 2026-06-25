@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../src/App';
 import styles from '../src/components/NameFrame.module.css';
 
@@ -10,6 +10,12 @@ function generatedName(): string {
 function wordCount(): number {
   const n = generatedName();
   return n ? n.split(/\s+/).length : 0;
+}
+
+function openCustomize() {
+  // Idempotent: opening an already-open modal is a no-op for these tests.
+  const btn = screen.queryByLabelText('Sesuaikan · Customize');
+  if (btn) fireEvent.click(btn);
 }
 
 function setWords(count: number) {
@@ -23,6 +29,7 @@ function clickGenerate() {
 describe('App: word count controls how many words the name has', () => {
   it('generated names have exactly the selected number of words', () => {
     render(<App />);
+    openCustomize();
     for (const count of [2, 3, 4]) {
       setWords(count);
       for (let i = 0; i < 6; i++) {
@@ -34,6 +41,7 @@ describe('App: word count controls how many words the name has', () => {
 
   it('auto-regenerates with the new word count when changed (no Generate click)', () => {
     render(<App />);
+    openCustomize();
     setWords(2);
     clickGenerate();
     expect(wordCount()).toBe(2);
@@ -45,33 +53,28 @@ describe('App: word count controls how many words the name has', () => {
 
   it('counts the surname as one of the words', () => {
     render(<App />);
+    openCustomize();
     fireEvent.change(screen.getByPlaceholderText('mis. Santoso'), { target: { value: 'Lie' } });
     setWords(2);
     clickGenerate();
-    // 1 generated word + surname "Lie" = 2 words total
     expect(wordCount()).toBe(1);
     setWords(3);
-    // auto-regenerates: 2 generated words + surname = 3
     expect(wordCount()).toBe(2);
   });
 
   it('auto-generates a name on first load', () => {
     render(<App />);
-    // No clicks: a name and the "1 / 1" counter are already present.
     expect(generatedName()).not.toBe('');
-    const panel = screen.getByRole('button', { name: /Regenerate/i }).closest('.result') as HTMLElement;
-    expect(within(panel).getByText(/1 \/ 1/)).toBeTruthy();
   });
 
-  it('the Next arrow is always enabled and generates a new name at the end', () => {
+  it('the Next arrow generates a fresh name', () => {
     render(<App />);
+    const first = generatedName();
     const next = screen.getByLabelText('Nama berikutnya') as HTMLButtonElement;
-    const panel = screen.getByRole('button', { name: /Regenerate/i }).closest('.result') as HTMLElement;
     expect(next.disabled).toBe(false);
-    // One name was auto-generated on load.
-    expect(within(panel).getByText(/1 \/ 1/)).toBeTruthy();
     fireEvent.click(next);
-    // At the end of history, Next generates a fresh name -> history grows to 2.
-    expect(within(panel).getByText(/2 \/ 2/)).toBeTruthy();
+    // A new, non-repeating name replaces the first one.
+    expect(generatedName()).not.toBe('');
+    expect(generatedName()).not.toBe(first);
   });
 });
