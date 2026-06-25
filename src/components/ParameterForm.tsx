@@ -123,6 +123,22 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         />
       </div>
 
+      {familiar && (
+        <div className="field">
+          <label className="field__label" htmlFor="familiar-initial">
+            Awalan huruf <span className="field__hint">/ Initial — kosongkan untuk acak otomatis</span>
+          </label>
+          <input
+            id="familiar-initial"
+            type="text"
+            maxLength={1}
+            placeholder="— (auto)"
+            value={value.familiarInitial ?? ''}
+            onChange={(e) => setFamiliarInitial(e.target.value)}
+          />
+        </div>
+      )}
+
       <div className="field">
         <span className="field__label">Gaya nama <span className="field__hint">/ Name style</span></span>
         <div className="segmented">
@@ -225,19 +241,6 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         </div>
       ) : familiar ? (
         <>
-          <div className="field">
-            <label className="field__label" htmlFor="familiar-initial">
-              Awalan huruf <span className="field__hint">/ Initial — kosongkan untuk acak otomatis</span>
-            </label>
-            <input
-              id="familiar-initial"
-              type="text"
-              maxLength={1}
-              placeholder="— (auto)"
-              value={value.familiarInitial ?? ''}
-              onChange={(e) => setFamiliarInitial(e.target.value)}
-            />
-          </div>
           <div className="field">
             <span className="field__label">
               Etimologi <span className="field__hint">(kosong = semua)</span>
