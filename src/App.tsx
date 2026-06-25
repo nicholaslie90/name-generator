@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import ParameterForm, { type FormState } from './components/ParameterForm';
-import ResultPanel from './components/ResultPanel';
+import { type FormState } from './components/ParameterForm';
+import Deck from './components/Deck';
+import Modal from './components/Modal';
+import CustomizationPanel from './components/CustomizationPanel';
+import { NAME_FONTS, type FrameStyle, type NameFontId } from './components/NameFrame';
 import { ELEMENTS, COMMON_NAMES, MEANING_POOL } from './data';
 import { generateName, generateFamiliarName, generateByMeaning, analyzeNameCandidates, buildAnalyzedName } from './lib/generator';
 import { isGenerateError, type GeneratedName, type GenerateError, type GenerateResult } from './types';
@@ -25,6 +28,11 @@ export default function App() {
   const [notice, setNotice] = useState<string | null>(null);
   // Names already shown — kept across regenerations until the user resets.
   const seen = useRef<Set<string>>(new Set());
+
+  const [style, setStyle] = useState<FrameStyle>('elegant');
+  const [nameFont, setNameFont] = useState<NameFontId>('great-vibes');
+  const [modalOpen, setModalOpen] = useState(false);
+  const frameRef = useRef<HTMLDivElement>(null);
 
   const analysis = useMemo(
     () =>
@@ -199,28 +207,39 @@ export default function App() {
         ? { ...history[cursor], surname: form.surname.trim() }
         : null;
 
+  const analyzeMode = form.nameStyle === 'analyze' && analysis.length > 0;
+  const nameFontFamily = NAME_FONTS.find((f) => f.id === nameFont)?.family;
+
   return (
     <div className="app">
-      <header className="app__header">
-        <h1 className="app__title">Name Generator</h1>
-        <p className="app__subtitle">
-          Rangkai nama bermakna dari akar etimologi · Craft a meaningful name from etymological roots
-        </p>
-      </header>
+      <Deck
+        current={current}
+        style={style}
+        nameFontFamily={nameFontFamily}
+        error={error}
+        notice={notice}
+        canPrev={cursor > 0}
+        onNext={goNext}
+        onPrev={goPrev}
+        navDisabled={analyzeMode}
+        onOpenCustomize={() => setModalOpen(true)}
+        frameRef={frameRef}
+      />
 
-      <div className="layout">
-        <ParameterForm value={form} onChange={setForm} onGenerate={generate} />
-        <ResultPanel
-          current={current}
-          error={error}
-          notice={notice}
-          position={{ index: cursor, total: history.length }}
-          canPrev={cursor > 0}
-          onPrev={goPrev}
-          onNext={goNext}
-          onRegenerate={generate}
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Sesuaikan nama · Customize">
+        <CustomizationPanel
+          form={form}
+          onFormChange={setForm}
+          onGenerate={generate}
+          style={style}
+          onStyleChange={setStyle}
+          nameFont={nameFont}
+          onNameFontChange={setNameFont}
+          frameRef={frameRef}
+          exportName={current?.name ?? ''}
+          exportSurname={current?.surname ?? ''}
           onReset={reset}
-          wordAnalyses={form.nameStyle === 'analyze' ? analysis : undefined}
+          wordAnalyses={analyzeMode ? analysis : undefined}
           selections={selections}
           onSelectCandidate={(wi, ci) =>
             setSelections((prev) => {
@@ -230,11 +249,7 @@ export default function App() {
             })
           }
         />
-      </div>
-
-      <footer className="app__footer">
-        Arab · Sanskerta/Jawa · Latin/Yunani · Ibrani — dibuat untuk berbagi kebahagiaan 🍼
-      </footer>
+      </Modal>
     </div>
   );
 }
