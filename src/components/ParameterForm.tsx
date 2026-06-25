@@ -111,6 +111,19 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
       }}
     >
       <div className="field">
+        <label className="field__label" htmlFor="surname">
+          Nama keluarga <span className="field__hint">/ Surname</span>
+        </label>
+        <input
+          id="surname"
+          type="text"
+          placeholder="mis. Santoso"
+          value={value.surname}
+          onChange={(e) => onChange({ ...value, surname: e.target.value })}
+        />
+      </div>
+
+      <div className="field">
         <span className="field__label">Gaya nama <span className="field__hint">/ Name style</span></span>
         <div className="segmented">
           {NAME_STYLES.map((s) => (
@@ -127,19 +140,6 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         <p className="field__hint" style={{ marginTop: '0.35rem' }}>
           {STYLE_HINTS[value.nameStyle]}
         </p>
-      </div>
-
-      <div className="field">
-        <label className="field__label" htmlFor="surname">
-          Nama keluarga <span className="field__hint">/ Surname</span>
-        </label>
-        <input
-          id="surname"
-          type="text"
-          placeholder="mis. Santoso"
-          value={value.surname}
-          onChange={(e) => onChange({ ...value, surname: e.target.value })}
-        />
       </div>
 
       {!analyze && (
