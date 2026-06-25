@@ -227,7 +227,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         <>
           <div className="field">
             <label className="field__label" htmlFor="familiar-initial">
-              Awalan nama <span className="field__hint">/ Initial — kosongkan untuk acak otomatis</span>
+              Awalan huruf <span className="field__hint">/ Initial — kosongkan untuk acak otomatis</span>
             </label>
             <input
               id="familiar-initial"
