@@ -5,6 +5,7 @@ import sanskerta from './elements.sanskerta.json';
 import latin from './elements.latin.json';
 import ibrani from './elements.ibrani.json';
 import yunani from './elements.yunani.json';
+import jermanik from './elements.jermanik.json';
 import commonNames from './commonNames.json';
 import importedNames from './commonNamesImported.json';
 import biblicalNames from './biblicalNames.json';
@@ -17,6 +18,7 @@ export const ELEMENTS: NameElement[] = [
   ...(latin as NameElement[]),
   ...(ibrani as NameElement[]),
   ...(yunani as NameElement[]),
+  ...(jermanik as NameElement[]),
 ];
 
 /**
