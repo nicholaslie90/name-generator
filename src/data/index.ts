@@ -9,6 +9,7 @@ import jermanik from './elements.jermanik.json';
 import keltik from './elements.keltik.json';
 import slavia from './elements.slavia.json';
 import afrika from './elements.afrika.json';
+import pasifik from './elements.pasifik.json';
 import commonNames from './commonNames.json';
 import importedNames from './commonNamesImported.json';
 import biblicalNames from './biblicalNames.json';
@@ -25,6 +26,7 @@ export const ELEMENTS: NameElement[] = [
   ...(keltik as NameElement[]),
   ...(slavia as NameElement[]),
   ...(afrika as NameElement[]),
+  ...(pasifik as NameElement[]),
 ];
 
 /**
