@@ -13,6 +13,7 @@ function Harness(opts: UseSwipeOptions) {
   );
 }
 
+// jsdom's fireEvent does not propagate clientX on PointerEvents, so we dispatch raw events with explicit coordinates.
 function drag(from: number, to: number) {
   act(() => {
     const el = screen.getByTestId('card');
