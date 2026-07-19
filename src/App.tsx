@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { type FormState } from './components/ParameterForm';
 import Deck from './components/Deck';
+import BrowseList from './components/BrowseList';
 import Modal from './components/Modal';
 import CustomizationPanel from './components/CustomizationPanel';
 import { NAME_FONTS, type FrameStyle, type NameFontId } from './components/NameFrame';
@@ -88,8 +89,8 @@ export default function App() {
 
   /** Generate a fresh, non-repeating name and append it to the history. */
   function generate() {
-    if (form.nameStyle === 'analyze') {
-      // Analyze mode derives `current` live from chip selections; no history.
+    if (form.nameStyle === 'analyze' || form.nameStyle === 'browse') {
+      // Analyze/browse modes render live from state; nothing to generate.
       setError(null);
       setNotice(null);
       return;
@@ -212,19 +213,32 @@ export default function App() {
 
   return (
     <div className="app">
-      <Deck
-        current={current}
-        style={style}
-        nameFontFamily={nameFontFamily}
-        error={error}
-        notice={notice}
-        canPrev={cursor > 0}
-        onNext={goNext}
-        onPrev={goPrev}
-        navDisabled={analyzeMode}
-        onOpenCustomize={() => setModalOpen(true)}
-        frameRef={frameRef}
-      />
+      {form.nameStyle === 'browse' ? (
+        <div className="browse-page">
+          <button
+            className="deck__customize"
+            onClick={() => setModalOpen(true)}
+            aria-label="Sesuaikan · Customize"
+          >
+            ⚙
+          </button>
+          <BrowseList gender={form.gender} />
+        </div>
+      ) : (
+        <Deck
+          current={current}
+          style={style}
+          nameFontFamily={nameFontFamily}
+          error={error}
+          notice={notice}
+          canPrev={cursor > 0}
+          onNext={goNext}
+          onPrev={goPrev}
+          navDisabled={analyzeMode}
+          onOpenCustomize={() => setModalOpen(true)}
+          frameRef={frameRef}
+        />
+      )}
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Sesuaikan nama · Customize">
         <CustomizationPanel

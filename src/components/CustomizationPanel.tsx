@@ -44,6 +44,7 @@ export default function CustomizationPanel({
   onSelectCandidate,
 }: CustomizationPanelProps) {
   const analyzeMode = !!wordAnalyses && wordAnalyses.length > 0;
+  const browseMode = form.nameStyle === 'browse';
 
   return (
     <div className="customize">
@@ -62,35 +63,39 @@ export default function CustomizationPanel({
         </div>
       )}
 
-      <div className="field">
-        <span className="field__label">
-          Gaya pigura <span className="field__hint">/ Frame style</span>
-        </span>
-        <FrameStyleSwitcher value={style} onChange={onStyleChange} />
-      </div>
+      {!browseMode && (
+        <>
+          <div className="field">
+            <span className="field__label">
+              Gaya pigura <span className="field__hint">/ Frame style</span>
+            </span>
+            <FrameStyleSwitcher value={style} onChange={onStyleChange} />
+          </div>
 
-      <div className="field">
-        <span className="field__label">
-          Font nama <span className="field__hint">/ Name font</span>
-        </span>
-        <NameFontSwitcher value={nameFont} onChange={onNameFontChange} />
-      </div>
+          <div className="field">
+            <span className="field__label">
+              Font nama <span className="field__hint">/ Name font</span>
+            </span>
+            <NameFontSwitcher value={nameFont} onChange={onNameFontChange} />
+          </div>
 
-      <div className="customize__actions">
-        <ExportButtons targetRef={frameRef} name={exportName} surname={exportSurname} />
-        {!analyzeMode && (
-          <button className="btn btn--ghost btn--icon" onClick={onReset} title="Reset" aria-label="Reset">
-            🗑
-          </button>
-        )}
-      </div>
+          <div className="customize__actions">
+            <ExportButtons targetRef={frameRef} name={exportName} surname={exportSurname} />
+            {!analyzeMode && (
+              <button className="btn btn--ghost btn--icon" onClick={onReset} title="Reset" aria-label="Reset">
+                🗑
+              </button>
+            )}
+          </div>
 
-      {/* Re-roll with current settings and close the modal so the new name is
-          visible on the card (especially on mobile, where the modal covers it). */}
-      {!analyzeMode && (
-        <button type="button" className="btn btn--primary customize__shuffle" onClick={onShuffle}>
-          🎲 Nama lain · Shuffle
-        </button>
+          {/* Re-roll with current settings and close the modal so the new name is
+              visible on the card (especially on mobile, where the modal covers it). */}
+          {!analyzeMode && (
+            <button type="button" className="btn btn--primary customize__shuffle" onClick={onShuffle}>
+              🎲 Nama lain · Shuffle
+            </button>
+          )}
+        </>
       )}
     </div>
   );

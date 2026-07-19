@@ -89,7 +89,7 @@ export interface CommonName {
 }
 
 /** Which generation style the user picked. */
-export type NameStyle = 'familiar' | 'composed' | 'meaning' | 'analyze';
+export type NameStyle = 'familiar' | 'composed' | 'meaning' | 'analyze' | 'browse';
 
 /** Per-syllable constraints chosen by the user. */
 export interface SlotConstraint {

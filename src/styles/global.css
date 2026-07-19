@@ -351,6 +351,60 @@ select:focus {
 .deck__notice { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); }
 
 /* ---- Modal ---- */
+.browse-page {
+  position: relative;
+  height: 100dvh;
+  overflow-y: auto;
+  padding: 1.25rem;
+}
+
+.browse-page .deck__customize {
+  position: fixed;
+}
+
+.browse {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-right: 3.25rem; /* clear the fixed ⚙ button */
+}
+
+.browse__letters {
+  margin-bottom: 0.75rem;
+}
+
+.browse__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 1.25rem 0 0.5rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.3rem;
+}
+
+.browse__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.35rem 1rem;
+}
+
+.browse__item {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.browse__gender {
+  opacity: 0.5;
+  font-size: 0.8rem;
+}
+
+.browse__meaning {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;

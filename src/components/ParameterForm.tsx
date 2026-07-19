@@ -39,6 +39,7 @@ const NAME_STYLES: { value: NameStyle; label: string; hint: string }[] = [
   { value: 'composed', label: 'Unik', hint: 'dirangkai dari akar kata' },
   { value: 'meaning', label: 'Arti', hint: 'mis. joy, happy, glee' },
   { value: 'analyze', label: 'Nama Sendiri', hint: 'ketik nama, lihat artinya' },
+  { value: 'browse', label: 'Jelajah', hint: 'daftar A–Z semua etimologi' },
 ];
 
 const STYLE_HINTS: Record<NameStyle, string> = {
@@ -46,6 +47,7 @@ const STYLE_HINTS: Record<NameStyle, string> = {
   composed: 'Nama unik · ' + NAME_STYLES[1].hint,
   meaning: 'Cari dari arti · ' + NAME_STYLES[2].hint,
   analyze: 'Arti nama Anda · ' + NAME_STYLES[3].hint,
+  browse: 'Jelajahi semua nama per huruf · browse all names by letter, all etymologies',
 };
 
 const GENDER_OPTIONS: { value: Gender; label: string }[] = [
@@ -68,6 +70,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
   // Synonyms the meaning query expands to (for the "also searched" hint).
   const meaningExtras = meaning ? addedSynonyms(value.meaningQuery ?? '') : [];
   const analyze = value.nameStyle === 'analyze';
+  const browse = value.nameStyle === 'browse';
   const familiarOrigins = value.familiarOrigins ?? [];
   const surname = value.surname.trim();
   // The surname is one of the chosen words, so one fewer word is generated.
@@ -110,6 +113,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         onGenerate();
       }}
     >
+      {!browse && (
       <div className="field">
         <label className="field__label" htmlFor="surname">
           Nama keluarga <span className="field__hint">/ Surname</span>
@@ -122,6 +126,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
           onChange={(e) => onChange({ ...value, surname: e.target.value })}
         />
       </div>
+      )}
 
       {familiar && (
         <div className="field">
@@ -176,7 +181,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         </div>
       )}
 
-      {!analyze && (
+      {!analyze && !browse && (
         <div className="field">
           <span className="field__label">
             Jumlah kata <span className="field__hint">/ Words — mis. 3 = tiga kata</span>
@@ -201,7 +206,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         </div>
       )}
 
-      {analyze ? (
+      {browse ? null : analyze ? (
         <div className="field">
           <label className="field__label" htmlFor="own-name">
             Nama <span className="field__hint">/ Name — ketik nama yang ingin dicari artinya</span>
