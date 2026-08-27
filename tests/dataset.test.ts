@@ -10,7 +10,7 @@ describe('name-element dataset', () => {
   it('has a healthy number of elements per root origin', () => {
     for (const origin of ELEMENT_ORIGINS) {
       const count = ELEMENTS.filter((e) => e.origin === origin).length;
-      expect(count, `origin ${origin}`).toBeGreaterThanOrEqual(20);
+      expect(count, `origin ${origin}`).toBeGreaterThanOrEqual(40);
     }
   });
 

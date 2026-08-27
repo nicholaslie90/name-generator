@@ -84,5 +84,22 @@
   { "id": "sa-agni", "text": "agni", "initial": "a", "origin": "sanskerta", "gender": "L", "meaning": { "id": "api", "en": "fire" } },
   { "id": "sa-brata", "text": "brata", "initial": "b", "origin": "sanskerta", "gender": "N", "meaning": { "id": "tapa, disiplin", "en": "austerity, discipline" } },
   { "id": "sa-krida", "text": "krida", "initial": "k", "origin": "sanskerta", "gender": "N", "meaning": { "id": "kegiatan, olah", "en": "activity, endeavor" } },
-  { "id": "sa-manggala", "text": "manggala", "initial": "m", "origin": "sanskerta", "gender": "L", "position": "prefix", "meaning": { "id": "pemimpin, panglima", "en": "leader, commander" } }
+  { "id": "sa-manggala", "text": "manggala", "initial": "m", "origin": "sanskerta", "gender": "L", "position": "prefix", "meaning": { "id": "pemimpin, panglima", "en": "leader, commander" } },
+  { "id": "sa-ishwara", "text": "ishwara", "initial": "i", "origin": "sanskerta", "gender": "L", "meaning": { "id": "penguasa, Yang Mahakuasa", "en": "lord, supreme being" } },
+  { "id": "sa-indu", "text": "indu", "initial": "i", "origin": "sanskerta", "gender": "N", "meaning": { "id": "bulan, titik cahaya", "en": "moon, drop of light" } },
+  { "id": "sa-ishta", "text": "ishta", "initial": "i", "origin": "sanskerta", "gender": "N", "meaning": { "id": "yang didambakan", "en": "desired, cherished" } },
+  { "id": "sa-indira", "text": "indira", "initial": "i", "origin": "sanskerta", "gender": "P", "meaning": { "id": "gemilang, Dewi Laksmi", "en": "splendid, goddess Lakshmi" } },
+  { "id": "sa-ila", "text": "ila", "initial": "i", "origin": "sanskerta", "gender": "P", "meaning": { "id": "bumi, tutur kata", "en": "earth, speech" } },
+  { "id": "sa-yoga", "text": "yoga", "initial": "y", "origin": "sanskerta", "gender": "N", "meaning": { "id": "penyatuan, laku disiplin", "en": "union, discipline" } },
+  { "id": "sa-yasa", "text": "yasa", "initial": "y", "origin": "sanskerta", "gender": "N", "meaning": { "id": "kemasyhuran", "en": "fame, renown" } },
+  { "id": "sa-yuga", "text": "yuga", "initial": "y", "origin": "sanskerta", "gender": "N", "meaning": { "id": "zaman, kurun", "en": "age, era" } },
+  { "id": "sa-yukti", "text": "yukti", "initial": "y", "origin": "sanskerta", "gender": "N", "meaning": { "id": "penalaran, kearifan", "en": "reasoning, discernment" } },
+  { "id": "sa-oja", "text": "oja", "initial": "o", "origin": "sanskerta", "gender": "L", "meaning": { "id": "daya hidup, tenaga", "en": "vital vigor" } },
+  { "id": "sa-om", "text": "om", "initial": "o", "origin": "sanskerta", "gender": "N", "meaning": { "id": "aksara suci", "en": "the sacred syllable" }, "position": "prefix" },
+  { "id": "sa-uday", "text": "uday", "initial": "u", "origin": "sanskerta", "gender": "L", "meaning": { "id": "terbit, kebangkitan", "en": "rising, ascent" } },
+  { "id": "sa-ujwala", "text": "ujwala", "initial": "u", "origin": "sanskerta", "gender": "N", "meaning": { "id": "terang berkilau", "en": "bright, luminous" } },
+  { "id": "sa-utsaha", "text": "utsaha", "initial": "u", "origin": "sanskerta", "gender": "N", "meaning": { "id": "semangat, gairah", "en": "zeal, enthusiasm" } },
+  { "id": "sa-esha", "text": "esha", "initial": "e", "origin": "sanskerta", "gender": "P", "meaning": { "id": "hasrat, dambaan", "en": "desire, longing" } },
+  { "id": "sa-jyoti", "text": "jyoti", "initial": "j", "origin": "sanskerta", "gender": "N", "meaning": { "id": "cahaya, nyala", "en": "light, flame" } },
+  { "id": "sa-jala", "text": "jala", "initial": "j", "origin": "sanskerta", "gender": "N", "meaning": { "id": "air", "en": "water" } }
 ]
