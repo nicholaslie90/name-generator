@@ -11,6 +11,10 @@ export type Origin =
   | 'slavia'
   | 'afrika'
   | 'pasifik_asia'
+  | 'jepang'
+  | 'nordik'
+  | 'persia'
+  | 'nusantara'
   | 'lainnya';
 
 /** All origins (used for labels and validation). */
@@ -26,6 +30,10 @@ export const ORIGINS: Origin[] = [
   'slavia',
   'afrika',
   'pasifik_asia',
+  'jepang',
+  'nordik',
+  'persia',
+  'nusantara',
   'lainnya',
 ];
 
@@ -33,7 +41,7 @@ export const ORIGINS: Origin[] = [
  * Origins that have building-block roots in the ELEMENTS dataset — only these
  * are offered in "composed" (per-syllable) mode.
  */
-export const ELEMENT_ORIGINS: Origin[] = ['arab', 'sanskerta', 'latin', 'ibrani', 'yunani', 'jermanik', 'keltik', 'slavia', 'afrika', 'pasifik_asia'];
+export const ELEMENT_ORIGINS: Origin[] = ['arab', 'sanskerta', 'latin', 'ibrani', 'yunani', 'jermanik', 'keltik', 'slavia', 'afrika', 'pasifik_asia', 'jepang', 'nordik', 'persia', 'nusantara'];
 
 /** Origins offered in "familiar" mode (the full expanded set). */
 export const COMMON_ORIGINS: Origin[] = ORIGINS;
@@ -46,11 +54,15 @@ export const ORIGIN_LABELS: Record<Origin, { id: string; en: string }> = {
   latin: { id: 'Latin & Roman', en: 'Latin & Romance' },
   inggris: { id: 'Inggris', en: 'English' },
   keltik: { id: 'Keltik', en: 'Celtic (Irish/Scottish/Welsh)' },
-  jermanik: { id: 'Jermanik', en: 'Germanic (German/Norse)' },
+  jermanik: { id: 'Jermanik', en: 'Germanic (German)' },
   sanskerta: { id: 'Sanskerta & Hindu', en: 'Sanskrit & Hindu' },
   slavia: { id: 'Slavia', en: 'Slavic' },
   afrika: { id: 'Afrika', en: 'African' },
   pasifik_asia: { id: 'Pasifik & Asia', en: 'Pacific & Asian' },
+  jepang: { id: 'Jepang', en: 'Japanese' },
+  nordik: { id: 'Nordik', en: 'Norse/Scandinavian' },
+  persia: { id: 'Persia & Turki', en: 'Persian & Turkic' },
+  nusantara: { id: 'Nusantara', en: 'Nusantara (Javanese/Sundanese/Malay)' },
   lainnya: { id: 'Lainnya', en: 'Other' },
 };
 

@@ -10,6 +10,10 @@ import keltik from './elements.keltik.json';
 import slavia from './elements.slavia.json';
 import afrika from './elements.afrika.json';
 import pasifik from './elements.pasifik.json';
+import jepang from './elements.jepang.json';
+import nordik from './elements.nordik.json';
+import persia from './elements.persia.json';
+import nusantara from './elements.nusantara.json';
 import commonNames from './commonNames.json';
 import importedNames from './commonNamesImported.json';
 import biblicalNames from './biblicalNames.json';
@@ -27,6 +31,10 @@ export const ELEMENTS: NameElement[] = [
   ...(slavia as NameElement[]),
   ...(afrika as NameElement[]),
   ...(pasifik as NameElement[]),
+  ...(jepang as NameElement[]),
+  ...(nordik as NameElement[]),
+  ...(persia as NameElement[]),
+  ...(nusantara as NameElement[]),
 ];
 
 /**
