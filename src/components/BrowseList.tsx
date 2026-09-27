@@ -5,10 +5,17 @@ import { ORIGINS, ORIGIN_LABELS, type CommonName, type Gender, type Origin } fro
 const LETTERS = ['all', ...'abcdefghijklmnopqrstuvwxyz'];
 const GENDER_ICON: Record<Gender, string> = { L: '♂', P: '♀', N: '⚥' };
 
-/** Group the given-name dictionary by origin for one initial letter (or 'all') + gender. */
-export function browseGroups(letter: string, gender: Gender): [Origin, CommonName[]][] {
+/**
+ * Group the given-name dictionary by origin for one initial letter (or 'all') + gender,
+ * optionally keeping only names whose name or meaning (ID/EN) contains `query`.
+ */
+export function browseGroups(letter: string, gender: Gender, query = ''): [Origin, CommonName[]][] {
+  const q = query.trim().toLowerCase();
   const pool = COMMON_NAMES.filter(
-    (n) => (letter === 'all' || n.initial === letter) && (gender === 'N' || n.gender === gender || n.gender === 'N'),
+    (n) =>
+      (letter === 'all' || n.initial === letter) &&
+      (gender === 'N' || n.gender === gender || n.gender === 'N') &&
+      (!q || `${n.name}\n${n.meaning.id}\n${n.meaning.en}`.toLowerCase().includes(q)),
   ).sort((a, b) => a.name.localeCompare(b.name));
   const byOrigin = new Map<Origin, CommonName[]>();
   for (const n of pool) {
@@ -22,7 +29,10 @@ export function browseGroups(letter: string, gender: Gender): [Origin, CommonNam
 /** A–Z index of every attested first name, grouped by etymology. */
 export default function BrowseList({ gender }: { gender: Gender }) {
   const [letter, setLetter] = useState('a');
-  const groups = useMemo(() => browseGroups(letter, gender), [letter, gender]);
+  const [query, setQuery] = useState('');
+  // The keyword filter lives in the "Semua" view only.
+  const activeQuery = letter === 'all' ? query : '';
+  const groups = useMemo(() => browseGroups(letter, gender, activeQuery), [letter, gender, activeQuery]);
   const total = groups.reduce((sum, [, names]) => sum + names.length, 0);
 
   return (
@@ -40,9 +50,25 @@ export default function BrowseList({ gender }: { gender: Gender }) {
           </button>
         ))}
       </div>
+      {letter === 'all' && (
+        <div className="field">
+          <label className="field__label" htmlFor="browse-search">
+            Cari kata kunci <span className="field__hint">/ Filter by keyword (name or meaning)</span>
+          </label>
+          <input
+            id="browse-search"
+            type="search"
+            placeholder="mis. God, Tuhan, cahaya"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+      )}
       <p className="field__hint">
         {letter === 'all'
-          ? `${total} nama, semua huruf · all names A–Z`
+          ? activeQuery.trim()
+            ? `${total} nama cocok «${activeQuery.trim()}» · names matching “${activeQuery.trim()}”`
+            : `${total} nama, semua huruf · all names A–Z`
           : `${total} nama berawalan «${letter.toUpperCase()}» · names starting with “${letter.toUpperCase()}”`}
       </p>
       {groups.map(([origin, names]) => (

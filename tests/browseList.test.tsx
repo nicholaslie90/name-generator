@@ -22,6 +22,16 @@ describe('browseGroups', () => {
     expect(total).toBe(COMMON_NAMES.length);
   });
 
+  it('query keeps only names whose name or ID/EN meaning contains the keyword', () => {
+    const names = browseGroups('all', 'N', '  GOD ').flatMap(([, ns]) => ns);
+    expect(names.length).toBeGreaterThan(0);
+    expect(names.length).toBeLessThan(COMMON_NAMES.length);
+    for (const n of names) {
+      expect(`${n.name} ${n.meaning.id} ${n.meaning.en}`.toLowerCase()).toContain('god');
+    }
+    expect(names.some((n) => n.name === 'Imanuel')).toBe(true);
+  });
+
   it('gender L keeps male + neutral names only', () => {
     const names = browseGroups('a', 'L').flatMap(([, ns]) => ns);
     expect(names.length).toBeGreaterThan(0);
