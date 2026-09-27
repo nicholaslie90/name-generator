@@ -2,6 +2,9 @@ import type { KeyboardEvent as ReactKeyboardEvent, RefObject } from 'react';
 import type { GeneratedName, GenerateError } from '../types';
 import NameFrame, { type FrameStyle } from './NameFrame';
 import { useSwipe } from '../hooks/useSwipe';
+import { useSaved } from '../hooks/useSaved';
+import { composeMeaning } from '../lib/composeMeaning';
+import { SaveButton } from './BrowseList';
 
 interface DeckProps {
   current: GeneratedName | null;
@@ -33,6 +36,7 @@ export default function Deck({
   // Flick the card AWAY to the left to advance (= next, like the right arrow);
   // flick it right to go back (= previous). This inverts the drag direction
   // relative to the arrow buttons, matching a Tinder-style "throw away" feel.
+  const { isSaved, toggle } = useSaved();
   const { dx, dragging, handlers } = useSwipe({
     onSwipeLeft: onNext,
     onSwipeRight: () => {
@@ -52,6 +56,11 @@ export default function Deck({
       <button className="deck__customize" onClick={onOpenCustomize} aria-label="Sesuaikan · Customize">
         ⚙
       </button>
+      {current && !error && (
+        <div className="deck__save">
+          <SaveButton entry={{ name: current.name, meaning: composeMeaning(current) }} saved={isSaved(current.name)} onToggle={toggle} />
+        </div>
+      )}
 
       {!navDisabled && (
         <button

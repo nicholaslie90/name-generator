@@ -416,6 +416,34 @@ select:focus {
   font-size: 0.8rem;
 }
 
+.save-btn {
+  border: 0;
+  background: none;
+  padding: 0 0.3rem 0 0;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--accent-deep);
+}
+
+.deck__save {
+  position: absolute;
+  top: 4.25rem; /* under the ⚙ button */
+  right: 1rem;
+  z-index: 2;
+}
+
+.deck__save .save-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  font-size: 1.3rem;
+}
+
 .browse__meaning {
   display: block;
   color: var(--muted);
