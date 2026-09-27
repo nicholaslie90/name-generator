@@ -372,6 +372,23 @@ select:focus {
   margin-bottom: 0.75rem;
 }
 
+.browse__jump {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--bg);
+  padding: 0.5rem 0;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: nowrap; /* one scrollable row so the sticky bar stays short on phones */
+  overflow-x: auto;
+}
+
+.browse__jump .chip {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
 .browse__title {
   font-family: var(--font-display);
   font-size: 1.15rem;

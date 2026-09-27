@@ -71,8 +71,22 @@ export default function BrowseList({ gender }: { gender: Gender }) {
             : `${total} nama, semua huruf · all names A–Z`
           : `${total} nama berawalan «${letter.toUpperCase()}» · names starting with “${letter.toUpperCase()}”`}
       </p>
+      {letter === 'all' && groups.length > 1 && (
+        <nav className="chips browse__jump" aria-label="Lompat ke etimologi / Jump to etymology">
+          {groups.map(([origin, names]) => (
+            <button
+              key={origin}
+              type="button"
+              className="chip"
+              onClick={() => document.getElementById(`browse-${origin}`)?.scrollIntoView?.({ behavior: 'smooth' })}
+            >
+              {ORIGIN_LABELS[origin].id} · {names.length}
+            </button>
+          ))}
+        </nav>
+      )}
       {groups.map(([origin, names]) => (
-        <section key={origin} className="browse__group">
+        <section key={origin} id={`browse-${origin}`} className="browse__group">
           <h3 className="browse__title">
             {ORIGIN_LABELS[origin].id}{' '}
             <span className="field__hint">/ {ORIGIN_LABELS[origin].en} — {names.length}</span>
