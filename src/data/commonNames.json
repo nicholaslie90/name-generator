@@ -210,5 +210,10 @@
   { "id": "cn-olsen", "name": "Olsen", "initial": "o", "syllables": 2, "origin": "nordik", "gender": "L", "meaning": { "id": "putra Ole (Olaf)", "en": "son of Ole (Olaf)" } },
   { "id": "cn-pierson", "name": "Pierson", "initial": "p", "syllables": 2, "origin": "inggris", "gender": "L", "meaning": { "id": "putra Piers (Peter)", "en": "son of Piers (Peter)" } },
   { "id": "cn-davidson", "name": "Davidson", "initial": "d", "syllables": 3, "origin": "inggris", "gender": "L", "meaning": { "id": "putra David", "en": "son of David" } },
-  { "id": "cn-grayson", "name": "Grayson", "initial": "g", "syllables": 2, "origin": "inggris", "gender": "L", "meaning": { "id": "putra pengurus rumah (greyve)", "en": "son of the steward (greyve)" } }
+  { "id": "cn-grayson", "name": "Grayson", "initial": "g", "syllables": 2, "origin": "inggris", "gender": "L", "meaning": { "id": "putra pengurus rumah (greyve)", "en": "son of the steward (greyve)" } },
+  { "id": "cn-alastair", "name": "Alastair", "initial": "a", "syllables": 4, "origin": "keltik", "gender": "L", "meaning": { "id": "pembela umat manusia (bentuk Gaelik Skotlandia dari Alexander)", "en": "defender of men (Scottish Gaelic form of Alexander)" } },
+  { "id": "cn-alistair", "name": "Alistair", "initial": "a", "syllables": 3, "origin": "keltik", "gender": "L", "meaning": { "id": "pembela umat manusia (bentuk Gaelik Skotlandia dari Alexander)", "en": "defender of men (Scottish Gaelic form of Alexander)" } },
+  { "id": "cn-alasdair", "name": "Alasdair", "initial": "a", "syllables": 3, "origin": "keltik", "gender": "L", "meaning": { "id": "pembela umat manusia (bentuk Gaelik Skotlandia dari Alexander)", "en": "defender of men (Scottish Gaelic form of Alexander)" } },
+  { "id": "cn-alister", "name": "Alister", "initial": "a", "syllables": 3, "origin": "keltik", "gender": "L", "meaning": { "id": "pembela umat manusia (bentuk Gaelik Skotlandia dari Alexander)", "en": "defender of men (Scottish Gaelic form of Alexander)" } },
+  { "id": "cn-fulvia-p", "name": "Fulvia", "initial": "f", "syllables": 3, "origin": "latin", "gender": "P", "meaning": { "id": "kekuningan, pirang kecokelatan", "en": "yellowish, tawny" } }
 ]
