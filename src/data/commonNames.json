@@ -195,5 +195,20 @@
   { "id": "cn-lintang-p", "name": "Lintang", "initial": "l", "syllables": 2, "origin": "nusantara", "gender": "P", "meaning": { "id": "bintang (Jawa)", "en": "star (Javanese)" } },
   { "id": "cn-asri-p", "name": "Asri", "initial": "a", "syllables": 2, "origin": "nusantara", "gender": "P", "meaning": { "id": "indah, sedap dipandang", "en": "beautiful, pleasant, serene" } },
   { "id": "cn-gendhis-p", "name": "Gendhis", "initial": "g", "syllables": 2, "origin": "nusantara", "gender": "P", "meaning": { "id": "gula (Jawa)", "en": "sugar (Javanese)" } },
-  { "id": "cn-kinanti-p", "name": "Kinanti", "initial": "k", "syllables": 3, "origin": "nusantara", "gender": "P", "meaning": { "id": "dituntun, didampingi; nama tembang macapat (Jawa)", "en": "guided, accompanied; a macapat verse form (Javanese)" } }
+  { "id": "cn-kinanti-p", "name": "Kinanti", "initial": "k", "syllables": 3, "origin": "nusantara", "gender": "P", "meaning": { "id": "dituntun, didampingi; nama tembang macapat (Jawa)", "en": "guided, accompanied; a macapat verse form (Javanese)" } },
+  { "id": "cn-anderson", "name": "Anderson", "initial": "a", "syllables": 3, "origin": "inggris", "gender": "L", "meaning": { "id": "putra Andrew", "en": "son of Andrew" } },
+  { "id": "cn-addison-n", "name": "Addison", "initial": "a", "syllables": 3, "origin": "inggris", "gender": "N", "meaning": { "id": "putra Adam", "en": "son of Adam" } },
+  { "id": "cn-denison", "name": "Denison", "initial": "d", "syllables": 3, "origin": "inggris", "gender": "L", "meaning": { "id": "putra Dennis", "en": "son of Dennis" } },
+  { "id": "cn-ellison-n", "name": "Ellison", "initial": "e", "syllables": 3, "origin": "inggris", "gender": "N", "meaning": { "id": "putra Ellis (Elias)", "en": "son of Ellis (Elias)" } },
+  { "id": "cn-emerson-n", "name": "Emerson", "initial": "e", "syllables": 3, "origin": "inggris", "gender": "N", "meaning": { "id": "putra Emery", "en": "son of Emery" } },
+  { "id": "cn-ericson", "name": "Ericson", "initial": "e", "syllables": 3, "origin": "nordik", "gender": "L", "meaning": { "id": "putra Eric", "en": "son of Eric" } },
+  { "id": "cn-hansen", "name": "Hansen", "initial": "h", "syllables": 2, "origin": "nordik", "gender": "L", "meaning": { "id": "putra Hans (John)", "en": "son of Hans (John)" } },
+  { "id": "cn-iverson", "name": "Iverson", "initial": "i", "syllables": 3, "origin": "nordik", "gender": "L", "meaning": { "id": "putra Ivar", "en": "son of Ivar" } },
+  { "id": "cn-jensen", "name": "Jensen", "initial": "j", "syllables": 2, "origin": "nordik", "gender": "L", "meaning": { "id": "putra Jens (John)", "en": "son of Jens (John)" } },
+  { "id": "cn-judson", "name": "Judson", "initial": "j", "syllables": 2, "origin": "inggris", "gender": "L", "meaning": { "id": "putra Judd (Jordan)", "en": "son of Judd (Jordan)" } },
+  { "id": "cn-larson", "name": "Larson", "initial": "l", "syllables": 2, "origin": "nordik", "gender": "L", "meaning": { "id": "putra Lars (Laurence)", "en": "son of Lars (Laurence)" } },
+  { "id": "cn-olsen", "name": "Olsen", "initial": "o", "syllables": 2, "origin": "nordik", "gender": "L", "meaning": { "id": "putra Ole (Olaf)", "en": "son of Ole (Olaf)" } },
+  { "id": "cn-pierson", "name": "Pierson", "initial": "p", "syllables": 2, "origin": "inggris", "gender": "L", "meaning": { "id": "putra Piers (Peter)", "en": "son of Piers (Peter)" } },
+  { "id": "cn-davidson", "name": "Davidson", "initial": "d", "syllables": 3, "origin": "inggris", "gender": "L", "meaning": { "id": "putra David", "en": "son of David" } },
+  { "id": "cn-grayson", "name": "Grayson", "initial": "g", "syllables": 2, "origin": "inggris", "gender": "L", "meaning": { "id": "putra pengurus rumah (greyve)", "en": "son of the steward (greyve)" } }
 ]
