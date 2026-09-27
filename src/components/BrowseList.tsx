@@ -46,8 +46,8 @@ export function SaveButton({ entry, saved, onToggle }: { entry: SavedName; saved
 export default function BrowseList({ gender }: { gender: Gender }) {
   const [letter, setLetter] = useState('a');
   const [query, setQuery] = useState('');
-  // The keyword filter lives in the "Semua" view only.
-  const activeQuery = letter === 'all' ? query : '';
+  // The keyword filter applies to Semua and single letters, not the saved list.
+  const activeQuery = letter === 'saved' ? '' : query.trim();
   const { saved, isSaved, toggle } = useSaved();
   const [copied, setCopied] = useState(false);
   const groups = useMemo(
@@ -106,7 +106,7 @@ export default function BrowseList({ gender }: { gender: Gender }) {
           </ul>
         </>
       )}
-      {letter === 'all' && (
+      {letter !== 'saved' && (
         <div className="field">
           <label className="field__label" htmlFor="browse-search">
             Cari kata kunci <span className="field__hint">/ Filter by keyword (name or meaning)</span>
@@ -123,10 +123,12 @@ export default function BrowseList({ gender }: { gender: Gender }) {
       {letter !== 'saved' && (
       <p className="field__hint">
         {letter === 'all'
-          ? activeQuery.trim()
-            ? `${total} nama cocok «${activeQuery.trim()}» · names matching “${activeQuery.trim()}”`
+          ? activeQuery
+            ? `${total} nama cocok «${activeQuery}» · names matching “${activeQuery}”`
             : `${total} nama, semua huruf · all names A–Z`
-          : `${total} nama berawalan «${letter.toUpperCase()}» · names starting with “${letter.toUpperCase()}”`}
+          : activeQuery
+            ? `${total} nama berawalan «${letter.toUpperCase()}» cocok «${activeQuery}» · names starting with “${letter.toUpperCase()}” matching “${activeQuery}”`
+            : `${total} nama berawalan «${letter.toUpperCase()}» · names starting with “${letter.toUpperCase()}”`}
       </p>
       )}
       {letter === 'all' && groups.length > 1 && (

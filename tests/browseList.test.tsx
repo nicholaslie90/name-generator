@@ -32,6 +32,14 @@ describe('browseGroups', () => {
     expect(names.some((n) => n.name === 'Imanuel')).toBe(true);
   });
 
+  it('query also narrows a single letter', () => {
+    const names = browseGroups('i', 'N', 'god').flatMap(([, ns]) => ns);
+    expect(names.length).toBeGreaterThan(0);
+    expect(names.every((n) => n.initial === 'i')).toBe(true);
+    expect(names.some((n) => n.name === 'Imanuel')).toBe(true);
+    expect(names.length).toBeLessThan(browseGroups('i', 'N').flatMap(([, ns]) => ns).length);
+  });
+
   it('gender L keeps male + neutral names only', () => {
     const names = browseGroups('a', 'L').flatMap(([, ns]) => ns);
     expect(names.length).toBeGreaterThan(0);
