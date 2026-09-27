@@ -389,6 +389,23 @@ select:focus {
   white-space: nowrap;
 }
 
+.browse__hide {
+  margin-top: 0.5rem;
+}
+
+.browse__hide summary {
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+}
+
+/* Pressed = hidden: strike through instead of the default "selected" fill. */
+.browse__hide-chip[aria-pressed='true'] {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
 .browse__title {
   font-family: var(--font-display);
   font-size: 1.15rem;

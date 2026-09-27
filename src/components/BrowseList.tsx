@@ -50,9 +50,16 @@ export default function BrowseList({ gender }: { gender: Gender }) {
   const activeQuery = letter === 'saved' ? '' : query.trim();
   const { saved, isSaved, toggle } = useSaved();
   const [copied, setCopied] = useState(false);
+  const [hidden, setHidden] = useState<ReadonlySet<Origin>>(new Set());
+  const toggleHidden = (o: Origin) =>
+    setHidden((prev) => {
+      const next = new Set(prev);
+      if (!next.delete(o)) next.add(o);
+      return next;
+    });
   const groups = useMemo(
-    () => (letter === 'saved' ? [] : browseGroups(letter, gender, activeQuery)),
-    [letter, gender, activeQuery],
+    () => (letter === 'saved' ? [] : browseGroups(letter, gender, activeQuery).filter(([o]) => !hidden.has(o))),
+    [letter, gender, activeQuery, hidden],
   );
   const total = groups.reduce((sum, [, names]) => sum + names.length, 0);
 
@@ -118,6 +125,24 @@ export default function BrowseList({ gender }: { gender: Gender }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+          <details className="browse__hide">
+            <summary className="field__hint">
+              Sembunyikan etimologi / Hide etymologies{hidden.size > 0 && ` · ${hidden.size}`}
+            </summary>
+            <div className="chips">
+              {ORIGINS.map((o) => (
+                <button
+                  key={o}
+                  type="button"
+                  className="chip browse__hide-chip"
+                  aria-pressed={hidden.has(o)}
+                  onClick={() => toggleHidden(o)}
+                >
+                  {ORIGIN_LABELS[o].id}
+                </button>
+              ))}
+            </div>
+          </details>
         </div>
       )}
       {letter !== 'saved' && (
