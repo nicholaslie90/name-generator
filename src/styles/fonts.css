@@ -171,6 +171,34 @@
   font-display: swap;
   src: url(../fonts/pacifico.woff2) format('woff2');
 }
+@font-face {
+  font-family: 'Cookie';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/cookie.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Yellowtail';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/yellowtail.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Grand Hotel';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/grand-hotel.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Kaushan Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/kaushan-script.woff2) format('woff2');
+}
 
 /* cyrillic */
 @font-face {

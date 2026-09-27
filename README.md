@@ -41,8 +41,10 @@ deploys to GitHub Pages.
   **Prev/Next** step back and forth through the names you've generated, and
   **Reset** clears the tracked set so you can start over.
 - **Four frame styles:** Klasik Elegan, Modern Lembut, Botani, Royal Gelap.
-- **Five cursive name fonts:** Great Vibes (default), Dancing Script, Parisienne,
-  Sacramento, Pacifico — picked under the frame and carried into the export.
+- **Nine cursive name fonts:** Great Vibes (default), Dancing Script, Parisienne,
+  Sacramento, Pacifico, plus Cookie, Yellowtail, Grand Hotel and Kaushan Script
+  (these four keep I and J clearly distinct) — picked under the frame and carried
+  into the export.
 - **Export:** hi-res PNG (3× pixel ratio) and PDF, with self-hosted cursive fonts
   embedded into the export.
 

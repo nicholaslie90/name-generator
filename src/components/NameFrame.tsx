@@ -5,7 +5,16 @@ import styles from './NameFrame.module.css';
 
 export type FrameStyle = 'elegant' | 'modern' | 'botanical' | 'royal';
 
-export type NameFontId = 'great-vibes' | 'dancing' | 'parisienne' | 'sacramento' | 'pacifico';
+export type NameFontId =
+  | 'great-vibes'
+  | 'dancing'
+  | 'parisienne'
+  | 'sacramento'
+  | 'pacifico'
+  | 'cookie'
+  | 'yellowtail'
+  | 'grand-hotel'
+  | 'kaushan';
 
 /** Cursive fonts offered for the big name. `family` is a CSS font-family value. */
 export const NAME_FONTS: { id: NameFontId; label: string; family: string }[] = [
@@ -14,6 +23,11 @@ export const NAME_FONTS: { id: NameFontId; label: string; family: string }[] = [
   { id: 'parisienne', label: 'Parisienne', family: "'Parisienne', cursive" },
   { id: 'sacramento', label: 'Sacramento', family: "'Sacramento', cursive" },
   { id: 'pacifico', label: 'Pacifico', family: "'Pacifico', cursive" },
+  // Scripts below keep I and J clearly distinct.
+  { id: 'cookie', label: 'Cookie', family: "'Cookie', cursive" },
+  { id: 'yellowtail', label: 'Yellowtail', family: "'Yellowtail', cursive" },
+  { id: 'grand-hotel', label: 'Grand Hotel', family: "'Grand Hotel', cursive" },
+  { id: 'kaushan', label: 'Kaushan Script', family: "'Kaushan Script', cursive" },
 ];
 
 export const FRAME_STYLES: { id: FrameStyle; label: { id: string; en: string } }[] = [
