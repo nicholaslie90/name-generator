@@ -17,6 +17,11 @@ describe('browseGroups', () => {
     expect(groups.length).toBeGreaterThan(1);
   });
 
+  it("'all' returns every name across all letters", () => {
+    const total = browseGroups('all', 'N').reduce((sum, [, names]) => sum + names.length, 0);
+    expect(total).toBe(COMMON_NAMES.length);
+  });
+
   it('gender L keeps male + neutral names only', () => {
     const names = browseGroups('a', 'L').flatMap(([, ns]) => ns);
     expect(names.length).toBeGreaterThan(0);

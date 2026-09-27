@@ -2,13 +2,13 @@ import { useMemo, useState } from 'react';
 import { COMMON_NAMES } from '../data';
 import { ORIGINS, ORIGIN_LABELS, type CommonName, type Gender, type Origin } from '../types';
 
-const LETTERS = 'abcdefghijklmnopqrstuvwxyz'.split('');
+const LETTERS = ['all', ...'abcdefghijklmnopqrstuvwxyz'];
 const GENDER_ICON: Record<Gender, string> = { L: '♂', P: '♀', N: '⚥' };
 
-/** Group the given-name dictionary by origin for one initial letter + gender. */
+/** Group the given-name dictionary by origin for one initial letter (or 'all') + gender. */
 export function browseGroups(letter: string, gender: Gender): [Origin, CommonName[]][] {
   const pool = COMMON_NAMES.filter(
-    (n) => n.initial === letter && (gender === 'N' || n.gender === gender || n.gender === 'N'),
+    (n) => (letter === 'all' || n.initial === letter) && (gender === 'N' || n.gender === gender || n.gender === 'N'),
   ).sort((a, b) => a.name.localeCompare(b.name));
   const byOrigin = new Map<Origin, CommonName[]>();
   for (const n of pool) {
@@ -36,12 +36,14 @@ export default function BrowseList({ gender }: { gender: Gender }) {
             aria-pressed={letter === l}
             onClick={() => setLetter(l)}
           >
-            {l.toUpperCase()}
+            {l === 'all' ? 'Semua' : l.toUpperCase()}
           </button>
         ))}
       </div>
       <p className="field__hint">
-        {total} nama berawalan «{letter.toUpperCase()}» · names starting with “{letter.toUpperCase()}”
+        {letter === 'all'
+          ? `${total} nama, semua huruf · all names A–Z`
+          : `${total} nama berawalan «${letter.toUpperCase()}» · names starting with “${letter.toUpperCase()}”`}
       </p>
       {groups.map(([origin, names]) => (
         <section key={origin} className="browse__group">
@@ -51,9 +53,10 @@ export default function BrowseList({ gender }: { gender: Gender }) {
           </h3>
           <ul className="browse__list">
             {names.map((n) => (
-              <li key={n.id} className="browse__item" title={n.meaning.en}>
+              <li key={n.id} className="browse__item">
                 <strong>{n.name}</strong> <span className="browse__gender">{GENDER_ICON[n.gender]}</span>
                 <span className="browse__meaning">{n.meaning.id}</span>
+                {n.meaning.en !== n.meaning.id && <span className="browse__meaning" lang="en">{n.meaning.en}</span>}
               </li>
             ))}
           </ul>
