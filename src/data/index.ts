@@ -1,4 +1,4 @@
-import type { CommonName, NameElement } from '../types';
+import type { CommonName, CoolName, NameElement } from '../types';
 import { asElement } from '../lib/generator';
 import arab from './elements.arab.json';
 import sanskerta from './elements.sanskerta.json';
@@ -18,6 +18,7 @@ import commonNames from './commonNames.json';
 import importedNames from './commonNamesImported.json';
 import biblicalNames from './biblicalNames.json';
 import islamicNames from './islamicNames.json';
+import coolBoyNames from './coolBoyNames.json';
 
 /** Building-block roots used by the "composed" (unique) name style. */
 export const ELEMENTS: NameElement[] = [
@@ -78,3 +79,8 @@ export const COMMON_NAMES: CommonName[] = mergeCommonNames();
  * bilingual meanings, so they search and render uniformly.
  */
 export const MEANING_POOL: NameElement[] = [...ELEMENTS, ...COMMON_NAMES.map(asElement)];
+
+/** Curated "Keren" names: rare first names and classic middle names for boys. */
+const COOL_NAMES = coolBoyNames as CoolName[];
+export const COOL_FIRST: CoolName[] = COOL_NAMES.filter((n) => n.role === 'first');
+export const COOL_MIDDLE: CoolName[] = COOL_NAMES.filter((n) => n.role === 'middle');
