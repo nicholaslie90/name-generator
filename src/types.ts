@@ -100,8 +100,30 @@ export interface CommonName {
   islamic?: boolean;
 }
 
+/** Vibe tags for curated "Keren" names. */
+export type Vibe = 'noble' | 'bright' | 'bold' | 'grounded' | 'joyful' | 'wise' | 'modern' | 'cosmopolitan';
+
+/** A curated boy name for the "Keren" style: a rare first name or a classic middle name. */
+export interface CoolName {
+  id: string;
+  name: string;
+  role: 'first' | 'middle';
+  /** Spoken syllable count (Lucan=2, Zael=1, Evander=3). */
+  syllables: number;
+  origin: Origin;
+  meaning: { id: string; en: string };
+  /** 1–2 tags; the first is the primary vibe. */
+  vibes: Vibe[];
+}
+
+export interface CoolRequest {
+  surname: string;
+  /** Optional desired first letter of the first name (lowercase). Empty = auto. */
+  initial?: string;
+}
+
 /** Which generation style the user picked. */
-export type NameStyle = 'familiar' | 'composed' | 'meaning' | 'analyze' | 'browse';
+export type NameStyle = 'cool' | 'familiar' | 'composed' | 'meaning' | 'analyze' | 'browse';
 
 /** Per-syllable constraints chosen by the user. */
 export interface SlotConstraint {
@@ -158,6 +180,8 @@ export interface GeneratedName {
    * Absent => each element is its own word (backward compatible).
    */
   wordGroups?: number[];
+  /** Keren-mode phonetic analysis, shown on the frame. */
+  analysis?: { cadence: string; vibe: string; phonetics: string };
 }
 
 /** Returned instead of a name when a slot has no matching candidates. */

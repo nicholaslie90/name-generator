@@ -43,6 +43,7 @@ const NAME_STYLES: { value: NameStyle; label: string; hint: string }[] = [
 ];
 
 const STYLE_HINTS: Record<NameStyle, string> = {
+  cool: 'Nama keren · nama langka + klasik · rare + classic',
   familiar: 'Nama umum yang dikenal · ' + NAME_STYLES[0].hint,
   composed: 'Nama unik · ' + NAME_STYLES[1].hint,
   meaning: 'Cari dari arti · ' + NAME_STYLES[2].hint,
