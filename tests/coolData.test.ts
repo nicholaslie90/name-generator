@@ -40,7 +40,7 @@ describe('curated cool boy names', () => {
   it('includes the reference examples', () => {
     const firsts = COOL_FIRST.map((n) => n.name);
     const middles = COOL_MIDDLE.map((n) => n.name);
-    for (const f of ['Lucan', 'Caspian', 'Evander', 'Orion']) expect(firsts).toContain(f);
-    for (const m of ['Marcus', 'Arthur', 'Asher']) expect(middles).toContain(m);
+    for (const f of ['Lucan', 'Zael', 'Caspian', 'Evander', 'Orion']) expect(firsts).toContain(f);
+    for (const m of ['Darren', 'Marcus', 'Arthur', 'Asher']) expect(middles).toContain(m);
   });
 });
