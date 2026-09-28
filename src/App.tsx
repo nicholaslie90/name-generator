@@ -5,7 +5,7 @@ import BrowseList from './components/BrowseList';
 import Modal from './components/Modal';
 import CustomizationPanel from './components/CustomizationPanel';
 import { NAME_FONTS, type FrameStyle, type NameFontId } from './components/NameFrame';
-import { ELEMENTS, COMMON_NAMES, MEANING_POOL, COOL_FIRST, COOL_MIDDLE } from './data';
+import { ELEMENTS, COMMON_NAMES, MEANING_POOL, COOL_FIRST, COOL_MIDDLE, COOL_FUSED } from './data';
 import { generateCoolName, analyzePair } from './lib/coolName';
 import { isBullySafe } from './lib/bullySafe';
 import { generateName, generateFamiliarName, generateByMeaning, analyzeNameCandidates, buildAnalyzedName } from './lib/generator';
@@ -18,11 +18,14 @@ const INITIAL_FORM: FormState = {
   slots: [{}, {}],
 };
 
-const COOL_BY_ID = new Map([...COOL_FIRST, ...COOL_MIDDLE].map((n) => [n.id, n]));
+const COOL_FIRST_BY_NAME = new Map([...COOL_FIRST, ...COOL_FUSED].map((n) => [n.name, n]));
+const COOL_MIDDLE_BY_NAME = new Map(COOL_MIDDLE.map((n) => [n.name, n]));
 
 /** Keren analysis depends on the surname, which is edited live — recompute it for the shown card. */
 function withLiveAnalysis(g: GeneratedName): GeneratedName {
-  const [f, m] = g.elements.map((e) => COOL_BY_ID.get(e.id));
+  const [first, middle] = g.name.split(' ');
+  const f = COOL_FIRST_BY_NAME.get(first);
+  const m = COOL_MIDDLE_BY_NAME.get(middle);
   return g.analysis && f && m ? { ...g, analysis: analyzePair(f, m, g.surname) } : g;
 }
 
@@ -61,9 +64,11 @@ export default function App() {
   function runGenerator(): GenerateResult {
     if (form.nameStyle === 'cool') {
       return generateCoolName(
-        { surname: form.surname, initial: form.familiarInitial, exclude: seen.current },
+        { surname: form.surname, initial: form.familiarInitial, exclude: seen.current, source: form.coolSource },
         COOL_FIRST,
         COOL_MIDDLE,
+        undefined,
+        COOL_FUSED,
       );
     }
     // The surname counts as one of the chosen words, so generate one fewer
@@ -190,6 +195,7 @@ export default function App() {
     // Whether a surname exists changes the generated word count (but typing
     // within an existing surname does not — that updates the frame live).
     surnamePresent: form.surname.trim().length > 0,
+    coolSource: form.coolSource ?? 'mix',
   });
   const lastSig = useRef(filterSig);
   useEffect(() => {

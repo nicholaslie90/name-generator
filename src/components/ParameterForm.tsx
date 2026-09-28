@@ -2,6 +2,7 @@ import {
   COMMON_ORIGINS,
   ELEMENT_ORIGINS,
   ORIGIN_LABELS,
+  type CoolSource,
   type Gender,
   type NameStyle,
   type Origin,
@@ -30,6 +31,8 @@ export interface FormState {
   sameOrigin?: boolean;
   /** Composed-mode: fuse 1–2 roots into a single word (samasa style). */
   fuse?: boolean;
+  /** Keren-mode: where first names come from (default mix). */
+  coolSource?: CoolSource;
   /** Analyze-mode: the name the user typed to look up. */
   ownName?: string;
 }
@@ -60,6 +63,12 @@ const GENDER_OPTIONS: { value: Gender; label: string }[] = [
 ];
 
 const WORD_OPTIONS = [2, 3, 4];
+
+const COOL_SOURCES: { value: CoolSource; label: string }[] = [
+  { value: 'real', label: 'Asli' },
+  { value: 'fused', label: 'Rangkaian' },
+  { value: 'mix', label: 'Campur' },
+];
 
 interface Props {
   value: FormState;
@@ -166,6 +175,26 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
           {STYLE_HINTS[value.nameStyle]}
         </p>
       </div>
+
+      {cool && (
+        <div className="field">
+          <span className="field__label">
+            Nama depan <span className="field__hint">/ First name — asli, rangkaian akar, atau campur</span>
+          </span>
+          <div className="segmented">
+            {COOL_SOURCES.map((s) => (
+              <button
+                key={s.value}
+                type="button"
+                aria-pressed={(value.coolSource ?? 'mix') === s.value}
+                onClick={() => onChange({ ...value, coolSource: s.value })}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {!analyze && !cool && (
         <div className="field">

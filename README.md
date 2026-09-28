@@ -15,6 +15,10 @@ deploys to GitHub Pages.
     and shows the cadence (e.g. 2 + 2 + 1), combined vibe and a phonetic note on
     the frame. Every pairing is screened for names that could invite teasing
     at an Indonesian/international school (`src/data/bullyBlocklist.json`).
+    First names come from **Asli** (attested names), **Rangkaian** (composed:
+    a head + tail root from *different* origins, e.g. Sanskrit *arya* "noble" +
+    Slavic *mir* "peace" → *Aryamir*, roots in `src/data/coolFusionRoots.json`)
+    or **Campur** (both, the default). Composed names say so on the frame.
   - **Umum (Familiar)** — joins **attested given names** (from a ~5,200-name set
     enriched from Lisa Shaw's *Baby Names Your Child Can Live With*) across 12
     origin families into a multi-word name. Meanings are English (the source is

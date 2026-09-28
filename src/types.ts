@@ -114,7 +114,21 @@ export interface CoolName {
   meaning: { id: string; en: string };
   /** 1–2 tags; the first is the primary vibe. */
   vibes: Vibe[];
+  /** Set on composed first names: the head + tail roots it was fused from. */
+  fusedFrom?: [FusionRoot, FusionRoot];
 }
+
+/** A curated root for composing Keren first names: a head (start) or tail (ending). */
+export interface FusionRoot {
+  id: string;
+  text: string;
+  origin: Origin;
+  meaning: { id: string; en: string };
+  vibe: Vibe;
+}
+
+/** Where Keren first names come from: attested names, composed roots, or both. */
+export type CoolSource = 'real' | 'fused' | 'mix';
 
 export interface CoolRequest {
   surname: string;
@@ -122,6 +136,8 @@ export interface CoolRequest {
   initial?: string;
   /** Lowercase "first middle" pairs already shown; skipped while unseen pairs remain. */
   exclude?: Set<string>;
+  /** First-name source; defaults to 'mix'. */
+  source?: CoolSource;
 }
 
 /** Which generation style the user picked. */

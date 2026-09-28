@@ -1,5 +1,6 @@
-import type { CommonName, CoolName, NameElement } from '../types';
+import type { CommonName, CoolName, FusionRoot, NameElement } from '../types';
 import { asElement } from '../lib/generator';
+import { fuseRoots } from '../lib/coolName';
 import arab from './elements.arab.json';
 import sanskerta from './elements.sanskerta.json';
 import latin from './elements.latin.json';
@@ -19,6 +20,7 @@ import importedNames from './commonNamesImported.json';
 import biblicalNames from './biblicalNames.json';
 import islamicNames from './islamicNames.json';
 import coolBoyNames from './coolBoyNames.json';
+import coolFusionRoots from './coolFusionRoots.json';
 
 /** Building-block roots used by the "composed" (unique) name style. */
 export const ELEMENTS: NameElement[] = [
@@ -84,3 +86,26 @@ export const MEANING_POOL: NameElement[] = [...ELEMENTS, ...COMMON_NAMES.map(asE
 const COOL_NAMES = coolBoyNames as CoolName[];
 export const COOL_FIRST: CoolName[] = COOL_NAMES.filter((n) => n.role === 'first');
 export const COOL_MIDDLE: CoolName[] = COOL_NAMES.filter((n) => n.role === 'middle');
+
+/** Curated roots for composed Keren first names (head + tail of different origins). */
+export const FUSION_HEADS = coolFusionRoots.heads as FusionRoot[];
+export const FUSION_TAILS = coolFusionRoots.tails as FusionRoot[];
+/** Composed names that pass the rules but read badly (brands, memes, girls' names, clumsy). */
+const FUSION_BLOCKED = new Set(coolFusionRoots.blockedNames);
+
+/** Every pronounceable, bully-safe head + tail fusion that isn't a real Keren name or blocked. */
+function buildFused(): CoolName[] {
+  const taken = new Set([...COOL_FIRST.map((n) => n.name), ...FUSION_BLOCKED]);
+  const out: CoolName[] = [];
+  for (const h of FUSION_HEADS) {
+    for (const t of FUSION_TAILS) {
+      const n = fuseRoots(h, t);
+      if (n && !taken.has(n.name)) {
+        taken.add(n.name);
+        out.push(n);
+      }
+    }
+  }
+  return out;
+}
+export const COOL_FUSED: CoolName[] = buildFused();

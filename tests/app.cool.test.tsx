@@ -69,4 +69,14 @@ describe('App: Keren mode is the default', () => {
     fireEvent.click(screen.getByLabelText('Nama sebelumnya'));
     expect(analysisText()).toMatch(/\+ 1 ·/);
   });
+
+  it('defaults the first-name source to Campur and can switch to composed names', () => {
+    render(<App />);
+    fireEvent.click(screen.getByLabelText('Sesuaikan · Customize'));
+    expect(screen.getByRole('button', { name: 'Campur' })).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(screen.getByRole('button', { name: 'Rangkaian' }));
+    expect(analysisText()).toMatch(/Composed: /);
+    fireEvent.click(screen.getByRole('button', { name: 'Asli' }));
+    expect(analysisText()).not.toMatch(/Composed: /);
+  });
 });
