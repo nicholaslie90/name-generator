@@ -44,7 +44,10 @@
     {"id": "fh-kian", "text": "kian", "origin": "persia", "meaning": {"id": "raja", "en": "king"}, "vibe": "noble"},
     {"id": "fh-tor", "text": "tor", "origin": "nordik", "meaning": {"id": "guntur", "en": "thunder"}, "vibe": "bold"},
     {"id": "fh-zeno", "text": "zeno", "origin": "yunani", "meaning": {"id": "dari Zeus", "en": "of Zeus"}, "vibe": "noble"},
-    {"id": "fh-tama", "text": "tama", "origin": "jepang", "meaning": {"id": "permata", "en": "jewel"}, "vibe": "bright"}
+    {"id": "fh-tama", "text": "tama", "origin": "jepang", "meaning": {"id": "permata", "en": "jewel"}, "vibe": "bright"},
+    {"id": "fh-iman", "text": "iman", "origin": "arab", "meaning": {"id": "iman", "en": "faith"}, "vibe": "grounded"},
+    {"id": "fh-ivar", "text": "ivar", "origin": "nordik", "meaning": {"id": "pejuang pemanah", "en": "bow warrior"}, "vibe": "bold"},
+    {"id": "fh-iwan", "text": "iwan", "origin": "nusantara", "meaning": {"id": "Tuhan Maha Pemurah", "en": "God is gracious"}, "vibe": "noble"}
   ],
   "tails": [
     {"id": "ft-mir", "text": "mir", "origin": "slavia", "meaning": {"id": "damai", "en": "peace"}, "vibe": "grounded"},
@@ -75,6 +78,6 @@
     {"id": "ft-ro", "text": "ro", "origin": "jepang", "meaning": {"id": "putra", "en": "son, man"}, "vibe": "modern"}
   ],
   "blockedNames": [
-    "Shirric", "Lucro", "Leoric", "Kaijit", "Kairo", "Nikonur", "Nikonui", "Renard", "Shirel", "Valdard", "Aurard", "Freyyar", "Lucjit", "Lucdev", "Lucnui", "Azizjit", "Hafjit", "Velivic", "Velivin", "Velivir", "Theodev"
+    "Shirric", "Lucro", "Leoric", "Kaijit", "Kairo", "Nikonur", "Nikonui", "Renard", "Shirel", "Valdard", "Aurard", "Freyyar", "Lucjit", "Lucdev", "Lucnui", "Azizjit", "Hafjit", "Velivic", "Velivin", "Velivir", "Theodev", "Imandan", "Imandev", "Iwandan", "Ivarvir"
   ]
 }

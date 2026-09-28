@@ -56,3 +56,13 @@ describe('composed Keren first names', () => {
     expect(names.size).toBe(COOL_FUSED.length);
   });
 });
+
+describe('initial coverage', () => {
+  it('offers plenty of varied first names starting with I', () => {
+    const real = COOL_FIRST.filter((n) => n.name[0] === 'I');
+    const fused = COOL_FUSED.filter((n) => n.name[0] === 'I');
+    expect(real.length).toBeGreaterThanOrEqual(15);
+    expect(real.length + fused.length).toBeGreaterThanOrEqual(60);
+    expect(new Set(fused.map((n) => n.fusedFrom![0].text)).size).toBeGreaterThanOrEqual(4);
+  });
+});
