@@ -29,7 +29,7 @@
   {"id": "cb-rhys", "name": "Rhys", "role": "first", "syllables": 1, "origin": "keltik", "meaning": {"id": "penuh semangat", "en": "ardor, enthusiasm"}, "vibes": ["bold", "joyful"]},
   {"id": "cb-tiernan", "name": "Tiernan", "role": "first", "syllables": 2, "origin": "keltik", "meaning": {"id": "tuan kecil", "en": "little lord"}, "vibes": ["noble"]},
   {"id": "cb-declan", "name": "Declan", "role": "first", "syllables": 2, "origin": "keltik", "meaning": {"id": "penuh kebaikan", "en": "full of goodness"}, "vibes": ["noble", "joyful"]},
-  {"id": "cb-cian", "name": "Cian", "role": "first", "syllables": 1, "origin": "keltik", "meaning": {"id": "kuno dan abadi", "en": "ancient, enduring"}, "vibes": ["grounded", "wise"]},
+  {"id": "cb-cian", "name": "Cian", "role": "first", "syllables": 2, "origin": "keltik", "meaning": {"id": "kuno dan abadi", "en": "ancient, enduring"}, "vibes": ["grounded", "wise"]},
   {"id": "cb-leif", "name": "Leif", "role": "first", "syllables": 1, "origin": "nordik", "meaning": {"id": "pewaris", "en": "heir, descendant"}, "vibes": ["grounded", "noble"]},
   {"id": "cb-mateo", "name": "Mateo", "role": "first", "syllables": 3, "origin": "latin", "meaning": {"id": "anugerah Tuhan", "en": "gift of God"}, "vibes": ["joyful", "modern"]},
   {"id": "cb-enzo", "name": "Enzo", "role": "first", "syllables": 2, "origin": "jermanik", "meaning": {"id": "penguasa rumah tangga", "en": "ruler of the household"}, "vibes": ["bold", "noble"]},
