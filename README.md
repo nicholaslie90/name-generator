@@ -9,6 +9,12 @@ deploys to GitHub Pages.
 ## Features
 
 - **Three name styles:**
+  - **Keren (Cool) — default, for boys** — pairs a rare, good-meaning first
+    name (Lucan, Caspian, Evander…) with a classic middle name (Marcus,
+    Arthur, Asher…), scores the pair for cadence and flow against the surname,
+    and shows the cadence (e.g. 2 + 2 + 1), combined vibe and a phonetic note on
+    the frame. Every pairing is screened for names that could invite teasing
+    at an Indonesian/international school (`src/data/bullyBlocklist.json`).
   - **Umum (Familiar)** — joins **attested given names** (from a ~5,200-name set
     enriched from Lisa Shaw's *Baby Names Your Child Can Live With*) across 12
     origin families into a multi-word name. Meanings are English (the source is
@@ -28,7 +34,7 @@ deploys to GitHub Pages.
 - **Biblical category:** a cross-cutting **Alkitab / Biblical** flag (spanning the
   Hebrew, Greek and Latin families) with a toggle in Familiar mode to draw only
   from names attested in the Bible (Old & New Testament).
-- **Parameters:** surname, gender (Laki-laki / Perempuan / Netral), **number of
+- **Parameters:** surname, gender (defaults to Laki-laki; Perempuan / Netral available), **number of
   words (2–4)** — e.g. 3 gives a three-word name — plus the initial letter (awalan)
   and etymology. In Composed mode each word is controlled *individually*, so you
   can mix origins across words ("campuran etimologi"). **Leaving an awalan empty
@@ -75,6 +81,7 @@ npm run preview  # preview the production build
 | Types | `src/types.ts` |
 | Dataset (roots + meanings) | `src/data/elements.*.json`, merged in `src/data/index.ts` |
 | Name assembly | `src/lib/generator.ts` (pure, seeded RNG) |
+| Keren pairing + analysis | `src/lib/coolName.ts`, `src/lib/bullySafe.ts`, `src/data/coolBoyNames.json` |
 | Meaning composition | `src/lib/composeMeaning.ts` |
 | PNG/PDF export | `src/lib/export.ts` (`html-to-image` + `jsPDF`) |
 | UI | `src/components/*` |
