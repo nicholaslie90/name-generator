@@ -44,4 +44,29 @@ describe('App: Keren mode is the default', () => {
     }
     expect(seen.size).toBe(20);
   });
+
+  it('keeps the shown name while the surname is edited', () => {
+    render(<App />);
+    fireEvent.click(screen.getByLabelText('Sesuaikan · Customize'));
+    const input = screen.getByPlaceholderText('mis. Santoso');
+    fireEvent.change(input, { target: { value: 'L' } });
+    const shown = nameText();
+    fireEvent.change(input, { target: { value: 'Li' } });
+    fireEvent.change(input, { target: { value: 'Lie' } });
+    expect(nameText()).toBe(shown);
+  });
+
+  it('older cards show the analysis for the current surname', () => {
+    render(<App />);
+    fireEvent.click(screen.getByLabelText('Sesuaikan · Customize'));
+    const input = screen.getByPlaceholderText('mis. Santoso');
+    fireEvent.change(input, { target: { value: 'Santoso' } });
+    fireEvent.keyDown(document, { key: 'Escape' });
+    fireEvent.click(screen.getByLabelText('Nama berikutnya'));
+    fireEvent.click(screen.getByLabelText('Sesuaikan · Customize'));
+    fireEvent.change(screen.getByPlaceholderText('mis. Santoso'), { target: { value: 'Lie' } });
+    fireEvent.keyDown(document, { key: 'Escape' });
+    fireEvent.click(screen.getByLabelText('Nama sebelumnya'));
+    expect(analysisText()).toMatch(/\+ 1 ·/);
+  });
 });

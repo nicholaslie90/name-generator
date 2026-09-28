@@ -16,11 +16,16 @@ const firstWord = (s: string) => s.trim().split(/\s+/)[0] ?? '';
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const lastChar = (s: string) => s[s.length - 1] ?? '';
 
-/** Rough spoken syllables: vowel groups, minus a silent final "e". Good enough for surnames. */
+/**
+ * Rough spoken syllables: vowel groups (y only when not next to a vowel, so
+ * Wijaya = 3), minus a silent final "e".
+ * ponytail: "ia" stays one group (Kurniawan = 3, not 4) so Chinese-Indonesian
+ * surnames like Liang/Tjia stay 1; add a surname exception list if that matters.
+ */
 export function countSyllables(word: string): number {
   const w = norm(word);
   if (!w) return 0;
-  const groups = w.match(/[aeiouy]+/g)?.length ?? 0;
+  const groups = w.match(/[aeiou]+|(?<![aeiou])y(?![aeiou])/g)?.length ?? 0;
   const silentE = w.length > 2 && /[^aeiouy]e$/.test(w) ? 1 : 0;
   return Math.max(1, groups - silentE);
 }
@@ -125,13 +130,22 @@ export function generateCoolName(
   }
 
   const surname = req.surname.trim();
+  const usable = (f: CoolName, m: CoolName) =>
+    f.name !== m.name &&
+    !req.exclude?.has(`${f.name} ${m.name}`.toLowerCase()) &&
+    isBullySafe([f.name, m.name], surname);
   const scored: { f: CoolName; m: CoolName; score: number }[] = [];
   for (let i = 0; i < DRAWS; i++) {
     const f = pick(pool, rng);
     const m = pick(middles, rng);
-    if (f.name === m.name || !isBullySafe([f.name, m.name], surname)) continue;
-    scored.push({ f, m, score: scorePair(f, m, surname) });
+    if (usable(f, m)) scored.push({ f, m, score: scorePair(f, m, surname) });
   }
+  // Random draws all missed (mostly shown already): scan every pair once.
+  if (scored.length === 0) {
+    for (const f of pool) for (const m of middles) if (usable(f, m)) scored.push({ f, m, score: scorePair(f, m, surname) });
+  }
+  // Everything has been shown: repeat one so the app's "all shown" notice fires.
+  if (scored.length === 0 && req.exclude) return generateCoolName({ ...req, exclude: undefined }, firsts, middles, rng);
   if (scored.length === 0) {
     return {
       error: 'empty-pool',

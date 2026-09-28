@@ -26,6 +26,11 @@ describe('countSyllables', () => {
     expect(countSyllables('Jude')).toBe(1);
     expect(countSyllables('')).toBe(0);
   });
+  it('treats y between vowels as a consonant (Indonesian surnames)', () => {
+    expect(countSyllables('Wijaya')).toBe(3);
+    expect(countSyllables('Hidayat')).toBe(3);
+    expect(countSyllables('Suryadi')).toBe(3);
+  });
 });
 
 describe('scorePair', () => {
@@ -86,6 +91,17 @@ describe('generateCoolName', () => {
   it('returns a bilingual empty-pool error when no first name matches', () => {
     const r = generateCoolName({ surname: '', initial: 'x' }, firsts, middles, makeRng(1));
     expect(isGenerateError(r) && r.message?.en).toBeTruthy();
+  });
+
+  it('skips pairs listed in exclude', () => {
+    const all = firsts.flatMap((f) => middles.map((m) => `${f.name} ${m.name}`.toLowerCase()));
+    const keep = 'kai nathan';
+    const exclude = new Set(all.filter((k) => k !== keep));
+    for (let s = 0; s < 5; s++) {
+      const r = generateCoolName({ surname: 'Lie', exclude }, firsts, middles, makeRng(s));
+      if (isGenerateError(r)) throw new Error('unexpected error');
+      expect(r.name.toLowerCase()).toBe(keep);
+    }
   });
 
   it('returns an error when every pair is bully-unsafe', () => {

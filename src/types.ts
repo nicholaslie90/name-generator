@@ -120,6 +120,8 @@ export interface CoolRequest {
   surname: string;
   /** Optional desired first letter of the first name (lowercase). Empty = auto. */
   initial?: string;
+  /** Lowercase "first middle" pairs already shown; skipped while unseen pairs remain. */
+  exclude?: Set<string>;
 }
 
 /** Which generation style the user picked. */

@@ -6,7 +6,8 @@ import Modal from './components/Modal';
 import CustomizationPanel from './components/CustomizationPanel';
 import { NAME_FONTS, type FrameStyle, type NameFontId } from './components/NameFrame';
 import { ELEMENTS, COMMON_NAMES, MEANING_POOL, COOL_FIRST, COOL_MIDDLE } from './data';
-import { generateCoolName } from './lib/coolName';
+import { generateCoolName, analyzePair } from './lib/coolName';
+import { isBullySafe } from './lib/bullySafe';
 import { generateName, generateFamiliarName, generateByMeaning, analyzeNameCandidates, buildAnalyzedName } from './lib/generator';
 import { isGenerateError, type GeneratedName, type GenerateError, type GenerateResult } from './types';
 
@@ -16,6 +17,14 @@ const INITIAL_FORM: FormState = {
   gender: 'L',
   slots: [{}, {}],
 };
+
+const COOL_BY_ID = new Map([...COOL_FIRST, ...COOL_MIDDLE].map((n) => [n.id, n]));
+
+/** Keren analysis depends on the surname, which is edited live — recompute it for the shown card. */
+function withLiveAnalysis(g: GeneratedName): GeneratedName {
+  const [f, m] = g.elements.map((e) => COOL_BY_ID.get(e.id));
+  return g.analysis && f && m ? { ...g, analysis: analyzePair(f, m, g.surname) } : g;
+}
 
 /** How many random draws to attempt before declaring the filtered pool exhausted. */
 const MAX_TRIES = 80;
@@ -51,7 +60,11 @@ export default function App() {
 
   function runGenerator(): GenerateResult {
     if (form.nameStyle === 'cool') {
-      return generateCoolName({ surname: form.surname, initial: form.familiarInitial }, COOL_FIRST, COOL_MIDDLE);
+      return generateCoolName(
+        { surname: form.surname, initial: form.familiarInitial, exclude: seen.current },
+        COOL_FIRST,
+        COOL_MIDDLE,
+      );
     }
     // The surname counts as one of the chosen words, so generate one fewer
     // given-name word when a surname is present (at least one word always).
@@ -177,8 +190,6 @@ export default function App() {
     // Whether a surname exists changes the generated word count (but typing
     // within an existing surname does not — that updates the frame live).
     surnamePresent: form.surname.trim().length > 0,
-    // Keren pairing and analysis depend on the surname itself, so regenerate on edits.
-    coolSurname: form.nameStyle === 'cool' ? form.surname.trim().toLowerCase() : '',
   });
   const lastSig = useRef(filterSig);
   useEffect(() => {
@@ -211,8 +222,15 @@ export default function App() {
     form.nameStyle === 'analyze'
       ? buildAnalyzedName(analysis, selections, form.surname)
       : cursor >= 0 && cursor < history.length
-        ? { ...history[cursor], surname: form.surname.trim() }
+        ? withLiveAnalysis({ ...history[cursor], surname: form.surname.trim() })
         : null;
+
+  // A shown Keren pair can become teasable under a newly typed surname (e.g. initials) — replace it.
+  const coolUnsafe = !!current?.analysis && !isBullySafe(current.name.split(' '), current.surname);
+  useEffect(() => {
+    if (coolUnsafe) generate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coolUnsafe]);
 
   const analyzeMode = form.nameStyle === 'analyze' && analysis.length > 0;
   const nameFontFamily = NAME_FONTS.find((f) => f.id === nameFont)?.family;
