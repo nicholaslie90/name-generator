@@ -5,14 +5,15 @@ import BrowseList from './components/BrowseList';
 import Modal from './components/Modal';
 import CustomizationPanel from './components/CustomizationPanel';
 import { NAME_FONTS, type FrameStyle, type NameFontId } from './components/NameFrame';
-import { ELEMENTS, COMMON_NAMES, MEANING_POOL } from './data';
+import { ELEMENTS, COMMON_NAMES, MEANING_POOL, COOL_FIRST, COOL_MIDDLE } from './data';
+import { generateCoolName } from './lib/coolName';
 import { generateName, generateFamiliarName, generateByMeaning, analyzeNameCandidates, buildAnalyzedName } from './lib/generator';
 import { isGenerateError, type GeneratedName, type GenerateError, type GenerateResult } from './types';
 
 const INITIAL_FORM: FormState = {
-  nameStyle: 'familiar',
+  nameStyle: 'cool',
   surname: '',
-  gender: 'N',
+  gender: 'L',
   slots: [{}, {}],
 };
 
@@ -49,6 +50,9 @@ export default function App() {
   }, [analysisKey]);
 
   function runGenerator(): GenerateResult {
+    if (form.nameStyle === 'cool') {
+      return generateCoolName({ surname: form.surname, initial: form.familiarInitial }, COOL_FIRST, COOL_MIDDLE);
+    }
     // The surname counts as one of the chosen words, so generate one fewer
     // given-name word when a surname is present (at least one word always).
     const hasSurname = form.surname.trim().length > 0;
@@ -173,6 +177,8 @@ export default function App() {
     // Whether a surname exists changes the generated word count (but typing
     // within an existing surname does not — that updates the frame live).
     surnamePresent: form.surname.trim().length > 0,
+    // Keren pairing and analysis depend on the surname itself, so regenerate on edits.
+    coolSurname: form.nameStyle === 'cool' ? form.surname.trim().toLowerCase() : '',
   });
   const lastSig = useRef(filterSig);
   useEffect(() => {

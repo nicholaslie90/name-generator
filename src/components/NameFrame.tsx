@@ -71,6 +71,13 @@ const NameFrame = forwardRef<HTMLDivElement, Props>(function NameFrame({ result,
 
         <div className={styles.etymology}>{etymology.id}</div>
 
+        {result.analysis && (
+          <div className={styles.analysis}>
+            <div>{result.analysis.cadence} · {result.analysis.vibe}</div>
+            {result.analysis.phonetics && <div className={styles.phonetics}>{result.analysis.phonetics}</div>}
+          </div>
+        )}
+
         <span className={styles.leafBottom}>❧ ❀ ❧</span>
       </div>
     </div>

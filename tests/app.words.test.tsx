@@ -18,6 +18,11 @@ function openCustomize() {
   if (btn) fireEvent.click(btn);
 }
 
+function selectFamiliar() {
+  openCustomize();
+  fireEvent.click(screen.getByRole('button', { name: 'Umum' }));
+}
+
 function closeModal() {
   if (screen.queryByRole('dialog')) fireEvent.keyDown(document, { key: 'Escape' });
 }
@@ -36,6 +41,7 @@ function clickNext() {
 describe('App: word count controls how many words the name has', () => {
   it('generated names have exactly the selected number of words', () => {
     render(<App />);
+    selectFamiliar();
     for (const count of [2, 3, 4]) {
       setWords(count); // opens modal, sets count → auto-regenerates once
       expect(wordCount(), `count=${count}, name="${generatedName()}"`).toBe(count);
@@ -48,6 +54,7 @@ describe('App: word count controls how many words the name has', () => {
 
   it('auto-regenerates with the new word count when changed (no Generate click)', () => {
     render(<App />);
+    selectFamiliar();
     openCustomize();
     setWords(2);
     expect(wordCount()).toBe(2);
@@ -59,6 +66,7 @@ describe('App: word count controls how many words the name has', () => {
 
   it('counts the surname as one of the words', () => {
     render(<App />);
+    selectFamiliar();
     openCustomize();
     fireEvent.change(screen.getByPlaceholderText('mis. Santoso'), { target: { value: 'Lie' } });
     setWords(2);

@@ -35,6 +35,7 @@ export interface FormState {
 }
 
 const NAME_STYLES: { value: NameStyle; label: string; hint: string }[] = [
+  { value: 'cool', label: 'Keren', hint: 'nama langka + klasik · rare + classic' },
   { value: 'familiar', label: 'Umum', hint: 'mis. Cindy, Elaine, Christie' },
   { value: 'composed', label: 'Unik', hint: 'dirangkai dari akar kata' },
   { value: 'meaning', label: 'Arti', hint: 'mis. joy, happy, glee' },
@@ -42,12 +43,13 @@ const NAME_STYLES: { value: NameStyle; label: string; hint: string }[] = [
   { value: 'browse', label: 'Jelajah', hint: 'daftar A–Z semua etimologi' },
 ];
 
+const hint = (v: NameStyle) => NAME_STYLES.find((s) => s.value === v)!.hint;
 const STYLE_HINTS: Record<NameStyle, string> = {
-  cool: 'Nama keren · nama langka + klasik · rare + classic',
-  familiar: 'Nama umum yang dikenal · ' + NAME_STYLES[0].hint,
-  composed: 'Nama unik · ' + NAME_STYLES[1].hint,
-  meaning: 'Cari dari arti · ' + NAME_STYLES[2].hint,
-  analyze: 'Arti nama Anda · ' + NAME_STYLES[3].hint,
+  cool: 'Nama keren untuk anak laki-laki · ' + hint('cool'),
+  familiar: 'Nama umum yang dikenal · ' + hint('familiar'),
+  composed: 'Nama unik · ' + hint('composed'),
+  meaning: 'Cari dari arti · ' + hint('meaning'),
+  analyze: 'Arti nama Anda · ' + hint('analyze'),
   browse: 'Jelajahi semua nama per huruf · browse all names by letter, all etymologies',
 };
 
@@ -67,6 +69,7 @@ interface Props {
 
 export default function ParameterForm({ value, onChange, onGenerate }: Props) {
   const familiar = value.nameStyle === 'familiar';
+  const cool = value.nameStyle === 'cool';
   const meaning = value.nameStyle === 'meaning';
   // Synonyms the meaning query expands to (for the "also searched" hint).
   const meaningExtras = meaning ? addedSynonyms(value.meaningQuery ?? '') : [];
@@ -129,7 +132,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
       </div>
       )}
 
-      {familiar && (
+      {(familiar || cool) && (
         <div className="field">
           <label className="field__label" htmlFor="familiar-initial">
             Awalan huruf <span className="field__hint">/ Initial — kosongkan untuk acak otomatis</span>
@@ -164,7 +167,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         </p>
       </div>
 
-      {!analyze && (
+      {!analyze && !cool && (
         <div className="field">
           <span className="field__label">Jenis kelamin <span className="field__hint">/ Gender</span></span>
           <div className="segmented">
@@ -182,7 +185,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         </div>
       )}
 
-      {!analyze && !browse && (
+      {!analyze && !browse && !cool && (
         <div className="field">
           <span className="field__label">
             Jumlah kata <span className="field__hint">/ Words — mis. 3 = tiga kata</span>
@@ -207,7 +210,7 @@ export default function ParameterForm({ value, onChange, onGenerate }: Props) {
         </div>
       )}
 
-      {browse ? null : analyze ? (
+      {browse || cool ? null : analyze ? (
         <div className="field">
           <label className="field__label" htmlFor="own-name">
             Nama <span className="field__hint">/ Name — ketik nama yang ingin dicari artinya</span>
