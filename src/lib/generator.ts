@@ -53,7 +53,7 @@ function preferByPosition(pool: NameElement[], slotIndex: number, total: number)
   return filtered.length > 0 ? filtered : pool;
 }
 
-function pick<T>(items: T[], rng: () => number): T {
+export function pick<T>(items: T[], rng: () => number): T {
   return items[Math.floor(rng() * items.length)];
 }
 
