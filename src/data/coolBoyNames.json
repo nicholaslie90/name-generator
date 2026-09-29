@@ -246,6 +246,7 @@
   {"id": "cb-pavel", "name": "Pavel", "role": "first", "syllables": 2, "origin": "slavia", "meaning": {"id": "kecil, rendah hati (bentuk Slavia dari Paulus)", "en": "small, humble (Slavic form of Paul)"}, "vibes": ["grounded"]},
   {"id": "cb-clement", "name": "Clement", "role": "first", "syllables": 2, "origin": "latin", "meaning": {"id": "penuh belas kasih", "en": "merciful"}, "vibes": ["wise", "grounded"]},
   {"id": "cb-perdana", "name": "Perdana", "role": "first", "syllables": 3, "origin": "nusantara", "meaning": {"id": "pertama, utama", "en": "first, prime"}, "vibes": ["noble"]},
+  {"id": "cb-makoto", "name": "Makoto", "role": "first", "syllables": 3, "origin": "jepang", "meaning": {"id": "ketulusan", "en": "sincerity"}, "vibes": ["wise", "grounded"]},
   {"id": "cb-darren", "name": "Darren", "role": "middle", "syllables": 2, "origin": "inggris", "meaning": {"id": "arti tidak pasti; mungkin dari nama keluarga Irlandia", "en": "meaning uncertain; possibly from an Irish surname"}, "vibes": ["bright", "grounded"]},
   {"id": "cb-marcus", "name": "Marcus", "role": "middle", "syllables": 2, "origin": "latin", "meaning": {"id": "dipersembahkan untuk Mars, dewa perang", "en": "strong, dedicated to Mars"}, "vibes": ["bold"]},
   {"id": "cb-arthur", "name": "Arthur", "role": "middle", "syllables": 2, "origin": "keltik", "meaning": {"id": "beruang, kuat dan gagah", "en": "bear, strong and noble"}, "vibes": ["noble"]},
