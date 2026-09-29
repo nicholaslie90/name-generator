@@ -125,6 +125,8 @@ export interface FusionRoot {
   origin: Origin;
   meaning: { id: string; en: string };
   vibe: Vibe;
+  /** Religious tails (el, din, nur, dev) join only heads from these origins, to avoid mixing faiths. */
+  allowWith?: Origin[];
 }
 
 /** Where Keren first names come from: attested names, composed roots, or both. */

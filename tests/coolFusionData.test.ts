@@ -65,4 +65,11 @@ describe('initial coverage', () => {
     expect(real.length + fused.length).toBeGreaterThanOrEqual(60);
     expect(new Set(fused.map((n) => n.fusedFrom![0].text)).size).toBeGreaterThanOrEqual(4);
   });
+
+  it('offers at least 30 first names for every initial except Q and X', () => {
+    const count: Record<string, number> = {};
+    for (const n of [...COOL_FIRST, ...COOL_FUSED]) count[n.name[0]] = (count[n.name[0]] ?? 0) + 1;
+    const thin = 'ABCDEFGHIJKLMNOPRSTUVWYZ'.split('').filter((l) => (count[l] ?? 0) < 30);
+    expect(thin).toEqual([]);
+  });
 });

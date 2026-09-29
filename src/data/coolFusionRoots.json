@@ -47,7 +47,19 @@
     {"id": "fh-tama", "text": "tama", "origin": "jepang", "meaning": {"id": "permata", "en": "jewel"}, "vibe": "bright"},
     {"id": "fh-iman", "text": "iman", "origin": "arab", "meaning": {"id": "iman", "en": "faith"}, "vibe": "grounded"},
     {"id": "fh-ivar", "text": "ivar", "origin": "nordik", "meaning": {"id": "pejuang pemanah", "en": "bow warrior"}, "vibe": "bold"},
-    {"id": "fh-iwan", "text": "iwan", "origin": "nusantara", "meaning": {"id": "Tuhan Maha Pemurah", "en": "God is gracious"}, "vibe": "noble"}
+    {"id": "fh-iwan", "text": "iwan", "origin": "nusantara", "meaning": {"id": "Tuhan Maha Pemurah", "en": "God is gracious"}, "vibe": "noble"},
+    {"id": "fh-ghali", "text": "ghali", "origin": "arab", "meaning": {"id": "berharga, tersayang", "en": "precious, dear"}, "vibe": "joyful"},
+    {"id": "fh-jalil", "text": "jalil", "origin": "arab", "meaning": {"id": "agung, mulia", "en": "majesty, greatness"}, "vibe": "noble"},
+    {"id": "fh-oro", "text": "oro", "origin": "latin", "meaning": {"id": "emas", "en": "gold"}, "vibe": "bright"},
+    {"id": "fh-olu", "text": "olu", "origin": "afrika", "meaning": {"id": "Tuhan (awalan nama Yoruba)", "en": "God (Yoruba name prefix)"}, "vibe": "noble"},
+    {"id": "fh-yori", "text": "yori", "origin": "jepang", "meaning": {"id": "kepercayaan, kesetiaan", "en": "trust, reliance"}, "vibe": "grounded"},
+    {"id": "fh-udaya", "text": "udaya", "origin": "sanskerta", "meaning": {"id": "terbit, fajar", "en": "rising, dawn"}, "vibe": "bright"},
+    {"id": "fh-dai", "text": "dai", "origin": "jepang", "meaning": {"id": "agung, besar", "en": "great"}, "vibe": "noble"},
+    {"id": "fh-giri", "text": "giri", "origin": "sanskerta", "meaning": {"id": "gunung", "en": "mountain"}, "vibe": "grounded"},
+    {"id": "fh-maha", "text": "maha", "origin": "sanskerta", "meaning": {"id": "agung, maha", "en": "great, supreme"}, "vibe": "noble"},
+    {"id": "fh-prana", "text": "prana", "origin": "sanskerta", "meaning": {"id": "daya hidup", "en": "life-force"}, "vibe": "bright"},
+    {"id": "fh-yan", "text": "yan", "origin": "slavia", "meaning": {"id": "Tuhan Maha Pemurah", "en": "God is gracious"}, "vibe": "noble"},
+    {"id": "fh-yuva", "text": "yuva", "origin": "sanskerta", "meaning": {"id": "muda", "en": "young"}, "vibe": "modern"}
   ],
   "tails": [
     {"id": "ft-mir", "text": "mir", "origin": "slavia", "meaning": {"id": "damai", "en": "peace"}, "vibe": "grounded"},
@@ -64,13 +76,13 @@
     {"id": "ft-bert", "text": "bert", "origin": "jermanik", "meaning": {"id": "cemerlang", "en": "bright"}, "vibe": "bright"},
     {"id": "ft-mund", "text": "mund", "origin": "jermanik", "meaning": {"id": "pelindung", "en": "protector"}, "vibe": "grounded"},
     {"id": "ft-dan", "text": "dan", "origin": "ibrani", "meaning": {"id": "hakim", "en": "judge"}, "vibe": "wise"},
-    {"id": "ft-el", "text": "el", "origin": "ibrani", "meaning": {"id": "Tuhan", "en": "God"}, "vibe": "noble"},
-    {"id": "ft-dev", "text": "dev", "origin": "sanskerta", "meaning": {"id": "ilahi", "en": "divine"}, "vibe": "noble"},
+    {"id": "ft-el", "text": "el", "origin": "ibrani", "meaning": {"id": "Tuhan", "en": "God"}, "vibe": "noble", "allowWith": ["latin", "yunani", "keltik", "jermanik", "nordik", "slavia", "inggris"]},
+    {"id": "ft-dev", "text": "dev", "origin": "sanskerta", "meaning": {"id": "ilahi", "en": "divine"}, "vibe": "noble", "allowWith": ["nusantara"]},
     {"id": "ft-raj", "text": "raj", "origin": "sanskerta", "meaning": {"id": "raja", "en": "king"}, "vibe": "noble"},
     {"id": "ft-vir", "text": "vir", "origin": "sanskerta", "meaning": {"id": "pahlawan", "en": "hero"}, "vibe": "bold"},
     {"id": "ft-jit", "text": "jit", "origin": "sanskerta", "meaning": {"id": "unggul", "en": "victorious"}, "vibe": "bold"},
-    {"id": "ft-nur", "text": "nur", "origin": "arab", "meaning": {"id": "cahaya", "en": "light"}, "vibe": "bright"},
-    {"id": "ft-din", "text": "din", "origin": "arab", "meaning": {"id": "agama, iman", "en": "religion, faith"}, "vibe": "wise"},
+    {"id": "ft-nur", "text": "nur", "origin": "arab", "meaning": {"id": "cahaya", "en": "light"}, "vibe": "bright", "allowWith": ["persia", "nusantara"]},
+    {"id": "ft-din", "text": "din", "origin": "arab", "meaning": {"id": "agama, iman", "en": "religion, faith"}, "vibe": "wise", "allowWith": ["persia", "nusantara"]},
     {"id": "ft-zar", "text": "zar", "origin": "persia", "meaning": {"id": "emas", "en": "gold"}, "vibe": "cosmopolitan"},
     {"id": "ft-yar", "text": "yar", "origin": "persia", "meaning": {"id": "sahabat", "en": "friend"}, "vibe": "joyful"},
     {"id": "ft-stein", "text": "stein", "origin": "nordik", "meaning": {"id": "batu", "en": "stone"}, "vibe": "grounded"},
@@ -78,6 +90,6 @@
     {"id": "ft-ro", "text": "ro", "origin": "jepang", "meaning": {"id": "putra", "en": "son, man"}, "vibe": "modern"}
   ],
   "blockedNames": [
-    "Shirric", "Lucro", "Leoric", "Kaijit", "Kairo", "Nikonur", "Nikonui", "Renard", "Shirel", "Valdard", "Aurard", "Freyyar", "Lucjit", "Lucdev", "Lucnui", "Azizjit", "Hafjit", "Velivic", "Velivin", "Velivir", "Theodev", "Imandan", "Imandev", "Iwandan", "Ivarvir"
+    "Shirric", "Lucro", "Leoric", "Kaijit", "Kairo", "Nikonur", "Nikonui", "Renard", "Shirel", "Valdard", "Aurard", "Freyyar", "Lucjit", "Lucdev", "Lucnui", "Azizjit", "Hafjit", "Velivic", "Velivin", "Velivir", "Theodev", "Imandan", "Imandev", "Iwandan", "Ivarvir", "Orostein", "Olustein", "Jalildev", "Jaliljit", "Jalilraj", "Jalilel", "Jalilro", "Jalilrex", "Udayarex", "Udayard", "Udayanur", "Yorirex", "Dewadev", "Dainik", "Daidan", "Daistein", "Yanmar", "Yanel", "Yanyar", "Mahanur", "Mahard", "Mahabert", "Pranayar", "Giribert", "Yuvabert"
   ]
 }

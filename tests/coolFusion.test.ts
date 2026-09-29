@@ -70,6 +70,12 @@ describe('fuseRoots', () => {
     expect(fuseRoots(root('leo', 'latin', 'lion'), el)).toBeNull();
   });
 
+  it('only joins a religious tail to the head origins it allows', () => {
+    const din = { ...root('din', 'arab', 'religion'), allowWith: ['persia' as const] };
+    expect(fuseRoots(root('giri', 'sanskerta', 'mountain'), din)).toBeNull();
+    expect(fuseRoots(root('shir', 'persia', 'lion'), din)!.name).toBe('Shirdin');
+  });
+
   it('rejects unpronounceable clusters', () => {
     expect(fuseRoots(kast, tren)).toBeNull(); // "kasttren"
   });

@@ -112,6 +112,7 @@ const originName = (r: FusionRoot) => ORIGIN_LABELS[r.origin].en.replace(/ \(.*\
  */
 export function fuseRoots(head: FusionRoot, tail: FusionRoot): CoolName | null {
   if (head.origin === tail.origin) return null;
+  if (tail.allowWith && !tail.allowWith.includes(head.origin)) return null;
   const hEn = firstSense(head.meaning.en);
   const tEn = firstSense(tail.meaning.en);
   if (hEn === tEn) return null;
